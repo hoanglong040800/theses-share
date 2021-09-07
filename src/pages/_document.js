@@ -6,7 +6,7 @@ import theme from 'common/themes/theme'
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="vn">
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
         </Head>
