@@ -23,6 +23,12 @@ const theme = createTheme({
       xl: 1280, //default: 1920
     },
   },
+
+  typography: {
+    button: {
+      textTransform: 'inherit',
+    },
+  },
 })
 
 export default theme

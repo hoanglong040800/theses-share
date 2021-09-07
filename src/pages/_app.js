@@ -9,16 +9,16 @@ import DefaultLayout from 'common/layouts/DefaultLayout'
 export default function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentElement.removeChild(jssStyles)
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
     }
   }, [])
 
   return (
     <>
       <Head>
-        <title>Theses Share</title>
+        <title>Theses Share - Nơi chia sẻ khóa luận</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

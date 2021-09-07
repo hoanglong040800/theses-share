@@ -1,6 +1,5 @@
 module.exports = {
-  reactStrictMode: true,
-  target: "serverless",
+  reactStrictMode: false, //do not change this line
   webpack(config) {
     config.resolve.modules.push('src')
     return config
