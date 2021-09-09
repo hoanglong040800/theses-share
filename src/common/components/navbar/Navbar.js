@@ -1,4 +1,5 @@
 import { AppBar, Box, Container, makeStyles, Toolbar } from '@material-ui/core'
+import NavSearchBar from 'modules/search filter/NavSearchBar'
 import Link from 'next/link'
 import NavLink from './NavLink'
 
@@ -6,11 +7,12 @@ export default function Navbar() {
   const classes = useStyles()
 
   return (
-    <AppBar position="sticky" color="primary">
+    <AppBar position="sticky" color="default">
       <Toolbar>
         <Container maxWidth="xl">
           <Box className={classes.toolbar}>
-            <Box className={classes.box}>
+            {/* left side */}
+            <Box display="flex">
               <Box className={classes.mobile} mr={2}>
                 <h3>Icon Menu</h3>
               </Box>
@@ -21,18 +23,20 @@ export default function Navbar() {
                 </a>
               </Link>
 
-              <Box className={classes.desktop} ml={2} alignItems='center'>
+              <Box className={classes.desktop} mx={3} alignItems="center">
                 <NavLink />
               </Box>
             </Box>
 
-            <Box className={classes.box}>
-              <Box mr={2}>
-                <h3>Search</h3>
+            {/* right side */}
+            <Box display="flex" alignItems="center" flex={1}>
+              <Box display="flex" justifyContent="flex-end" mx={2} flex={1}>
+                <NavSearchBar />
               </Box>
 
               <h3>Profile</h3>
             </Box>
+            {/* right side */}
           </Box>
         </Container>
       </Toolbar>
@@ -46,10 +50,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     flex: 1,
-  },
-
-  box: {
-    display: 'flex',
   },
 
   desktop: {

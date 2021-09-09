@@ -9,11 +9,11 @@ export default function NavLink() {
       {
         //
         navlinks.map(item => (
-          <NavLinkMenu name={item.cate} lists={item.lists} />
+          <NavLinkMenu key={item.cate} name={item.cate} lists={item.lists} />
         ))
       }
 
-      <Box ml={1}>
+      <Box ml={0.5}>
         <Link href="/about">
           <a>
             <h3>Về Theses Share</h3>

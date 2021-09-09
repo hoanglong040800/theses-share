@@ -18,6 +18,7 @@ export default function NavLinkMenu({ name, lists }) {
   return (
     <Box position="relative">
       <Button
+        size="small"
         className={classes.button}
         onMouseEnter={handleClick}
         onMouseLeave={handleClose}
@@ -46,7 +47,7 @@ export default function NavLinkMenu({ name, lists }) {
 
 const useStyles = makeStyles(() => ({
   button: {
-    color: '#fff',
+    color: 'inherit',
     fontSize: '1rem',
     fontWeight: 'bold',
 

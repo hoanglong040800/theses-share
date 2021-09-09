@@ -20,11 +20,11 @@ export const navlinks = [
     lists: [
       {
         name: 'Máy học',
-        link: `${prefixNavlink}tag="KHMT"`,
+        link: `${prefixNavlink}tag="ML"`,
       },
       {
         name: 'Học sâu',
-        link: `${prefixNavlink}tag="KHMT"`,
+        link: `${prefixNavlink}tag="DL"`,
       },
     ],
   },
