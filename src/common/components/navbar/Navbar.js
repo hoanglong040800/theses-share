@@ -1,7 +1,9 @@
+import Image from 'next/image'
 import { AppBar, Box, Container, makeStyles, Toolbar } from '@material-ui/core'
 import NavSearchBar from 'modules/search/NavSearchBar'
 import Link from 'next/link'
 import NavLink from './NavLink'
+import NavProfile from './NavProfile'
 
 export default function Navbar() {
   const classes = useStyles()
@@ -17,22 +19,30 @@ export default function Navbar() {
                 <h3>Icon Menu</h3>
               </Box>
 
-              <Link href="/">
-                <a>
-                  <h3>Logo</h3>
-                </a>
-              </Link>
+              <Box display="flex" alignItems="center">
+                <Link href="/">
+                  <a>
+                    <Image
+                      src="/logo.png"
+                      alt="logo-theses-share"
+                      width={35}
+                      height={30}
+                    />
+                  </a>
+                </Link>
+              </Box>
 
-              <Box className={classes.desktop} mx={3} alignItems="center">
+              <Box className={classes.desktop} mx={2} alignItems="center">
                 <NavLink />
               </Box>
             </Box>
+            {/* left side */}
 
             {/* right side */}
             <Box display="flex" alignItems="center" flex={1}>
               <NavSearchBar />
 
-              <h3>Profile</h3>
+              <NavProfile />
             </Box>
             {/* right side */}
           </Box>
