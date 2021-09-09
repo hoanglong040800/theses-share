@@ -1,4 +1,4 @@
-const prefixNavlink = '/search?'
+const prefixNavlink = '/filter?'
 
 export const navlinks = [
   {
@@ -6,11 +6,11 @@ export const navlinks = [
     lists: [
       {
         name: 'Khoa học máy tính',
-        link: `${prefixNavlink}faculty="KHMT"`,
+        link: `${prefixNavlink}faculty=KHMT`,
       },
       {
         name: 'Công nghệ phần mềm',
-        link: `${prefixNavlink}faculty="CNPM"`,
+        link: `${prefixNavlink}faculty=CNPM`,
       },
     ],
   },
@@ -20,11 +20,11 @@ export const navlinks = [
     lists: [
       {
         name: 'Máy học',
-        link: `${prefixNavlink}tag="ML"`,
+        link: `${prefixNavlink}tag=ML`,
       },
       {
         name: 'Học sâu',
-        link: `${prefixNavlink}tag="DL"`,
+        link: `${prefixNavlink}tag=DL`,
       },
     ],
   },

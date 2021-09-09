@@ -4,10 +4,10 @@ export default function Filter(){
   return (
     <>
     <Head>
-      <title>Tìm kiếm</title>
+      <title>Tìm kiếm nâng cao</title>
     </Head>
 
-    <h1>Kết quả tìm kiếm</h1>
+    <h1>Trang tìm kiếm nâng cao</h1>
     </>
   )
 }
