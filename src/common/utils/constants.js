@@ -1,4 +1,4 @@
-const prefixNavlink = '/filter?'
+const prefixNavlink = '/theses?'
 
 export const navlinks = [
   {

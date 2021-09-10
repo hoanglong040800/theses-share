@@ -17,14 +17,14 @@ export default function NavLinkMenu({ name, lists }) {
 
   return (
     <Box position="relative">
-      <Button
+      <Box
         size="small"
         className={classes.button}
         onMouseEnter={handleClick}
         onMouseLeave={handleClose}
       >
         {name}
-      </Button>
+      </Box>
 
       <Box
         {...menu}
@@ -50,9 +50,11 @@ const useStyles = makeStyles(() => ({
     color: 'inherit',
     fontSize: '1rem',
     fontWeight: 'bold',
+    padding: '5px 7px',
 
     '&:hover': {
-      background: 'none',
+      cursor: 'pointer',
+
     },
   },
 

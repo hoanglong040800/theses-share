@@ -26,7 +26,7 @@ export default function NavProfile() {
   return (
     <>
       <IconButton size="small" onClick={handleOpen}>
-        <AccountCircle fontSize="large" />
+        <AccountCircle fontSize="large" style={{ color: '#fff' }} />
       </IconButton>
 
       <Menu
@@ -36,7 +36,7 @@ export default function NavProfile() {
         keepMounted
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <MenuItem onClick={() => handleSelect('/user/like')}>
           Luận văn yêu thích
@@ -48,7 +48,7 @@ export default function NavProfile() {
 
         <MenuItem onClick={() => handleSelect('/user/profile')}>Hồ sơ</MenuItem>
 
-        <MenuItem onClick={handleClose}>Đăng xuất</MenuItem>
+        <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
       </Menu>
     </>
   )

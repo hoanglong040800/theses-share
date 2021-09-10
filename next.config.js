@@ -11,6 +11,10 @@ module.exports = {
         source: '/home',
         destination: '/',
       },
+      {
+        source: '/user',
+        destination: '/profile',
+      },
     ]
   },
 }

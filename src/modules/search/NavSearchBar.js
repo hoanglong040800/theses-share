@@ -35,6 +35,7 @@ export default function NavSearchBar() {
       <SearchBar
         value={stateValue}
         placeholder="Tìm tag hoặc tên đề tài"
+        onCancelSearch={handleChange}
         onChange={handleChange}
         onRequestSearch={handleSearch}
         className={mui.searchbar}

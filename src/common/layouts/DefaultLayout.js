@@ -5,7 +5,7 @@ export default function DefaultLayout({ children }) {
   return (
     <>
       <Navbar />
-      <Container maxWidth='xl'>{children}</Container>
+      <Container maxWidth="xl">{children}</Container>
     </>
   )
 }
