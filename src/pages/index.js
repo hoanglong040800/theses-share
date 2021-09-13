@@ -1,4 +1,4 @@
-import { Box, Button } from '@material-ui/core'
+import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
 
 export default function Home() {
@@ -9,24 +9,7 @@ export default function Home() {
       </Head>
 
       <h1>Trang chủ</h1>
-
-      <Box display="flex" justifyContent="space-evenly">
-        <Button color="primary" size="large">
-          Primary
-        </Button>
-
-        <Button color="secondary" size="large">
-          Secondary
-        </Button>
-
-        <Button variant="contained" color="primary">
-          Primary
-        </Button>
-
-        <Button variant="contained" color="secondary">
-          Secondary
-        </Button>
-      </Box>
+      <ThesesTable />
     </>
   )
 }

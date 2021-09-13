@@ -1,17 +1,17 @@
 import { createTheme } from '@material-ui/core'
-import { red, amber } from '@material-ui/core/colors'
+import { red, blueGrey, lightGreen, grey } from '@material-ui/core/colors'
 
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#db447f',
-      main: '#c23c70',
-      dark: '#a63360',
+      light: blueGrey[600],
+      main: blueGrey[700],
+      dark: blueGrey[800],
     },
     secondary: {
-      light: amber[100],
-      main: amber[200],
-      dark: amber[300],
+      light: grey[200],
+      main: grey[300],
+      dark: grey[400],
     },
     error: {
       main: red[400],

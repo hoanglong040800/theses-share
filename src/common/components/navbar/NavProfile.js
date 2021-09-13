@@ -1,10 +1,11 @@
-import { IconButton, Menu, MenuItem } from '@material-ui/core'
+import { IconButton, makeStyles, Menu, MenuItem } from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 export default function NavProfile() {
   const router = useRouter()
+  const mui = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
 
   function handleOpen(e) {
@@ -17,6 +18,7 @@ export default function NavProfile() {
 
   function handleSelect(route) {
     router.push(route)
+    handleClose()
   }
 
   function handleLogout() {
@@ -26,7 +28,7 @@ export default function NavProfile() {
   return (
     <>
       <IconButton size="small" onClick={handleOpen}>
-        <AccountCircle fontSize="large" style={{ color: '#fff' }} />
+        <AccountCircle fontSize="large" className={mui.icon} />
       </IconButton>
 
       <Menu
@@ -53,3 +55,9 @@ export default function NavProfile() {
     </>
   )
 }
+
+const useStyles = makeStyles(theme => ({
+  icon: {
+    color: [theme.palette.primary.main],
+  },
+}))

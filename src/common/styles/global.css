@@ -12,3 +12,41 @@ a {
 * {
   box-sizing: border-box;
 }
+
+*::-webkit-scrollbar {
+  height: 6px;
+  width: 8px;
+  border-radius: 5px;
+  background: #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  outline: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* === MUI data grid === */
+.MuiDataGrid-columnHeaderTitle {
+  font-weight: bold !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell {
+  white-space: pre-wrap !important;
+  line-height: inherit !important;
+  padding: 10px 10px !important;
+}
+
+/* MUI data grid focus outline */
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus,
+.MuiDataGrid-root .MuiDataGrid-cell:focus {
+  outline: 0.5px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}

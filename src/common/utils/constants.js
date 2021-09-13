@@ -1,3 +1,5 @@
+import Navbar from "common/components/navbar/Navbar"
+
 const prefixNavlink = '/theses?'
 
 export const navlinks = [

@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import { render } from 'react-dom'
 
 export default function About() {
+  
   return (
     <>
       <Head>
@@ -8,6 +10,7 @@ export default function About() {
       </Head>
 
       <h1>Về Theses Share</h1>
+
     </>
   )
 }
