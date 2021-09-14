@@ -13,6 +13,8 @@ a {
   box-sizing: border-box;
 }
 
+/* ==== scroll bar ==== */
+
 *::-webkit-scrollbar {
   height: 6px;
   width: 8px;
@@ -49,4 +51,13 @@ a {
 .MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within,
 .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
   outline: none !important;
+}
+
+/* styling rows */
+.MuiDataGrid-row {
+  cursor: pointer;
+}
+
+.Mui-even {
+  background-color: rgba(0, 0, 0, 0.02);
 }

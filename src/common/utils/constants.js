@@ -1,4 +1,4 @@
-import Navbar from "common/components/navbar/Navbar"
+import Navbar from 'common/components/navbar/Navbar'
 
 const prefixNavlink = '/theses?'
 
@@ -43,5 +43,71 @@ export const navlinks = [
         link: `${prefixNavlink}published_year=2020`,
       },
     ],
+  },
+]
+
+// ======= ThesesTable
+export const colDef = [
+  {
+    field: 'name',
+    headerName: 'Tên đề tài',
+    type: 'string',
+    flex: 0.7,
+    autoHeight: true,
+    wrapText: true,
+    minWidth: 400,
+    sortable: true,
+  },
+
+  {
+    field: 'faculty',
+    headerName: 'Khoa',
+    type: 'string',
+    width: 100,
+    headerAlign: 'center',
+    align: 'center',
+    sortable: true,
+  },
+
+  {
+    field: 'publishedYear',
+    headerName: 'Năm',
+    type: 'string',
+    width: 90,
+    headerAlign: 'center',
+    align: 'center',
+    sortable: true,
+  },
+
+  {
+    field: 'tags',
+    headerName: 'Tags',
+    type: 'string',
+    flex: 0.3,
+    minWidth: 200,
+    valueFormatter: params => {
+      return params.value.join(', ')
+    },
+    sortable: true,
+  },
+
+  {
+    field: 'type',
+    headerName: 'Loại',
+    type: 'string',
+    headerAlign: 'center',
+    align: 'center',
+    width: 80,
+    sortable: true,
+  },
+
+  {
+    field: 'language',
+    headerName: 'Ngôn ngữ',
+    type: 'string',
+    headerAlign: 'center',
+    align: 'center',
+    width: 120,
+    sortable: true,
   },
 ]
