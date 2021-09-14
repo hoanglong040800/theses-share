@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from '@material-ui/core'
+import { Box, makeStyles } from '@material-ui/core'
 import { colDef } from 'common/utils/constants'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'

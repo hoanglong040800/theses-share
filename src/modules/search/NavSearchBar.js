@@ -6,26 +6,16 @@ import { useState } from 'react'
 export default function NavSearchBar() {
   const mui = useStyles()
   const router = useRouter()
-  const [style, setStyle] = useState({
-    display: 'none',
-  })
 
   const [stateValue, setStateValue] = useState('')
 
   function handleChange(value) {
     setStateValue(value)
-
-    if (value) {
-      setStyle({ display: 'block' })
-    } else {
-      setStyle({ display: 'none' })
-    }
   }
 
-  function handleSearch(value) {
-    if (value) {
-      router.push(`/search?q=${value}`)
-      setStyle({ display: 'none' })
+  function handleSearch() {
+    if (stateValue) {
+      router.push(`/search?q=${stateValue}`)
       setStateValue('')
     }
   }
@@ -41,20 +31,30 @@ export default function NavSearchBar() {
         className={mui.searchbar}
       />
 
-      <Box className={mui.suggestion} {...style}>
-        <Box display="flex" justifyContent="center" alignItems="center" my={2}>
-          <CircularProgress variant="indeterminate" size={30} />
-        </Box>
+      {
+        //
+        stateValue && (
+          <Box className={mui.suggestion}>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              my={2}
+            >
+              <CircularProgress variant="indeterminate" size={30} />
+            </Box>
 
-        <Button
-          size="small"
-          fullWidth
-          style={{ borderTop: '0.5px solid rgba(0,0,0,0.1)' }}
-          onClick={handleSearch}
-        >
-          Xem tất cả
-        </Button>
-      </Box>
+            <Button
+              size="small"
+              fullWidth
+              style={{ borderTop: '0.5px solid rgba(0,0,0,0.1)' }}
+              onClick={handleSearch}
+            >
+              Xem tất cả
+            </Button>
+          </Box>
+        )
+      }
     </div>
   )
 }
