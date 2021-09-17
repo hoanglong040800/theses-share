@@ -1,5 +1,3 @@
-import Navbar from 'common/components/navbar/Navbar'
-
 const prefixNavlink = '/theses?'
 
 export const navlinks = [
@@ -11,22 +9,8 @@ export const navlinks = [
         link: `${prefixNavlink}faculty=KHMT`,
       },
       {
-        name: 'Công nghệ phần mềm',
-        link: `${prefixNavlink}faculty=CNPM`,
-      },
-    ],
-  },
-
-  {
-    cate: 'Tags',
-    lists: [
-      {
-        name: 'Máy học',
-        link: `${prefixNavlink}tag=ML`,
-      },
-      {
-        name: 'Học sâu',
-        link: `${prefixNavlink}tag=DL`,
+        name: 'Khoa học và kĩ thuật thông tin',
+        link: `${prefixNavlink}faculty=KH%26KTTT`,
       },
     ],
   },
@@ -44,9 +28,24 @@ export const navlinks = [
       },
     ],
   },
+
+  {
+    cate: 'Tags',
+    lists: [
+      {
+        name: 'Máy học',
+        link: `${prefixNavlink}tags=ML`,
+      },
+      {
+        name: 'Học sâu',
+        link: `${prefixNavlink}tags=DL`,
+      },
+    ],
+  },
 ]
 
-// ======= ThesesTable
+// ======= ThesesTable ===========
+
 export const colDef = [
   {
     field: 'name',
@@ -70,7 +69,7 @@ export const colDef = [
   },
 
   {
-    field: 'publishedYear',
+    field: 'published_year',
     headerName: 'Năm',
     type: 'string',
     width: 90,
@@ -83,11 +82,21 @@ export const colDef = [
     field: 'tags',
     headerName: 'Tags',
     type: 'string',
-    flex: 0.3,
-    minWidth: 200,
+    flex: 0.2,
+    minWidth: 150,
     valueFormatter: params => {
       return params.value.join(', ')
     },
+    sortable: true,
+  },
+
+  {
+    field: 'views',
+    headerName: 'Lượt xem',
+    type: 'string',
+    headerAlign: 'center',
+    align: 'center',
+    width: 120,
     sortable: true,
   },
 
@@ -109,5 +118,227 @@ export const colDef = [
     align: 'center',
     width: 120,
     sortable: true,
+  },
+]
+
+export const rowsDummy = [
+  {
+    id: 1,
+    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
+    faculty: 'KH&KTTT',
+    published_year: 2021,
+    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 2,
+    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
+    faculty: 'KHMT',
+    published_year: 2020,
+    tags: ['ML', 'mạng neural'],
+    type: 'DACN',
+    language: 'vn',
+  },
+
+  {
+    id: 3,
+    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
+    faculty: 'KH&KTTT',
+    published_year: 2021,
+    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 4,
+    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
+    faculty: 'KHMT',
+    published_year: 2020,
+    tags: ['ML', 'mạng neural'],
+    type: 'DACN',
+    language: 'vn',
+  },
+
+  {
+    id: 5,
+    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
+    faculty: 'KH&KTTT',
+    published_year: 2021,
+    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 6,
+    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
+    faculty: 'KHMT',
+    published_year: 2020,
+    tags: ['ML', 'mạng neural'],
+    type: 'DACN',
+    language: 'vn',
+  },
+
+  {
+    id: 7,
+    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
+    faculty: 'KH&KTTT',
+    published_year: 2021,
+    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 8,
+    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
+    faculty: 'KHMT',
+    published_year: 2020,
+    tags: ['ML', 'mạng neural'],
+    type: 'DACN',
+    language: 'vn',
+  },
+
+  {
+    id: 9,
+    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
+    faculty: 'KH&KTTT',
+    published_year: 2021,
+    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 10,
+    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
+    faculty: 'KHMT',
+    published_year: 2020,
+    tags: ['ML', 'mạng neural'],
+    type: 'DACN',
+    language: 'vn',
+  },
+
+  {
+    id: 11,
+    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ứng dụng', 'di động'],
+    type: 'KLTN',
+    language: 'en',
+  },
+
+  {
+    id: 12,
+    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ML', 'web', 'ứng dụng'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 13,
+    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ứng dụng', 'di động'],
+    type: 'KLTN',
+    language: 'en',
+  },
+
+  {
+    id: 14,
+    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ML', 'web', 'ứng dụng'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 15,
+    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ứng dụng', 'di động'],
+    type: 'KLTN',
+    language: 'en',
+  },
+
+  {
+    id: 16,
+    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ML', 'web', 'ứng dụng'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 17,
+    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ứng dụng', 'di động'],
+    type: 'KLTN',
+    language: 'en',
+  },
+
+  {
+    id: 18,
+    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ML', 'web', 'ứng dụng'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 19,
+    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ứng dụng', 'di động'],
+    type: 'KLTN',
+    language: 'en',
+  },
+
+  {
+    id: 20,
+    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ML', 'web', 'ứng dụng'],
+    type: 'KLTN',
+    language: 'vn',
+  },
+
+  {
+    id: 21,
+    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ứng dụng', 'di động'],
+    type: 'KLTN',
+    language: 'en',
+  },
+
+  {
+    id: 22,
+    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
+    faculty: 'MMT&TT',
+    published_year: 2021,
+    tags: ['ML', 'web', 'ứng dụng'],
+    type: 'KLTN',
+    language: 'vn',
   },
 ]

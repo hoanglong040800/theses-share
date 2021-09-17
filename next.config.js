@@ -5,6 +5,10 @@ module.exports = {
     return config
   },
 
+  env: {
+    API_URL: process.env.BASE_URL,
+  },
+
   async rewrites() {
     return [
       {

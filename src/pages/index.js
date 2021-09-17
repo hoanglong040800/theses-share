@@ -1,113 +1,23 @@
 import { Box, makeStyles } from '@material-ui/core'
-import { colDef } from 'common/utils/constants'
+import { colDef, rowsDummy } from 'common/utils/constants'
+import { fetchNewestTheses } from 'modules/theses/fetch-theses'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
 import Link from 'next/link'
 
-const data = [
-  {
-    id: 1,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    publishedYear: 2021,
-    tags: ['học sâu', 'mạng neural', 'học sâu', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
+export async function getStaticProps() {
+  const newestTheses = await fetchNewestTheses(process.env.API_URL)
 
-  {
-    id: 2,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    publishedYear: 2020,
-    tags: ['máy học', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
+  return {
+    props: {
+      newestTheses,
+    },
+  }
+}
 
-  {
-    id: 3,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    publishedYear: 2021,
-    tags: ['học sâu', 'mạng neural', 'học sâu', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 4,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    publishedYear: 2020,
-    tags: ['máy học', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
-
-  {
-    id: 5,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    publishedYear: 2021,
-    tags: ['học sâu', 'mạng neural', 'học sâu', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 6,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    publishedYear: 2020,
-    tags: ['máy học', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
-
-  {
-    id: 7,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    publishedYear: 2021,
-    tags: ['học sâu', 'mạng neural', 'học sâu', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 8,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    publishedYear: 2020,
-    tags: ['máy học', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
-
-  {
-    id: 9,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    publishedYear: 2021,
-    tags: ['học sâu', 'mạng neural', 'học sâu', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 10,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    publishedYear: 2020,
-    tags: ['máy học', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
-]
-
-export default function Home() {
+export default function Home({ newestTheses }) {
   const mui = useStyles()
+
   return (
     <>
       <Head>
@@ -122,7 +32,7 @@ export default function Home() {
         </Link>
 
         <Box mt={3}>
-          <ThesesTable columns={colDef} rows={data} />
+          <ThesesTable columns={colDef} rows={newestTheses} />
         </Box>
       </Box>
 
@@ -134,7 +44,7 @@ export default function Home() {
         </Link>
 
         <Box my={3}>
-          <ThesesTable columns={colDef} rows={data} />
+          <ThesesTable columns={colDef} rows={newestTheses} />
         </Box>
       </Box>
     </>

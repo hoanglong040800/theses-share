@@ -1,0 +1,224 @@
+{
+  "theses": [
+    {
+      "id": 1,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 0
+    },
+    {
+      "id": 2,
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 20
+    },
+    {
+      "id": 3,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 30
+    },
+    {
+      "id": 4,
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 44
+    },
+    {
+      "id": 5,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 55
+    },
+    {
+      "id": 6,
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 60
+    },
+    {
+      "id": 7,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 70
+    },
+    {
+      "id": 8,
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 80
+    },
+    {
+      "id": 9,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 90
+    },
+    {
+      "id": 10,
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 100
+    },
+    {
+      "id": 11,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 111
+    },
+    {
+      "id": 12,
+      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ML", "web", "ứng dụng"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 122
+    },
+    {
+      "id": 13,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 130
+    },
+    {
+      "id": 14,
+      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ML", "web", "ứng dụng"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 140
+    },
+    {
+      "id": 15,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 150
+    },
+    {
+      "id": 16,
+      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ML", "web", "ứng dụng"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 160
+    },
+    {
+      "id": 17,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 170
+    },
+    {
+      "id": 18,
+      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ML", "web", "ứng dụng"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 180
+    },
+    {
+      "id": 19,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 190
+    },
+    {
+      "id": 20,
+      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ML", "web", "ứng dụng"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 200
+    },
+    {
+      "id": 21,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 211
+    },
+    {
+      "id": 22,
+      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ML", "web", "ứng dụng"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 222
+    }
+  ]
+}
