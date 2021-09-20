@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "slug": "tim-hieu-kien-truc-mang-neural-voi-thuat-toan-tien-hoa-cho-bai-toan-phan-tich-cam-xuc",
       "faculty": "KH&KTTT",
       "published_year": 2021,
       "tags": ["DL", "mạng neural", "DL", "mạng neural"],
@@ -13,212 +14,211 @@
     {
       "id": 2,
       "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "slug": "xay-dung-ung-dung-mang-xa-hoi-da-nen-tang",
       "faculty": "KHMT",
       "published_year": 2020,
       "tags": ["ML", "mạng neural"],
       "type": "DACN",
       "language": "vn",
-      "views": 320
+      "views": 211
     },
     {
       "id": 3,
-      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
-      "faculty": "KH&KTTT",
-      "published_year": 2021,
-      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
-      "type": "KLTN",
-      "language": "vn",
-      "views": 305
-    },
-    {
-      "id": 4,
-      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
-      "faculty": "KHMT",
-      "published_year": 2020,
-      "tags": ["ML", "mạng neural"],
-      "type": "DACN",
-      "language": "vn",
-      "views": 744
-    },
-    {
-      "id": 5,
-      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
-      "faculty": "KH&KTTT",
-      "published_year": 2021,
-      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
-      "type": "KLTN",
-      "language": "vn",
-      "views": 555
-    },
-    {
-      "id": 6,
-      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
-      "faculty": "KHMT",
-      "published_year": 2020,
-      "tags": ["ML", "mạng neural"],
-      "type": "DACN",
-      "language": "vn",
-      "views": 60
-    },
-    {
-      "id": 7,
-      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
-      "faculty": "KH&KTTT",
-      "published_year": 2021,
-      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
-      "type": "KLTN",
-      "language": "vn",
-      "views": 70
-    },
-    {
-      "id": 8,
-      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
-      "faculty": "KHMT",
-      "published_year": 2020,
-      "tags": ["ML", "mạng neural"],
-      "type": "DACN",
-      "language": "vn",
-      "views": 80
-    },
-    {
-      "id": 9,
-      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
-      "faculty": "KH&KTTT",
-      "published_year": 2021,
-      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
-      "type": "KLTN",
-      "language": "vn",
-      "views": 90
-    },
-    {
-      "id": 10,
-      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
-      "faculty": "KHMT",
-      "published_year": 2020,
-      "tags": ["ML", "mạng neural"],
-      "type": "DACN",
-      "language": "vn",
-      "views": 100
-    },
-    {
-      "id": 11,
       "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "slug": "phat-trien-ung-dung-doc-sach-va-chia-se-sach-cu-tren-di-dong",
       "faculty": "MMT&TT",
       "published_year": 2021,
       "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
       "language": "en",
-      "views": 111
+      "views": 384
+    },
+    {
+      "id": 4,
+      "name": "Hệ thống giám sát xe tự hành theo line trong kho",
+      "slug": "he-thong-giam-sat-xe-tu-hanh-theo-line-trong-kho",
+      "faculty": "KTMT",
+      "published_year": 2019,
+      "tags": ["nhúng", "xe tự hành"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 427
+    },
+    {
+      "id": 5,
+      "name": "Xây dựng ứng dụng tìm kiếm tài liệu pháp lý Việt Nam",
+      "slug": "xay-dung-ung-dung-tim-kiem-tai-lieu-phap-ly-viet-nam",
+      "faculty": "CNPM",
+      "published_year": 2020,
+      "tags": ["ML", "web"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 542
+    },
+    {
+      "id": 6,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "slug": "tim-hieu-kien-truc-mang-neural-voi-thuat-toan-tien-hoa-cho-bai-toan-phan-tich-cam-xuc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 104
+    },
+    {
+      "id": 7,
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "slug": "xay-dung-ung-dung-mang-xa-hoi-da-nen-tang",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 26
+    },
+    {
+      "id": 8,
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "slug": "phat-trien-ung-dung-doc-sach-va-chia-se-sach-cu-tren-di-dong",
+      "faculty": "MMT&TT",
+      "published_year": 2021,
+      "tags": ["ứng dụng", "di động"],
+      "type": "KLTN",
+      "language": "en",
+      "views": 33
+    },
+    {
+      "id": 9,
+      "name": "Hệ thống giám sát xe tự hành theo line trong kho",
+      "slug": "he-thong-giam-sat-xe-tu-hanh-theo-line-trong-kho",
+      "faculty": "KTMT",
+      "published_year": 2019,
+      "tags": ["nhúng", "xe tự hành"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 45
+    },
+    {
+      "id": 10,
+      "name": "Xây dựng ứng dụng tìm kiếm tài liệu pháp lý Việt Nam",
+      "slug": "xay-dung-ung-dung-tim-kiem-tai-lieu-phap-ly-viet-nam",
+      "faculty": "CNPM",
+      "published_year": 2020,
+      "tags": ["ML", "web"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 51
+    },
+    {
+      "id": 11,
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "slug": "tim-hieu-kien-truc-mang-neural-voi-thuat-toan-tien-hoa-cho-bai-toan-phan-tich-cam-xuc",
+      "faculty": "KH&KTTT",
+      "published_year": 2021,
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
+      "type": "KLTN",
+      "language": "vn",
+      "views": 167
     },
     {
       "id": 12,
-      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ML", "web", "ứng dụng"],
-      "type": "KLTN",
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "slug": "xay-dung-ung-dung-mang-xa-hoi-da-nen-tang",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
       "language": "vn",
-      "views": 122
+      "views": 280
     },
     {
       "id": 13,
       "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "slug": "phat-trien-ung-dung-doc-sach-va-chia-se-sach-cu-tren-di-dong",
       "faculty": "MMT&TT",
       "published_year": 2021,
       "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
       "language": "en",
-      "views": 130
+      "views": 335
     },
     {
       "id": 14,
-      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ML", "web", "ứng dụng"],
+      "name": "Hệ thống giám sát xe tự hành theo line trong kho",
+      "slug": "he-thong-giam-sat-xe-tu-hanh-theo-line-trong-kho",
+      "faculty": "KTMT",
+      "published_year": 2019,
+      "tags": ["nhúng", "xe tự hành"],
       "type": "KLTN",
       "language": "vn",
-      "views": 140
+      "views": 4
     },
     {
       "id": 15,
-      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ứng dụng", "di động"],
+      "name": "Xây dựng ứng dụng tìm kiếm tài liệu pháp lý Việt Nam",
+      "slug": "xay-dung-ung-dung-tim-kiem-tai-lieu-phap-ly-viet-nam",
+      "faculty": "CNPM",
+      "published_year": 2020,
+      "tags": ["ML", "web"],
       "type": "KLTN",
-      "language": "en",
-      "views": 150
+      "language": "vn",
+      "views": 586
     },
     {
       "id": 16,
-      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
-      "faculty": "MMT&TT",
+      "name": "Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc",
+      "slug": "tim-hieu-kien-truc-mang-neural-voi-thuat-toan-tien-hoa-cho-bai-toan-phan-tich-cam-xuc",
+      "faculty": "KH&KTTT",
       "published_year": 2021,
-      "tags": ["ML", "web", "ứng dụng"],
+      "tags": ["DL", "mạng neural", "DL", "mạng neural"],
       "type": "KLTN",
       "language": "vn",
-      "views": 160
+      "views": 12
     },
     {
       "id": 17,
-      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ứng dụng", "di động"],
-      "type": "KLTN",
-      "language": "en",
-      "views": 170
+      "name": "Xây dựng ứng dụng mạng xã hội đa nền tảng",
+      "slug": "xay-dung-ung-dung-mang-xa-hoi-da-nen-tang",
+      "faculty": "KHMT",
+      "published_year": 2020,
+      "tags": ["ML", "mạng neural"],
+      "type": "DACN",
+      "language": "vn",
+      "views": 201
     },
     {
       "id": 18,
-      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
+      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
+      "slug": "phat-trien-ung-dung-doc-sach-va-chia-se-sach-cu-tren-di-dong",
       "faculty": "MMT&TT",
       "published_year": 2021,
-      "tags": ["ML", "web", "ứng dụng"],
+      "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
-      "language": "vn",
-      "views": 180
+      "language": "en",
+      "views": 326
     },
     {
       "id": 19,
-      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ứng dụng", "di động"],
+      "name": "Hệ thống giám sát xe tự hành theo line trong kho",
+      "slug": "he-thong-giam-sat-xe-tu-hanh-theo-line-trong-kho",
+      "faculty": "KTMT",
+      "published_year": 2019,
+      "tags": ["nhúng", "xe tự hành"],
       "type": "KLTN",
-      "language": "en",
-      "views": 190
+      "language": "vn",
+      "views": 48
     },
     {
       "id": 20,
-      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ML", "web", "ứng dụng"],
+      "name": "Xây dựng ứng dụng tìm kiếm tài liệu pháp lý Việt Nam",
+      "slug": "xay-dung-ung-dung-tim-kiem-tai-lieu-phap-ly-viet-nam",
+      "faculty": "CNPM",
+      "published_year": 2020,
+      "tags": ["ML", "web"],
       "type": "KLTN",
       "language": "vn",
-      "views": 200
-    },
-    {
-      "id": 21,
-      "name": "Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ứng dụng", "di động"],
-      "type": "KLTN",
-      "language": "en",
-      "views": 211
-    },
-    {
-      "id": 22,
-      "name": "Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML",
-      "faculty": "MMT&TT",
-      "published_year": 2021,
-      "tags": ["ML", "web", "ứng dụng"],
-      "type": "KLTN",
-      "language": "vn",
-      "views": 222
+      "views": 53
     }
   ]
 }

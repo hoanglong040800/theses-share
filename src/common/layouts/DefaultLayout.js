@@ -1,4 +1,5 @@
 import { Box, Container } from '@material-ui/core'
+import Footer from 'common/components/footer/Footer'
 import Navbar from 'common/components/navbar/Navbar'
 
 export default function DefaultLayout({ children }) {
@@ -6,8 +7,11 @@ export default function DefaultLayout({ children }) {
     <>
       <Navbar />
       <Container maxWidth="xl">
-        <Box my={5}>{children}</Box>
+        <Box mt={13} mb={5}>
+          {children}
+        </Box>
       </Container>
+      <Footer />
     </>
   )
 }

@@ -36,7 +36,7 @@ export default function Theses({ apiUrl }) {
     }
 
     fetchRows()
-  })
+  }, [])
 
   return (
     <>

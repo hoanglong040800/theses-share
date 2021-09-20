@@ -9,7 +9,7 @@ export default function Navbar() {
   const classes = useStyles()
 
   return (
-    <AppBar position="sticky" color="default">
+    <AppBar position="fixed" color="default">
       <Toolbar>
         <Container maxWidth="xl">
           <Box className={classes.toolbar}>
