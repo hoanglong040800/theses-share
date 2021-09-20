@@ -27,7 +27,6 @@ export default function ThesesTable({
         onPageSizeChange={newPageSize => setPageSizeState(newPageSize)}
         scrollbarSize={20}
         hideFooter={hideFooter}
-        loading={false}
         onRowClick={handleRowClick}
         autoHeight
         disableColumnMenu

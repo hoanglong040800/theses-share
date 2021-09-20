@@ -5,13 +5,14 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from 'common/themes/theme'
 import 'common/styles/global.css'
 import DefaultLayout from 'common/layouts/DefaultLayout'
+import { Provider } from 'react-redux'
+import store from 'common/store'
 
 export default function MyApp({ Component, pageProps }) {
-
   useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
+      jssStyles.parentElement.removeChild(jssStyles)
     }
   }, [])
 
@@ -26,12 +27,15 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <ThemeProvider theme={theme}>
-        <DefaultLayout>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </DefaultLayout>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <DefaultLayout>
+            <CssBaseline />
+
+            <Component {...pageProps} />
+          </DefaultLayout>
+        </ThemeProvider>
+      </Provider>
     </>
   )
 }

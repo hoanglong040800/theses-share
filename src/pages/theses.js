@@ -21,19 +21,22 @@ export default function Theses({ apiUrl }) {
 
   // state
   const [rows, setRows] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function fetchRows() {
+      setLoading(true)
       const data = await fetchThesesWithQuery(
         apiUrl,
         objToQueryString(router.query)
       )
 
+      setLoading(false)
       setRows(data)
     }
 
     fetchRows()
-  }, [router.query])
+  })
 
   return (
     <>
@@ -54,6 +57,7 @@ export default function Theses({ apiUrl }) {
         rows={rows}
         pageSize={5}
         hideFooter={false}
+        loading={loading}
       />
     </>
   )
