@@ -1,7 +1,9 @@
 import { Typography } from "@material-ui/core";
-import classes from "./Footer.module.css";
+import useStyle from "./style";
 
 export default function Footer() {
+  const classes = useStyle();
+
   return (
     <footer className={classes.footer}>
       <Typography variant="h6" align="center" gutterBottom>
