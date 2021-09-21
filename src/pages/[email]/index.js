@@ -12,9 +12,10 @@ export default function OverviewUser() {
         <title>{email}</title>
       </Head>
 
-      <h1>Trang profile và theses của {email}</h1>
+      <h1>Trang profile và theses</h1>
       <h3>Email: {email}</h3>
       <h3>Tab: {tab}</h3>
+      
     </>
   )
 }

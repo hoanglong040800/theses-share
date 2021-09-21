@@ -44,6 +44,22 @@ export const navlinks = [
   },
 ]
 
+// ======== setting tabs ======
+export const settingsPages = [
+  {
+    label: 'Hồ sơ của tôi',
+    pathname: '/settings/profile',
+  },
+  {
+    label: 'Tài khoản',
+    pathname: '/settings/account',
+  },
+  {
+    label: 'Đổi mật khẩu',
+    pathname: '/settings/change-password',
+  },
+]
+
 // ======= ThesesTable ===========
 
 export const colDef = [

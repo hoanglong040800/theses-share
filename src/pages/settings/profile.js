@@ -1,15 +1,21 @@
+import { Divider } from '@material-ui/core'
 import SettingsTabs from 'modules/user/tabs/SettingsTabs'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 export default function ChangePassword() {
+  const router = useRouter()
+
   return (
     <>
       <Head>
         <title>Hồ sơ của tôi</title>
       </Head>
 
-      <SettingsTabs value='profile'>
+      <SettingsTabs value={router.pathname}>
         <h1>Hồ sơ của tôi</h1>
+        <Divider />
+
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur
           amet iure eaque, magni possimus quas asperiores tempore doloremque

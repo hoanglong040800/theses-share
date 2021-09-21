@@ -1,4 +1,5 @@
 import { Grid, makeStyles, Paper, Tab, Tabs } from '@material-ui/core'
+import { settingsPages } from 'common/utils/constants'
 import { useRouter } from 'next/router'
 
 export default function SettingsTabs({ children, value }) {
@@ -7,29 +8,21 @@ export default function SettingsTabs({ children, value }) {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12} md={3}>
+      <Grid item xs={12} md={3} className={mui.sidebar}>
         <Paper variant="outlined" className={mui.paper}>
           <Tabs orientation="vertical" value={value} variant="fullWidth">
-            <Tab
-              label="Hồ sơ của tôi"
-              value="profile"
-              onClick={() => router.push('/settings/profile')}
-              className={mui.tab}
-            />
-
-            <Tab
-              label="Tài khoản"
-              value="account"
-              onClick={() => router.push('/settings/account')}
-              className={mui.tab}
-            />
-
-            <Tab
-              label="Đổi mật khẩu"
-              value="change-password"
-              onClick={() => router.push('/settings/change-password')}
-              className={mui.tab}
-            />
+            {
+              //
+              settingsPages.map(item => (
+                <Tab
+                  key={item.label}
+                  label={item.label}
+                  value={item.pathname}
+                  onClick={() => router.push(item.pathname)}
+                  className={mui.tab}
+                />
+              ))
+            }
           </Tabs>
         </Paper>
       </Grid>
@@ -44,8 +37,14 @@ export default function SettingsTabs({ children, value }) {
 const useStyles = makeStyles(theme => ({
   paper: {
     '& .MuiTabs-indicator': {
-      width: '5px !important',
+      width: '3px !important',
       backgroundColor: [theme.palette.primary.light],
+    },
+  },
+
+  sidebar: {
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '200px',
     },
   },
 
