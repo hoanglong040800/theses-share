@@ -27,7 +27,7 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
         <ThemeProvider theme={theme}>
           <DefaultLayout>
             <CssBaseline />
@@ -35,7 +35,7 @@ export default function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
           </DefaultLayout>
         </ThemeProvider>
-      </Provider>
+      {/* </Provider> */}
     </>
   )
 }
