@@ -16,7 +16,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function MostViewsTheses({ mostViewedTheses }) {
+export default function Popular({ mostViewedTheses }) {
   return (
     <>
       <Head>

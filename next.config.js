@@ -12,8 +12,8 @@ module.exports = {
         destination: '/',
       },
       {
-        source: '/user',
-        destination: '/user/profile',
+        source: '/settings',
+        destination: '/settings/profile',
       },
     ]
   },

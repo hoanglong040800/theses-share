@@ -1,4 +1,4 @@
-import { Box, makeStyles } from '@material-ui/core'
+import { Box, Divider, makeStyles } from '@material-ui/core'
 import { colDef } from 'common/utils/constants'
 import {
   fetchMostViewsTheses,
@@ -36,8 +36,8 @@ export default function Home({ newestTheses, mostViewsTheses }) {
         <title>Trang chủ</title>
       </Head>
 
-      <Box my={8}>
-        <Link href="/theses/newest">
+      <Box my={6}>
+        <Link href="newest">
           <a>
             <h1 className={mui.link}>Luận văn mới nhất</h1>
           </a>
@@ -48,8 +48,10 @@ export default function Home({ newestTheses, mostViewsTheses }) {
         </Box>
       </Box>
 
-      <Box my={8}>
-        <Link href="/theses/most-views">
+      <Divider />
+
+      <Box my={6}>
+        <Link href="most-views">
           <a>
             <h1 className={mui.link}>Luận văn xem nhiều</h1>
           </a>

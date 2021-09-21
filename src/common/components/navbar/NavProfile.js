@@ -40,15 +40,15 @@ export default function NavProfile() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <MenuItem onClick={() => handleSelect('/user/like')}>
+        <MenuItem onClick={() => handleSelect(`/hoanglong040800?tab=bookmark`)}>
           Luận văn yêu thích
         </MenuItem>
 
-        <MenuItem onClick={() => handleSelect('/user/theses')}>
-          Luận văn của tôi
+        <MenuItem onClick={() => handleSelect(`/hoanglong040800`)}>
+          Hồ sơ của tôi
         </MenuItem>
 
-        <MenuItem onClick={() => handleSelect('/user/profile')}>Hồ sơ</MenuItem>
+        <MenuItem onClick={() => handleSelect('/settings')}>Cài đặt</MenuItem>
 
         <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
       </Menu>
