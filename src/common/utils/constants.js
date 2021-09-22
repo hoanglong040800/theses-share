@@ -60,6 +60,19 @@ export const settingsPages = [
   },
 ]
 
+// ======= user horizontal tab ======
+
+export const userPages = [
+  {
+    label: 'Luận văn',
+    value: 'theses',
+  },
+  {
+    label: 'Yêu thích',
+    value: 'bookmark',
+  },
+]
+
 // ======= ThesesTable ===========
 
 export const colDef = [
@@ -356,44 +369,5 @@ export const rowsDummy = [
     tags: ['ML', 'web', 'ứng dụng'],
     type: 'KLTN',
     language: 'vn',
-  },
-]
-
-// ======== UserPages ============
-export const userPages = [
-  {
-    name: 'like',
-    display: 'Luận văn yêu thích',
-    active: true,
-    get link() {
-      return this.name
-    },
-  },
-
-  {
-    name: 'theses',
-    display: 'Luận văn của tôi',
-    active: false,
-    get link() {
-      return this.name
-    },
-  },
-
-  {
-    name: 'profile',
-    display: 'Hồ sơ',
-    active: false,
-    get link() {
-      return this.name
-    },
-  },
-
-  {
-    name: 'account',
-    display: 'Tài khoản',
-    active: false,
-    get link() {
-      return this.name
-    },
   },
 ]

@@ -5,8 +5,6 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from 'common/themes/theme'
 import 'common/styles/global.css'
 import DefaultLayout from 'common/layouts/DefaultLayout'
-import { Provider } from 'react-redux'
-import store from 'common/store'
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -27,7 +25,6 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      {/* <Provider store={store}> */}
         <ThemeProvider theme={theme}>
           <DefaultLayout>
             <CssBaseline />
@@ -35,7 +32,6 @@ export default function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
           </DefaultLayout>
         </ThemeProvider>
-      {/* </Provider> */}
     </>
   )
 }

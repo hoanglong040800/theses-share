@@ -35,3 +35,12 @@ export async function fetchMostViewsTheses(apiUrl, limit = null) {
   // tra du lieu
   return data
 }
+
+export async function fetchThesisBySlug(apiUrl, slug) {
+  const res = await fetch(`${apiUrl}/theses?slug=${slug}&_limit=1`)
+  const dataArr = await res.json()
+
+  const data = dataArr[0]
+
+  return data
+}

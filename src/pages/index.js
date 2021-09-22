@@ -37,7 +37,7 @@ export default function Home({ newestTheses, mostViewsTheses }) {
       </Head>
 
       <Box my={6}>
-        <Link href="newest">
+        <Link href="/newest">
           <a>
             <h1 className={mui.link}>Luận văn mới nhất</h1>
           </a>
@@ -51,7 +51,7 @@ export default function Home({ newestTheses, mostViewsTheses }) {
       <Divider />
 
       <Box my={6}>
-        <Link href="most-views">
+        <Link href="/most-views">
           <a>
             <h1 className={mui.link}>Luận văn xem nhiều</h1>
           </a>

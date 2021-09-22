@@ -9,7 +9,11 @@
       "tags": ["DL", "mạng neural", "DL", "mạng neural"],
       "type": "KLTN",
       "language": "vn",
-      "views": 1000
+      "views": 1000,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 2,
@@ -20,7 +24,11 @@
       "tags": ["ML", "mạng neural"],
       "type": "DACN",
       "language": "vn",
-      "views": 211
+      "views": 211,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 3,
@@ -31,7 +39,11 @@
       "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
       "language": "en",
-      "views": 384
+      "views": 384,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 4,
@@ -42,7 +54,11 @@
       "tags": ["nhúng", "xe tự hành"],
       "type": "KLTN",
       "language": "vn",
-      "views": 427
+      "views": 427,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 5,
@@ -53,7 +69,11 @@
       "tags": ["ML", "web"],
       "type": "KLTN",
       "language": "vn",
-      "views": 542
+      "views": 542,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 6,
@@ -64,7 +84,11 @@
       "tags": ["DL", "mạng neural", "DL", "mạng neural"],
       "type": "KLTN",
       "language": "vn",
-      "views": 104
+      "views": 104,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 7,
@@ -75,7 +99,11 @@
       "tags": ["ML", "mạng neural"],
       "type": "DACN",
       "language": "vn",
-      "views": 26
+      "views": 26,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 8,
@@ -86,7 +114,11 @@
       "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
       "language": "en",
-      "views": 33
+      "views": 33,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 9,
@@ -97,7 +129,11 @@
       "tags": ["nhúng", "xe tự hành"],
       "type": "KLTN",
       "language": "vn",
-      "views": 45
+      "views": 45,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 10,
@@ -108,7 +144,11 @@
       "tags": ["ML", "web"],
       "type": "KLTN",
       "language": "vn",
-      "views": 51
+      "views": 51,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 11,
@@ -119,7 +159,11 @@
       "tags": ["DL", "mạng neural", "DL", "mạng neural"],
       "type": "KLTN",
       "language": "vn",
-      "views": 167
+      "views": 167,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 12,
@@ -130,7 +174,11 @@
       "tags": ["ML", "mạng neural"],
       "type": "DACN",
       "language": "vn",
-      "views": 280
+      "views": 280,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 13,
@@ -141,7 +189,11 @@
       "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
       "language": "en",
-      "views": 335
+      "views": 335,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 14,
@@ -152,7 +204,11 @@
       "tags": ["nhúng", "xe tự hành"],
       "type": "KLTN",
       "language": "vn",
-      "views": 4
+      "views": 4,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 15,
@@ -163,7 +219,11 @@
       "tags": ["ML", "web"],
       "type": "KLTN",
       "language": "vn",
-      "views": 586
+      "views": 586,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 16,
@@ -174,7 +234,11 @@
       "tags": ["DL", "mạng neural", "DL", "mạng neural"],
       "type": "KLTN",
       "language": "vn",
-      "views": 12
+      "views": 12,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 17,
@@ -185,7 +249,11 @@
       "tags": ["ML", "mạng neural"],
       "type": "DACN",
       "language": "vn",
-      "views": 201
+      "views": 201,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 18,
@@ -196,7 +264,11 @@
       "tags": ["ứng dụng", "di động"],
       "type": "KLTN",
       "language": "en",
-      "views": 326
+      "views": 326,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     },
     {
       "id": 19,
@@ -207,7 +279,11 @@
       "tags": ["nhúng", "xe tự hành"],
       "type": "KLTN",
       "language": "vn",
-      "views": 48
+      "views": 48,
+      "user": {
+        "id": 251,
+        "email": "18520251@gm.uit.edu.vn"
+      }
     },
     {
       "id": 20,
@@ -218,7 +294,11 @@
       "tags": ["ML", "web"],
       "type": "KLTN",
       "language": "vn",
-      "views": 53
+      "views": 53,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
     }
   ]
 }

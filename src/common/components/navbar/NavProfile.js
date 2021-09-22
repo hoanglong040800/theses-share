@@ -1,4 +1,10 @@
-import { IconButton, makeStyles, Menu, MenuItem } from '@material-ui/core'
+import {
+  Divider,
+  IconButton,
+  makeStyles,
+  Menu,
+  MenuItem,
+} from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -40,15 +46,17 @@ export default function NavProfile() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <MenuItem onClick={() => handleSelect(`/hoanglong040800?tab=bookmark`)}>
-          Luận văn yêu thích
+        <MenuItem onClick={() => handleSelect(`/18520093`)}>
+          Hồ sơ
         </MenuItem>
 
-        <MenuItem onClick={() => handleSelect(`/hoanglong040800`)}>
-          Hồ sơ của tôi
+        <MenuItem onClick={() => handleSelect(`/18520093?tab=bookmark`)}>
+          Yêu thích
         </MenuItem>
 
         <MenuItem onClick={() => handleSelect('/settings')}>Cài đặt</MenuItem>
+
+        <Divider variant="middle" />
 
         <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
       </Menu>
