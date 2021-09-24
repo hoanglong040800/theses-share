@@ -1,21 +1,23 @@
-import { DataGrid } from '@material-ui/data-grid'
-import { getNameFromEmail } from 'common/utils/util'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { DataGrid } from "@material-ui/data-grid";
+import { getNameFromEmail } from "common/utils/util";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function ThesesTable({
   columns,
   rows,
   pageSize = 10,
-  hideFooter = true,
+  hideFooter = false,
   loading = false,
 }) {
-  const router = useRouter()
-  const [pageSizeState, setPageSizeState] = useState(pageSize)
+  const router = useRouter();
+  const [pageSizeState, setPageSizeState] = useState(pageSize);
 
   function handleRowClick(params) {
     // console.log(params)
-    router.push(`${getNameFromEmail(params.row.user.email)}/${params.row.slug}`)
+    router.push(
+      `${getNameFromEmail(params.row.user.email)}/${params.row.slug}`
+    );
   }
 
   return (
@@ -26,7 +28,7 @@ export default function ThesesTable({
         pageSize={pageSizeState}
         loading={loading}
         rowsPerPageOptions={[5, 10, 20]}
-        onPageSizeChange={newPageSize => setPageSizeState(newPageSize)}
+        onPageSizeChange={(newPageSize) => setPageSizeState(newPageSize)}
         scrollbarSize={20}
         hideFooter={hideFooter}
         onRowClick={handleRowClick}
@@ -35,5 +37,5 @@ export default function ThesesTable({
         disableSelectionOnClick
       />
     </>
-  )
+  );
 }
