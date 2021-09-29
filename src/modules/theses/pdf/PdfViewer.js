@@ -6,7 +6,7 @@ import { Document, Page, pdfjs } from 'react-pdf'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 
 export default function PdfViewer({
-  file = 'https://www.ets.org/Media/Tests/GRE/pdf/gre_research_validity_data.pdf',
+  file = 'https://res.cloudinary.com/thesesshare/image/upload/v1632826157/theses_storage/v4zbvmnprqe3ywrdm9iy.pdf',
   isList = true,
 }) {
   const mui = useStyles()
@@ -42,7 +42,7 @@ export default function PdfViewer({
       </Button>
 
       <p>
-        Page {pageNumber} of {numPages}
+        Trang {pageNumber} trong {numPages}
       </p>
 
       <Button
@@ -93,9 +93,10 @@ export default function PdfViewer({
 const useStyles = makeStyles(theme => ({
   page: {
     '& .react-pdf__Page__canvas': {
-      maxWidth: '600px !important',
+      maxWidth: '500px !important',
       width: '100% !important',
       height: 'auto !important',
+      margin: '20px 0',
     },
   },
 

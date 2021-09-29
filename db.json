@@ -300,5 +300,24 @@
         "email": "18520093@gm.uit.edu.vn"
       }
     }
+  ],
+
+  "thesesDetail": [
+    {
+      "id": 20,
+      "name": "Xây dựng ứng dụng tìm kiếm tài liệu pháp lý Việt Nam",
+      "slug": "xay-dung-ung-dung-tim-kiem-tai-lieu-phap-ly-viet-nam",
+      "faculty": "CNPM",
+      "published_year": 2020,
+      "tags": ["ML", "web"],
+      "type": "KLTN",
+      "language": "vn",
+      "link_storage": "https://www.ets.org/Media/Tests/GRE/pdf/gre_research_validity_data.pdf",
+      "views": 53,
+      "user": {
+        "id": 93,
+        "email": "18520093@gm.uit.edu.vn"
+      }
+    }
   ]
 }

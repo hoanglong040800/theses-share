@@ -1,8 +1,7 @@
-import { Typography } from "@material-ui/core";
-import useStyle from "./style";
+import { makeStyles, Typography } from '@material-ui/core'
 
 export default function Footer() {
-  const classes = useStyle();
+  const classes = useStyle()
 
   return (
     <footer className={classes.footer}>
@@ -17,5 +16,12 @@ export default function Footer() {
         của body, không biết chỉnh ở đâu
       </Typography>
     </footer>
-  );
+  )
 }
+
+const useStyle = makeStyles(theme => ({
+  footer: {
+    backgroundColor: theme.palette.secondary.light,
+    padding: '3.25rem 1.5rem',
+  },
+}))

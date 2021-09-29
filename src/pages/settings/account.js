@@ -17,7 +17,7 @@ export default function ChangePassword() {
         <h1>Cài đặt tài khoản</h1>
         <Divider />
 
-        <PdfViewer isList={true} />
+        <PdfViewer />
       </SettingsTabs>
     </>
   )
