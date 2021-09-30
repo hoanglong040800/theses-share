@@ -389,7 +389,7 @@ export const authSchema = yup.object().shape({
     .oneOf([yup.ref('pswd'), null], 'Không trùng với mật khẩu'),
 })
 
-export const rsPswdSchema=yup.object().shape({
+export const rsPswdSchema = yup.object().shape({
   pswdOld: yup.string().required('Chưa nhập mật khẩu cũ'),
 
   pswdNew: yup
@@ -404,5 +404,12 @@ export const rsPswdSchema=yup.object().shape({
 })
 
 export const thesisSchema = yup.object().shape({
-  file: yup.mixed().required('Chưa tải luận văn'),
+  file: yup
+    .mixed()
+    .test('required', 'Chưa tải luận văn', value =>
+      value.length ? true : false
+    )
+    .test('fileSize', 'File vượt quá 1MB', value => {
+      return value.length ? (value[0].size <= 1000000 ? true : false) : false
+    }),
 })

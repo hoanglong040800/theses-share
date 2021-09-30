@@ -1,23 +1,28 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, Typography } from '@material-ui/core'
 import { thesisSchema } from 'common/utils/constants'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 
 export default function NewThesis() {
   const {
-    watch,
-    handleSubmit,
     register,
     control,
     formState: { errors },
+    handleSubmit,
     setValue,
   } = useForm({
     resolver: yupResolver(thesisSchema),
   })
 
   function onSubmit(data) {
+    console.log('onSubmit')
     console.log(data)
+  }
+
+  function onError(err) {
+    console.log('onError')
+    console.log(err)
   }
 
   return (
@@ -30,12 +35,13 @@ export default function NewThesis() {
 
       <form>
         <input {...register('file')} accept=".pdf" type="file" />
+        <p style={{ color: '#d32f2f' }}>{errors.file?.message}</p>
 
         <Box display="flex" justifyContent="center">
           <Button
             variant="contained"
             color="primary"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit, onError)}
           >
             Đăng
           </Button>
