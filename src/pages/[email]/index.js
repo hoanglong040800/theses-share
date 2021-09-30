@@ -1,4 +1,4 @@
-import { Box, makeStyles, Tab, Tabs } from '@material-ui/core'
+import { Box, Button, makeStyles, Tab, Tabs } from '@material-ui/core'
 import { userPages } from 'common/utils/constants'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -13,7 +13,7 @@ export default function OverviewUser() {
   return (
     <>
       <Head>
-        <title>{email}</title>
+        <title>{email} - Hồ sơ</title>
       </Head>
 
       <h1>Trang profile và theses</h1>
@@ -36,9 +36,24 @@ export default function OverviewUser() {
           }
         </Tabs>
       </Box>
-      {tab == 'theses' && <h3>Tất cả luận văn đã đăng</h3>}
 
-      {tab == 'bookmark' && <h3>Những luận văn đánh dấu yêu thích</h3>}
+      {tab == 'theses' && (
+        <Box mt={5}>
+          <Box display="flex" justifyContent="flex-end">
+            <Button variant="contained" color="primary" onClick={()=>router.push('/new')}>
+              Thêm luận văn
+            </Button>
+          </Box>
+
+          <h3>Tất cả luận văn đã đăng</h3>
+        </Box>
+      )}
+
+      {tab == 'bookmark' && (
+        <Box mt={5}>
+          <h3>Những luận văn đánh dấu yêu thích</h3>
+        </Box>
+      )}
     </>
   )
 }

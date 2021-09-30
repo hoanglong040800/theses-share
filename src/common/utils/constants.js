@@ -47,7 +47,7 @@ export const navlinks = [
 // ======== setting tabs ======
 export const settingsPages = [
   {
-    label: 'Hồ sơ của tôi',
+    label: 'Chỉnh sửa hồ sơ',
     pathname: '/settings/profile',
   },
   {
@@ -60,7 +60,7 @@ export const settingsPages = [
   },
 ]
 
-// ======= user horizontal tab ======
+// ======= user [email] tabs ======
 
 export const userPages = [
   {
@@ -371,3 +371,38 @@ export const rowsDummy = [
     language: 'vn',
   },
 ]
+
+// ========== SCHEMA yup =========
+import * as yup from 'yup'
+
+export const authSchema = yup.object().shape({
+  email: yup.string().required('Chưa nhập email').email('Không phải email'),
+
+  pswd: yup
+    .string()
+    .required('Chưa nhập mật khẩu')
+    .min(8, 'Mật khẩu tối thiểu 8 kí tự')
+    .max(20, 'Mật khẩu không được quá 20 kí tự'),
+
+  pswdCf: yup
+    .string()
+    .oneOf([yup.ref('pswd'), null], 'Không trùng với mật khẩu'),
+})
+
+export const rsPswdSchema=yup.object().shape({
+  pswdOld: yup.string().required('Chưa nhập mật khẩu cũ'),
+
+  pswdNew: yup
+    .string()
+    .required('Chưa nhập mật khẩu mới')
+    .min(8, 'Mật khẩu tối thiểu 8 kí tự')
+    .max(20, 'Mật khẩu không được quá 20 kí tự'),
+
+  pswdCf: yup
+    .string()
+    .oneOf([yup.ref('pswdNew'), null], 'Không trùng với mật khẩu mới'),
+})
+
+export const thesisSchema = yup.object().shape({
+  file: yup.mixed().required('Chưa tải luận văn'),
+})
