@@ -7,11 +7,12 @@ export default function TextFieldController({
   label,
   control,
   errors,
+  required = false,
   defaultValue = '',
   type = 'text',
 }) {
   return (
-    <FormControl margin="normal" fullWidth>
+    <FormControl margin="normal" required={required} fullWidth>
       <Controller
         name={name}
         control={control}

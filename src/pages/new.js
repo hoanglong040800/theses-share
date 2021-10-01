@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Button, InputLabel, Typography } from '@material-ui/core'
+import { Box, Button, InputLabel } from '@material-ui/core'
 import { thesisSchema } from 'common/utils/constants'
+import { addFile } from 'modules/theses/fetch-theses'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 
@@ -17,20 +18,11 @@ export default function NewThesis() {
 
   async function onSubmit(data) {
     console.log('SUBMIT')
-    console.log(data)
-
-    await fetch('api/test', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'multipart/form-data',
-      },
-      body: JSON.stringify(data),
-    })
+    // await addFile('', 1, data.file[0])
   }
 
   function onError(err) {
-    console.log('ERROR')
-    console.log(err)
+    console.log('ERROR\n', err)
   }
 
   return (
@@ -44,7 +36,7 @@ export default function NewThesis() {
       <form>
         <Box>
           <InputLabel
-            error={errors.file}
+            error={!!errors.file} // convert truethy falsy to bool
             style={{ margin: '0 0 15px 0' }}
             required
           >
