@@ -406,10 +406,8 @@ export const rsPswdSchema = yup.object().shape({
 export const thesisSchema = yup.object().shape({
   file: yup
     .mixed()
-    .test('required', 'Chưa tải luận văn', value =>
-      value.length ? true : false
-    )
-    .test('fileSize', 'File vượt quá 1MB', value => {
-      return value.length ? (value[0].size <= 1000000 ? true : false) : false
-    }),
+    .test('required', 'Chưa tải luận văn', value => value.length)
+    .test('fileSize', 'File vượt quá 1MB', value =>
+      value.length ? value[0].size <= 1000000 : false
+    ),
 })

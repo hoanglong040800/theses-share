@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Button, Typography } from '@material-ui/core'
+import { Box, Button, InputLabel, Typography } from '@material-ui/core'
 import { thesisSchema } from 'common/utils/constants'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
@@ -15,13 +15,21 @@ export default function NewThesis() {
     resolver: yupResolver(thesisSchema),
   })
 
-  function onSubmit(data) {
-    console.log('onSubmit')
+  async function onSubmit(data) {
+    console.log('SUBMIT')
     console.log(data)
+
+    await fetch('api/test', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
+      body: JSON.stringify(data),
+    })
   }
 
   function onError(err) {
-    console.log('onError')
+    console.log('ERROR')
     console.log(err)
   }
 
@@ -34,8 +42,19 @@ export default function NewThesis() {
       <h1>Thêm luận văn mới</h1>
 
       <form>
-        <input {...register('file')} accept=".pdf" type="file" />
-        <p style={{ color: '#d32f2f' }}>{errors.file?.message}</p>
+        <Box>
+          <InputLabel
+            error={errors.file}
+            style={{ margin: '0 0 15px 0' }}
+            required
+          >
+            Tải luận văn
+          </InputLabel>
+
+          <input {...register('file')} accept=".pdf" type="file" />
+
+          <p style={{ color: '#ef5350' }}>{errors.file?.message}</p>
+        </Box>
 
         <Box display="flex" justifyContent="center">
           <Button
