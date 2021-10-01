@@ -1,24 +1,24 @@
-import { Box, Button, makeStyles } from '@material-ui/core'
-import { Alert, AlertTitle } from '@material-ui/lab'
-import Loading from 'common/components/loading/Loading'
-import { useState } from 'react'
-import { Document, Page, pdfjs } from 'react-pdf'
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
+import { Box, Button, makeStyles } from "@material-ui/core";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import Loading from "common/components/loading/Loading";
+import { useState } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export default function PdfViewer({
-  file = 'https://res.cloudinary.com/thesesshare/image/upload/v1632826157/theses_storage/v4zbvmnprqe3ywrdm9iy.pdf',
+  file = "https://res.cloudinary.com/thesesshare/image/upload/v1632826157/theses_storage/v4zbvmnprqe3ywrdm9iy.pdf",
   isList = true,
 }) {
-  const mui = useStyles()
-  const [numPages, setNumPages] = useState(null)
-  const [pageNumber, setPageNumber] = useState(1)
+  const mui = useStyles();
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages)
+    setNumPages(numPages);
   }
 
   function handleChangePage(payload) {
-    setPageNumber(prev => prev + payload)
+    setPageNumber((prev) => prev + payload);
   }
 
   const errorComponent = (
@@ -28,7 +28,7 @@ export default function PdfViewer({
         Tải tài liệu thất bại
       </Alert>
     </Box>
-  )
+  );
 
   const paginationComponent = (
     <Box display="flex" justifyContent="center" my={3}>
@@ -54,13 +54,13 @@ export default function PdfViewer({
         Sau
       </Button>
     </Box>
-  )
+  );
 
   return (
     <>
       {!isList ? paginationComponent : null}
 
-      <Box sx={{ bgcolor: 'rgba(0, 0, 0, 0.7)' }} my={5}>
+      <Box sx={{ bgcolor: "rgba(0, 0, 0, 0.7)" }} my={5}>
         <Document
           file={file}
           onLoadSuccess={onDocumentLoadSuccess}
@@ -87,20 +87,20 @@ export default function PdfViewer({
 
       {!isList ? paginationComponent : null}
     </>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   page: {
-    '& .react-pdf__Page__canvas': {
-      maxWidth: '500px !important',
-      width: '100% !important',
-      height: 'auto !important',
-      margin: '20px 0',
+    "& .react-pdf__Page__canvas": {
+      maxWidth: "500px !important",
+      width: "100% !important",
+      height: "auto !important",
+      margin: "20px 0",
     },
   },
 
   btn: {
-    margin: '0 20px',
+    margin: "0 20px",
   },
-}))
+}));
