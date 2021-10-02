@@ -1,5 +1,4 @@
 import { FormControl, TextField } from '@material-ui/core'
-import { useEffect } from 'react'
 import { Controller } from 'react-hook-form'
 
 export default function TextFieldController({
@@ -12,7 +11,7 @@ export default function TextFieldController({
   type = 'text',
 }) {
   return (
-    <FormControl margin="normal" required={required} fullWidth>
+    <FormControl margin="normal" fullWidth>
       <Controller
         name={name}
         control={control}
@@ -20,8 +19,9 @@ export default function TextFieldController({
         render={({ field }) => (
           <TextField
             {...field}
-            label={label}
             type={type}
+            label={label}
+            required={required}
             error={!!errors[name]}
             helperText={errors[name]?.message}
           />

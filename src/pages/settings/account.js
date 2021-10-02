@@ -1,5 +1,4 @@
 import { Divider } from '@material-ui/core'
-import PdfViewer from 'modules/theses/pdf/PdfViewer'
 import SettingsTabs from 'modules/user/tabs/SettingsTabs'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -17,7 +16,6 @@ export default function ChangePassword() {
         <h1>Cài đặt tài khoản</h1>
         <Divider />
 
-        <PdfViewer />
       </SettingsTabs>
     </>
   )

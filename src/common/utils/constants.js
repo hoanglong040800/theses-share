@@ -390,13 +390,13 @@ export const authSchema = yup.object().shape({
 })
 
 export const rsPswdSchema = yup.object().shape({
-  pswdOld: yup.string().required('Chưa nhập mật khẩu cũ'),
+  pswdOld: yup.string().required('Bắt buộc'),
 
   pswdNew: yup
     .string()
-    .required('Chưa nhập mật khẩu mới')
-    .min(8, 'Mật khẩu tối thiểu 8 kí tự')
-    .max(20, 'Mật khẩu không được quá 20 kí tự'),
+    .required('Bắt buộc')
+    .min(8, 'Tối thiểu 8 kí tự')
+    .max(20, 'Không được quá 20 kí tự'),
 
   pswdCf: yup
     .string()
@@ -404,6 +404,20 @@ export const rsPswdSchema = yup.object().shape({
 })
 
 export const thesisSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required('Bắt buộc')
+    .max(255, obj => `Không được quá ${obj.max} kí tự`),
+
+  type: yup.string().required('Bắt buộc'),
+
+  published_year: yup
+    .number()
+    .typeError('Không phải số')
+    .required('Bắt buộc')
+    .min(1, obj => `Không được nhỏ hơn năm ${obj.min}`)
+    .max(new Date().getFullYear(), obj => `Không được lớn hơn năm ${obj.max}`),
+
   file: yup
     .mixed()
     .test('required', 'Chưa tải luận văn', value => value.length)

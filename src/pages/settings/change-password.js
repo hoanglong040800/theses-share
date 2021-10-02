@@ -48,6 +48,7 @@ export default function ChangePassword() {
             name="pswdOld"
             label="Mật khẩu cũ"
             type="password"
+            required={true}
             control={control}
             errors={errors}
           />
@@ -56,6 +57,7 @@ export default function ChangePassword() {
             name="pswdNew"
             label="Mật khẩu mới"
             type="password"
+            required={true}
             control={control}
             errors={errors}
           />
@@ -64,6 +66,7 @@ export default function ChangePassword() {
             name="pswdCf"
             label="Xác nhận mật khẩu mới"
             type="password"
+            required={true}
             control={control}
             errors={errors}
           />

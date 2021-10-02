@@ -4,32 +4,32 @@ import {
   CircularProgress,
   Container,
   Grid,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
 import {
   fetchNewestTheses,
   fetchThesisBySlug,
-} from "modules/theses/fetch-theses";
-import PdfViewer from "modules/theses/pdf/PdfViewer";
-import Head from "next/head";
-import { useRouter } from "next/router";
+} from 'modules/theses/fetch-theses'
+import PdfViewer from 'modules/theses/pdf/PdfViewer'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 export async function getStaticPaths() {
-  const data = await fetchNewestTheses(process.env.API_URL);
+  const data = await fetchNewestTheses(process.env.API_URL)
 
-  const paths = data.map((item) => {
+  const paths = data.map(item => {
     return {
       params: {
         email: item.user.email,
         slug: item.slug,
       },
-    };
-  });
+    }
+  })
 
   return {
     paths,
     fallback: true,
-  };
+  }
 }
 
 export async function getStaticProps({ params }) {
@@ -37,12 +37,12 @@ export async function getStaticProps({ params }) {
     props: {
       details: await fetchThesisBySlug(process.env.API_URL, params.slug),
     },
-  };
+  }
 }
 
 export default function ThesisDetail({ details }) {
-  const classes = useStyle();
-  const router = useRouter();
+  const classes = useStyle()
+  const router = useRouter()
 
   // cho trang fetch du lieu -> hien thi component loading
   if (router.isFallback) {
@@ -56,7 +56,7 @@ export default function ThesisDetail({ details }) {
           <CircularProgress size={50} />
         </Box>
       </>
-    );
+    )
   }
 
   return (
@@ -124,12 +124,12 @@ export default function ThesisDetail({ details }) {
       </Container>
       <PdfViewer file={details.link_storage} isList={false} />
     </>
-  );
+  )
 }
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(theme => ({
   gridContainer: {
-    padding: "1rem",
-    borderBottom: "1px solid #ddd",
+    padding: '1rem',
+    borderBottom: '1px solid #ddd',
   },
-}));
+}))

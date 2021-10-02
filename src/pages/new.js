@@ -1,7 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Button, InputLabel } from '@material-ui/core'
+import { Box, Button, MenuItem } from '@material-ui/core'
+import SelectController from 'common/components/input/SelectController'
+import TextFieldController from 'common/components/input/TextFieldController'
 import { thesisSchema } from 'common/utils/constants'
-import { addFile } from 'modules/theses/fetch-theses'
+import UploadPDF from 'modules/theses/pdf/UploadPDF'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 
@@ -17,7 +19,7 @@ export default function NewThesis() {
   })
 
   async function onSubmit(data) {
-    console.log('SUBMIT')
+    console.log('SUBMIT', data)
     // await addFile('', 1, data.file[0])
   }
 
@@ -33,22 +35,39 @@ export default function NewThesis() {
 
       <h1>Thêm luận văn mới</h1>
 
-      <form>
-        <Box>
-          <InputLabel
-            error={!!errors.file} // convert truethy falsy to bool
-            style={{ margin: '0 0 15px 0' }}
-            required
-          >
-            Tải luận văn
-          </InputLabel>
+      <Box display="flex" flexDirection="column" mx="auto" maxWidth="500px">
+        <UploadPDF name="file" register={register} errors={errors} />
 
-          <input {...register('file')} accept=".pdf" type="file" />
+        <TextFieldController
+          name="name"
+          label="Tên luận văn"
+          defaultValue="abc"
+          required={true}
+          control={control}
+          errors={errors}
+        />
 
-          <p style={{ color: '#ef5350' }}>{errors.file?.message}</p>
-        </Box>
+        <TextFieldController
+          name="published_year"
+          label="Năm"
+          type="number"
+          defaultValue={2021}
+          required={true}
+          control={control}
+          errors={errors}
+        />
 
-        <Box display="flex" justifyContent="center">
+        <SelectController
+          name="type"
+          control={control}
+          errors={errors}
+          required={true}
+        >
+          <MenuItem value="KLTN">Khóa luận tốt nghiệp</MenuItem>
+          <MenuItem value="ĐACN">Đồ án chuyên ngành</MenuItem>
+        </SelectController>
+
+        <Box display="flex" justifyContent="flex-end" mt={3}>
           <Button
             variant="contained"
             color="primary"
@@ -57,17 +76,17 @@ export default function NewThesis() {
             Đăng
           </Button>
         </Box>
-      </form>
+      </Box>
     </>
   )
 }
 
 /*
  user_id (session)
- name: text
- type: dropdown/text
- faculty: text
- published_year: number
+ name*: text
+ type*: dropdown
+ faculty*: dropdown
+ published_year*: number
  
  tags: [
   { id: 1, name_vn: 'Học sâu'},
@@ -81,7 +100,6 @@ tags:[
 
  author: array
  teachers: array
- language: dropdown/text
- format:
- file upload
+ language*: dropdown
+ file*
 */
