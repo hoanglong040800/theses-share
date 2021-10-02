@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles } from '@material-ui/core'
+import { Box, Button, makeStyles, TextField } from '@material-ui/core'
 import { Alert, AlertTitle } from '@material-ui/lab'
 import Loading from 'common/components/loading/Loading'
 import { useState } from 'react'
@@ -11,18 +11,36 @@ export default function PdfViewer({
 }) {
   const mui = useStyles()
   const [numPages, setNumPages] = useState(null)
-  const [pageNumber, setPageNumber] = useState(1)
+  const [page, setPage] = useState(1)
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages)
   }
 
   function handleChangePage(payload) {
-    setPageNumber(prev => prev + payload)
+    let nextPage = page + payload
+
+    if (nextPage < 1 || nextPage > numPages) {
+      return
+    }
+
+    setPage(nextPage)
   }
 
   function handleKeyDown(e) {
-    alert(e.keyCode)
+    e = e || window.event
+    switch (e.keyCode) {
+      case 37:
+        handleChangePage(-1)
+        break
+
+      case 39:
+        handleChangePage(1)
+        break
+
+      default:
+        break
+    }
   }
 
   const errorComponent = (
@@ -40,20 +58,20 @@ export default function PdfViewer({
         variant="contained"
         className={mui.btn}
         onClick={() => handleChangePage(-1)}
-        disabled={pageNumber === 1}
+        disabled={page === 1}
       >
         Trước
       </Button>
 
       <p>
-        Trang {pageNumber} trong {numPages}
+        Trang {page} trong {numPages}
       </p>
 
       <Button
         variant="contained"
         className={mui.btn}
         onClick={() => handleChangePage(1)}
-        disabled={pageNumber === numPages}
+        disabled={page === numPages}
       >
         Sau
       </Button>
@@ -68,6 +86,7 @@ export default function PdfViewer({
         sx={{ bgcolor: 'rgba(0, 0, 0, 0.7)' }}
         my={5}
         onKeyDown={handleKeyDown}
+        tabIndex="0"
       >
         <Document
           file={file}
@@ -82,10 +101,10 @@ export default function PdfViewer({
                 //
                 isList ? (
                   [...Array(numPages)].map((e, i) => (
-                    <Page pageNumber={i + 1} key={i + 1} className={mui.page} />
+                    <Page page={i + 1} key={i + 1} className={mui.page} />
                   ))
                 ) : (
-                  <Page pageNumber={pageNumber} className={mui.page} />
+                  <Page pageNumber={page} className={mui.page} />
                 )
               }
             </Box>
