@@ -63,6 +63,7 @@ export default function ThesisDetail({ details }) {
   };
 
   const email = "18520093@gm.uit.edu.vn";
+  const checkEmail = details.user.email === email;
 
   // cho trang fetch du lieu -> hien thi component loading
   if (router.isFallback) {
@@ -154,13 +155,17 @@ export default function ThesisDetail({ details }) {
           </Grid>
         </Grid>
         <Box display="flex" justifyContent="flex-end" mt={2}>
-          <Button
-            disabled={details.user.email !== email}
-            variant="contained"
-            color="primary"
-          >
-            Chỉnh sửa
-          </Button>
+          <div>
+            {checkEmail && (
+              <Button
+                disabled={details.user.email !== email}
+                variant="contained"
+                color="primary"
+              >
+                Chỉnh sửa
+              </Button>
+            )}
+          </div>
         </Box>
       </Container>
       <PdfViewer file={details.link_storage} isList={false} />
