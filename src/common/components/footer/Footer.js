@@ -7,34 +7,31 @@ export default function Footer() {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="xl">
-        <Typography
-          variant="h5"
-          align="center"
-          gutterBottom
-          className={classes.footerHead}
-        >
-          Theses Share
-        </Typography>
         <Grid container className={classes.container}>
-          <Grid item xs={9} className={classes.info}>
-            <Typography variant="subtitle2">
+          <Grid item xs={12} md={4}>
+            <Typography
+              variant="h5"
+              align="center"
+              className={classes.footerHead}
+            >
+              Theses Share
+            </Typography>
+
+            <Typography variant="subtitle1" align="center" gutterBottom>
+              <span className={classes.link}>
+                <Link href="/">Trang chủ</Link>
+              </span>
+              <span className={classes.whiteLine}>|</span>
+              <span className={classes.link}>
+                <Link href="/about">Về chúng tôi</Link>
+              </span>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Typography variant="subtitle2" className={classes.info}>
               <div>Địa chỉ: 503B Minh Phụng, Phường 9, Quận 11, TP.HCM</div>
               <div>SĐT: (+84) 9633623</div>
               <div>Email: 18520093@gm.uit.edu.vn</div>
-            </Typography>
-          </Grid>
-          <Grid item xs={3} className={classes.nav}>
-            <Typography variant="subtitle1" align="right">
-              <div>
-                <span className={classes.link}>
-                  <Link href="/">Trang chủ</Link>
-                </span>
-              </div>
-              <div>
-                <span className={classes.link}>
-                  <Link href="/about">Về chúng tôi</Link>
-                </span>
-              </div>
             </Typography>
           </Grid>
         </Grid>
@@ -54,10 +51,21 @@ const useStyle = makeStyles((theme) => ({
   },
 
   container: {
-    borderLeft: "1px solid #ddd",
-    borderRight: "1px solid #ddd",
     margin: "1rem 0",
-    padding: "0 1rem",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    info: {
+      textAlign: "center",
+    },
+  },
+
+  [theme.breakpoints.up("md")]: {
+    info: {
+      borderRight: "1px solid #ddd",
+      paddingRight: "1rem",
+      textAlign: "right",
+    },
   },
 
   footerHead: {
@@ -67,14 +75,11 @@ const useStyle = makeStyles((theme) => ({
 
   link: {
     "&:hover": {
-      fontWeight: "bold",
       textDecoration: "underline",
     },
   },
 
-  nav: {
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
+  whiteLine: {
+    padding: "0 10px",
   },
 }));
