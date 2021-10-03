@@ -47,18 +47,12 @@ export default function ThesisDetail({ details }) {
   const gridItemProperty = {
     property: {
       item: true,
-      xl: 3,
       xs: 3,
-      sm: 3,
-      md: 3,
     },
 
     value: {
       item: true,
-      xl: 9,
       xs: 9,
-      sm: 9,
-      md: 9,
     },
   };
 
@@ -106,7 +100,7 @@ export default function ThesisDetail({ details }) {
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.author.map((name) => (
-              <div>{name}</div>
+              <div key={details.author.indexOf(name)}>{name}</div>
             ))}
           </Grid>
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
@@ -114,7 +108,7 @@ export default function ThesisDetail({ details }) {
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.teachers.map((teacher) => (
-              <div>{teacher}</div>
+              <div key={details.teachers.indexOf(teacher)}>{teacher}</div>
             ))}
           </Grid>
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
@@ -127,8 +121,8 @@ export default function ThesisDetail({ details }) {
             Định dạng:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.format.map((f) => (
-              <div>{f}</div>
+            {details.format.map((type) => (
+              <div key={details.format.indexOf(type)}>{type}</div>
             ))}
           </Grid>
 
@@ -150,18 +144,14 @@ export default function ThesisDetail({ details }) {
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.tags.map((item) => (
-              <div>{item}</div>
+              <div key={details.tags.indexOf(item)}>{item}</div>
             ))}
           </Grid>
         </Grid>
         <Box display="flex" justifyContent="flex-end" mt={2}>
           <div>
             {checkEmail && (
-              <Button
-                disabled={details.user.email !== email}
-                variant="contained"
-                color="primary"
-              >
+              <Button variant="contained" color="primary">
                 Chỉnh sửa
               </Button>
             )}
