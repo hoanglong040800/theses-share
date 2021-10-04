@@ -3,6 +3,7 @@ import { Controller } from 'react-hook-form'
 
 export default function SelectController({
   name,
+  label,
   control,
   errors,
   children,
@@ -16,7 +17,7 @@ export default function SelectController({
       required={required}
       error={!!errors[name]}
     >
-      <InputLabel>Loại luận văn</InputLabel>
+      <InputLabel>{label}</InputLabel>
 
       <Controller
         name={name}

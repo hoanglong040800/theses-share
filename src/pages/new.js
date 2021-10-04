@@ -41,17 +41,27 @@ export default function NewThesis() {
         <TextFieldController
           name="name"
           label="Tên luận văn"
-          defaultValue="abc"
           required={true}
           control={control}
           errors={errors}
         />
 
+        <SelectController
+          name="faculty"
+          label="Khoa"
+          required={true}
+          control={control}
+          errors={errors}
+        >
+          <MenuItem value="KHMT">Khoa học máy tính</MenuItem>
+          <MenuItem value="CNPM">Công nghệ phần mềm</MenuItem>
+          <MenuItem value="KTMT">Kĩ thuật máy tính</MenuItem>
+        </SelectController>
+
         <TextFieldController
           name="published_year"
           label="Năm"
           type="number"
-          defaultValue={2021}
           required={true}
           control={control}
           errors={errors}
@@ -59,13 +69,48 @@ export default function NewThesis() {
 
         <SelectController
           name="type"
+          label="Loại luận văn"
+          required={true}
           control={control}
           errors={errors}
-          required={true}
         >
           <MenuItem value="KLTN">Khóa luận tốt nghiệp</MenuItem>
           <MenuItem value="ĐACN">Đồ án chuyên ngành</MenuItem>
         </SelectController>
+
+        <SelectController
+          name="language"
+          label="Ngôn ngữ"
+          control={control}
+          errors={errors}
+        >
+          <MenuItem value="vn">Tiếng Việt</MenuItem>
+          <MenuItem value="en">Tiếng Anh</MenuItem>
+        </SelectController>
+
+        <SelectController
+          name="format"
+          label="Định dạng"
+          defaultValue="pdf"
+          control={control}
+          errors={errors}
+        >
+          <MenuItem value="pdf">PDF</MenuItem>
+        </SelectController>
+
+        <TextFieldController
+          name="authors"
+          label="Tác giả"
+          control={control}
+          errors={errors}
+        />
+
+        <TextFieldController
+          name="teachers"
+          label="Giảng viên hướng dẫn"
+          control={control}
+          errors={errors}
+        />
 
         <Box display="flex" justifyContent="flex-end" mt={3}>
           <Button
@@ -83,9 +128,9 @@ export default function NewThesis() {
 
 /*
  user_id (session)
- name*: text
- type*: dropdown
- faculty*: dropdown
+ name*: text x
+ type*: dropdown x
+ faculty*: dropdown x
  published_year*: number
  
  tags: [
@@ -100,6 +145,7 @@ tags:[
 
  author: array
  teachers: array
- language*: dropdown
+ language: dropdown x
+ format: dropdown x
  file*
 */

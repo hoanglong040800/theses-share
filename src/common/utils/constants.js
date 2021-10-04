@@ -373,6 +373,7 @@ export const rowsDummy = [
 ]
 
 // ========== SCHEMA yup =========
+
 import * as yup from 'yup'
 
 export const authSchema = yup.object().shape({
@@ -410,6 +411,16 @@ export const thesisSchema = yup.object().shape({
     .max(255, obj => `Không được quá ${obj.max} kí tự`),
 
   type: yup.string().required('Bắt buộc'),
+
+  faculty: yup.string().required('Bắt buộc'),
+
+  language: yup.string(),
+
+  format: yup.string(),
+
+  authors: yup.string().max(255, obj => `Không được quá ${obj.max} kí tự`),
+
+  teachers: yup.string().max(255, obj => `Không được quá ${obj.max} kí tự`),
 
   published_year: yup
     .number()
