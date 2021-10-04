@@ -37,6 +37,8 @@ export default function NewThesis({ tagsOptions }) {
     console.log('ERROR\n', err)
   }
 
+  console.log(errors.tags)
+
   return (
     <>
       <Head>
@@ -45,17 +47,6 @@ export default function NewThesis({ tagsOptions }) {
 
       <Box display="flex" flexDirection="column" mx="auto" maxWidth="500px">
         <UploadPDF name="file" register={register} errors={errors} />
-
-        <AutocompleteController
-          name="tags"
-          label="Tags"
-          options={tagsOptions}
-          optionLabel='name_en'
-          required
-          control={control}
-          errors={errors}
-          setValue={setValue}
-        />
 
         <TextFieldController
           name="name"
@@ -100,6 +91,19 @@ export default function NewThesis({ tagsOptions }) {
           <MenuItem value="KLTN">Khóa luận tốt nghiệp</MenuItem>
           <MenuItem value="ĐACN">Đồ án chuyên ngành</MenuItem>
         </SelectController>
+
+        <Box mt={2}>
+          <AutocompleteController
+            name="tags"
+            label="Tags"
+            options={tagsOptions}
+            optionLabel="name_en"
+            required
+            control={control}
+            errors={errors}
+            setValue={setValue}
+          />
+        </Box>
 
         <SelectController
           name="language"

@@ -16,7 +16,7 @@ export default function AutocompleteController({
   limitTags = 5,
 }) {
   function handleOnChange(value) {
-    setValue(name, getIdFromArrObj(value))
+    setValue(name, getIdFromArrObj(value), { shouldValidate: true })
   }
 
   return (
