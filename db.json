@@ -379,5 +379,36 @@
         "email": "18520093@gm.uit.edu.vn"
       }
     }
+  ],
+
+  "tags": [
+    {
+      "name_en": "Machine Learning",
+      "id": 1
+    },
+    {
+      "name_en": "Deep Learning",
+      "id": 2
+    },
+    {
+      "name_en": "Automation",
+      "id": 3
+    },
+    {
+      "name_en": "Internet of Things",
+      "id": 4
+    },
+    {
+      "name_en": "Network",
+      "id": 5
+    },
+    {
+      "name_en": "Security",
+      "id": 6
+    },
+    {
+      "name_en": "Embed",
+      "id": 7
+    }
   ]
 }

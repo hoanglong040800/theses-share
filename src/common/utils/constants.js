@@ -410,6 +410,12 @@ export const thesisSchema = yup.object().shape({
     .required('Bắt buộc')
     .max(255, obj => `Không được quá ${obj.max} kí tự`),
 
+  tags: yup
+    .array()
+    .required('Ít nhất 1 tag')
+    .min(1, obj => `Ít nhất ${obj.min} tags`)
+    .max(5, obj => `Không được quá ${obj.max} tags`),
+
   type: yup.string().required('Bắt buộc'),
 
   faculty: yup.string().required('Bắt buộc'),

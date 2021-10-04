@@ -1,13 +1,23 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Button, MenuItem } from '@material-ui/core'
+import AutocompleteController from 'common/components/input/AutocompleteController'
 import SelectController from 'common/components/input/SelectController'
 import TextFieldController from 'common/components/input/TextFieldController'
 import { thesisSchema } from 'common/utils/constants'
+import { fetchAllTags } from 'modules/theses/fetch-tags'
 import UploadPDF from 'modules/theses/pdf/UploadPDF'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 
-export default function NewThesis() {
+export async function getServerSideProps() {
+  return {
+    props: {
+      tagsOptions: await fetchAllTags(process.env.API_URL),
+    },
+  }
+}
+
+export default function NewThesis({ tagsOptions }) {
   const {
     register,
     control,
@@ -33,15 +43,25 @@ export default function NewThesis() {
         <title>Thêm luận văn mới</title>
       </Head>
 
-      <h1>Thêm luận văn mới</h1>
-
       <Box display="flex" flexDirection="column" mx="auto" maxWidth="500px">
         <UploadPDF name="file" register={register} errors={errors} />
+
+        <AutocompleteController
+          name="tags"
+          label="Tags"
+          required
+          options={tagsOptions}
+          getOptionLabel={option => option.name_en}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
 
         <TextFieldController
           name="name"
           label="Tên luận văn"
-          required={true}
+          defaultValue="abc"
+          required
           control={control}
           errors={errors}
         />
@@ -49,7 +69,8 @@ export default function NewThesis() {
         <SelectController
           name="faculty"
           label="Khoa"
-          required={true}
+          defaultValue="KHMT"
+          required
           control={control}
           errors={errors}
         >
@@ -62,7 +83,8 @@ export default function NewThesis() {
           name="published_year"
           label="Năm"
           type="number"
-          required={true}
+          defaultValue={2021}
+          required
           control={control}
           errors={errors}
         />
@@ -70,7 +92,8 @@ export default function NewThesis() {
         <SelectController
           name="type"
           label="Loại luận văn"
-          required={true}
+          defaultValue="KLTN"
+          required
           control={control}
           errors={errors}
         >
