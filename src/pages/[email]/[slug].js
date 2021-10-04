@@ -112,7 +112,7 @@ export default function ThesisDetail({ details }) {
             Tags:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.tags}
+            {details.tags.join(", ")}
           </Grid>
 
           {/* type */}
