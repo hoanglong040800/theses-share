@@ -83,49 +83,71 @@ export default function ThesisDetail({ details }) {
       <h1>Chi tiết luận văn</h1>
       <Container maxWidth="md" className={classes.container}>
         <Grid container>
+          {/* name */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Tên:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.name}
           </Grid>
+
+          {/* faculty */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
-            Loại:
+            Khoa:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.type}
+            {details.faculty}
           </Grid>
-          <Grid {...gridItemProperty.property} className={classes.gridItem}>
-            Tác giả:
-          </Grid>
-          <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.author.map((name) => (
-              <div key={details.author.indexOf(name)}>{name}</div>
-            ))}
-          </Grid>
-          <Grid {...gridItemProperty.property} className={classes.gridItem}>
-            GVHD:
-          </Grid>
-          <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.teachers.map((teacher) => (
-              <div key={details.teachers.indexOf(teacher)}>{teacher}</div>
-            ))}
-          </Grid>
+
+          {/* year */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Năm xuất bản:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.published_year}
           </Grid>
+
+          {/* tags */}
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+            Tags:
+          </Grid>
+          <Grid {...gridItemProperty.value} className={classes.gridItem}>
+            {details.tags.join(", ")}
+          </Grid>
+
+          {/* type */}
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+            Loại:
+          </Grid>
+          <Grid {...gridItemProperty.value} className={classes.gridItem}>
+            {details.type}
+          </Grid>
+
+          {/* authors */}
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+            Tác giả:
+          </Grid>
+          <Grid {...gridItemProperty.value} className={classes.gridItem}>
+            {details.authors}
+          </Grid>
+
+          {/* teachers */}
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+            GVHD:
+          </Grid>
+          <Grid {...gridItemProperty.value} className={classes.gridItem}>
+            {details.teachers}
+          </Grid>
+
+          {/* format */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Định dạng:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.format.map((type) => (
-              <div key={details.format.indexOf(type)}>{type}</div>
-            ))}
+            {details.format}
           </Grid>
 
+          {/* language */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Ngôn ngữ:
           </Grid>
@@ -133,19 +155,12 @@ export default function ThesisDetail({ details }) {
             {details.language}
           </Grid>
 
+          {/* views */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Lượt xem:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.views}
-          </Grid>
-          <Grid {...gridItemProperty.property} className={classes.gridItem}>
-            Thẻ:
-          </Grid>
-          <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.tags.map((item) => (
-              <div key={details.tags.indexOf(item)}>{item}</div>
-            ))}
           </Grid>
         </Grid>
         <Box display="flex" justifyContent="flex-end" mt={2}>
