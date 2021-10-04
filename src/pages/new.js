@@ -49,9 +49,9 @@ export default function NewThesis({ tagsOptions }) {
         <AutocompleteController
           name="tags"
           label="Tags"
-          required
           options={tagsOptions}
-          getOptionLabel={option => option.name_en}
+          optionLabel='name_en'
+          required
           control={control}
           errors={errors}
           setValue={setValue}
