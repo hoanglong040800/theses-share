@@ -5,15 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from 'common/themes/theme'
 import 'common/styles/global.css'
 import DefaultLayout from 'common/layouts/DefaultLayout'
+import { Provider as SessionProvider } from 'next-auth/client'
 
 export default function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles)
-    }
-  }, [])
-
   return (
     <>
       <Head>
@@ -25,6 +19,7 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/logo.png" />
       </Head>
 
+      <SessionProvider session={pageProps.session}>
         <ThemeProvider theme={theme}>
           <DefaultLayout>
             <CssBaseline />
@@ -32,6 +27,7 @@ export default function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
           </DefaultLayout>
         </ThemeProvider>
+      </SessionProvider>
     </>
   )
 }
