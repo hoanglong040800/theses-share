@@ -1,3 +1,4 @@
+import fetchSignin from 'modules/auth/fetch-auth'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 
@@ -30,12 +31,8 @@ const options = {
       },
 
       async authorize(credentials) {
-        const user = {
-          id: 12345,
-          name: 'J Smith',
-          email: 'jsmith@example.com',
-          gender: 'men',
-        }
+        const user = await fetchSignin(process.env.API_URL, credentials)
+        console.log('-- authorize/user --', user)
 
         if (user) {
           return user
@@ -47,27 +44,16 @@ const options = {
   ],
 
   callbacks: {
-    signIn: async (user, type) => {
-      const isAllowedToSignIn = false
+    jwt: async data => {
+      console.log('--- jwt/data ---', data)
 
-      if (isAllowedToSignIn) {
-        return true
-      } else {
-        return '/about'
-      }
-    },
-
-    jwt: async token => {
-      // console.log('--- jwt ---', token)
-      token.gender ? null : (token.gender = 'male')
-
-      return token
+      return Promise.resolve(data)
     },
 
     session: async (session, token) => {
-      // console.log('--- token ---', token)
+      console.log('--- session/token ---', token)
 
-      return token
+      return Promise.resolve(token)
     },
   },
 }

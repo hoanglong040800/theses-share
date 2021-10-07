@@ -361,7 +361,6 @@
       }
     }
   ],
-
   "thesesDetail": [
     {
       "id": 20,
@@ -380,7 +379,33 @@
       }
     }
   ],
-
+  "users": [
+    {
+      "id": 1,
+      "email": "18520093@gm.uit.edu.vn",
+      "password": "1",
+      "full_name": "Trần Hoàng Long",
+      "gender": "men",
+      "age": 21,
+      "academic_year": 4,
+      "student_code": "18520093",
+      "university": "uit",
+      "major": {
+        "id": 5,
+        "name_vi": "Mạng máy tính và truyền thông",
+        "name_en": "Computer network and Comunication",
+        "name_short_vi": "MMT&TT"
+      }
+    },
+    
+    {
+      "id": 12345,
+      "name": "J Smith",
+      "email": "jsmith@example.com",
+      "password": "1",
+      "gender": "men"
+    }
+  ],
   "tags": [
     {
       "name_en": "Machine Learning",
