@@ -1,12 +1,11 @@
 import { colDef } from 'common/utils/constants'
-import { objToQueryString } from 'common/utils/util'
 import { fetchThesesWithQuery } from 'modules/theses/fetch-theses'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
       apiUrl: process.env.API_URL,
@@ -16,10 +15,8 @@ export async function getStaticProps() {
 
 export default function Theses({ apiUrl }) {
   const router = useRouter()
-  // query from url
   const { faculty, tags, published_year } = router.query
 
-  // state
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -28,7 +25,7 @@ export default function Theses({ apiUrl }) {
       setLoading(true)
       const data = await fetchThesesWithQuery(
         apiUrl,
-        objToQueryString(router.query)
+        new URLSearchParams(router.query).toString() // encode obj to URI query string
       )
 
       setLoading(false)
@@ -36,7 +33,7 @@ export default function Theses({ apiUrl }) {
     }
 
     fetchRows()
-  }, [])
+  }, [router.query])
 
   return (
     <>
@@ -51,6 +48,42 @@ export default function Theses({ apiUrl }) {
         {tags && <h3>Tags: {tags}</h3>}
         {published_year && <h3>Năm: {published_year}</h3>}
       </div>
+
+      <button
+        onClick={() =>
+          router.push(
+            {
+              pathname: '/explore',
+              query: {
+                faculty: 'CNPM',
+                published_year: 2019,
+              },
+            },
+            undefined,
+            { shallow: true }
+          )
+        }
+      >
+        Change to CNPM 2019
+      </button>
+
+      <button
+        onClick={() =>
+          router.push(
+            {
+              pathname: '/explore',
+              query: {
+                faculty: 'MMT&TT',
+                published_year: 2018,
+              },
+            },
+            undefined,
+            { shallow: true }
+          )
+        }
+      >
+        Change to MMTT 2018
+      </button>
 
       <ThesesTable
         columns={colDef}

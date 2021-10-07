@@ -48,20 +48,24 @@ const options = {
 
   callbacks: {
     signIn: async (user, type) => {
-      console.log('--- signIn ---', user)
+      const isAllowedToSignIn = false
 
-      return user
+      if (isAllowedToSignIn) {
+        return true
+      } else {
+        return '/about'
+      }
     },
 
     jwt: async token => {
-      console.log('--- jwt ---', token)
+      // console.log('--- jwt ---', token)
       token.gender ? null : (token.gender = 'male')
 
       return token
     },
 
     session: async (session, token) => {
-      console.log('--- token ---', token)
+      // console.log('--- token ---', token)
 
       return token
     },

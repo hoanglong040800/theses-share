@@ -1,4 +1,8 @@
-const prefixNavlink = '/explore?'
+function getUrlQuery(name, value) {
+  return {
+    [name]: value,
+  }
+}
 
 export const navlinks = [
   {
@@ -6,11 +10,19 @@ export const navlinks = [
     lists: [
       {
         name: 'Khoa học máy tính',
-        link: `${prefixNavlink}faculty=KHMT`,
+        query: getUrlQuery('faculty', 'KHMT'),
+      },
+      {
+        name: 'Công nghệ phần mềm',
+        query: getUrlQuery('faculty', 'CNPM'),
       },
       {
         name: 'Khoa học và kĩ thuật thông tin',
-        link: `${prefixNavlink}faculty=KH%26KTTT`,
+        query: getUrlQuery('faculty', 'KH&KTTT'),
+      },
+      {
+        name: 'Mạng máy tính & truyền thông',
+        query: getUrlQuery('faculty', 'MMT&TT'),
       },
     ],
   },
@@ -20,11 +32,19 @@ export const navlinks = [
     lists: [
       {
         name: '2021',
-        link: `${prefixNavlink}published_year=2021`,
+        query: getUrlQuery('published_year', 2021),
       },
       {
         name: '2020',
-        link: `${prefixNavlink}published_year=2020`,
+        query: getUrlQuery('published_year', 2020),
+      },
+      {
+        name: '2019',
+        query: getUrlQuery('published_year', 2019),
+      },
+      {
+        name: '2018',
+        query: getUrlQuery('published_year', 2018),
       },
     ],
   },
@@ -34,11 +54,11 @@ export const navlinks = [
     lists: [
       {
         name: 'Máy học',
-        link: `${prefixNavlink}tags=ML`,
+        query: getUrlQuery('tags', 'machine learning'),
       },
       {
         name: 'Học sâu',
-        link: `${prefixNavlink}tags=DL`,
+        query: getUrlQuery('tags', 'deep learning'),
       },
     ],
   },

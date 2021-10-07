@@ -35,7 +35,19 @@ export default function NavLinkMenu({ name, lists }) {
         {
           //
           lists.map(item => (
-            <MenuItem key={item.name} onClick={() => router.push(item.link)}>
+            <MenuItem
+              key={item.name}
+              onClick={() =>
+                router.push(
+                  {
+                    pathname: '/explore',
+                    query: item.query,
+                  },
+                  undefined,
+                  { shallow: true }
+                )
+              }
+            >
               {item.name}
             </MenuItem>
           ))
@@ -54,7 +66,6 @@ const useStyles = makeStyles(() => ({
 
     '&:hover': {
       cursor: 'pointer',
-
     },
   },
 
