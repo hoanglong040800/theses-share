@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import { signIn, signOut, useSession } from 'next-auth/client'
+import Head from "next/head";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function About() {
-  const [session, loading] = useSession()
+  const [session, loading] = useSession();
 
   return (
     <>
@@ -29,5 +29,5 @@ export default function About() {
         </>
       )}
     </>
-  )
+  );
 }
