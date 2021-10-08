@@ -72,7 +72,7 @@ export const navlinks = [
 export const settingsPages = [
   {
     label: 'Chỉnh sửa hồ sơ',
-    pathname: '/settings/profile',
+    pathname: '/settings/edit-profile',
   },
   {
     label: 'Tài khoản',

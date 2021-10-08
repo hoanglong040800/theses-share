@@ -6,6 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { rsPswdSchema } from 'common/utils/constants'
 import TextFieldController from 'common/components/input/TextFieldController'
+import { getSession } from 'next-auth/client'
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+  return { props: { session } }
+}
 
 export default function ChangePassword() {
   const router = useRouter()
@@ -85,3 +91,5 @@ export default function ChangePassword() {
     </>
   )
 }
+
+ChangePassword.auth = true

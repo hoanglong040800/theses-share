@@ -8,9 +8,12 @@ import {
 import { AccountCircle } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { signOut, useSession } from 'next-auth/client'
+import { getNameFromEmail } from 'common/utils/util'
 
 export default function NavProfile() {
   const router = useRouter()
+  const [session, loading] = useSession()
   const mui = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -28,6 +31,7 @@ export default function NavProfile() {
   }
 
   function handleLogout() {
+    signOut({ redirect: false })
     handleClose()
   }
 
@@ -46,11 +50,27 @@ export default function NavProfile() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <MenuItem onClick={() => handleSelect(`/18520093`)}>
+        {session.user.full_name && (
+          <MenuItem>
+            <p className={mui.full_name}>{session.user.full_name}</p>
+          </MenuItem>
+        )}
+
+        <MenuItem
+          onClick={() =>
+            handleSelect(`/${getNameFromEmail(session.user.email)}`)
+          }
+        >
           Hồ sơ
         </MenuItem>
 
-        <MenuItem onClick={() => handleSelect(`/18520093?tab=bookmark`)}>
+        <MenuItem
+          onClick={() =>
+            handleSelect(
+              `/${getNameFromEmail(session.user.email)}?tab=bookmark`
+            )
+          }
+        >
           Yêu thích
         </MenuItem>
 
@@ -67,5 +87,11 @@ export default function NavProfile() {
 const useStyles = makeStyles(theme => ({
   icon: {
     color: [theme.palette.primary.main],
+  },
+
+  full_name: {
+    fontWeight: 'bold',
+    padding: 0,
+    margin: 0,
   },
 }))

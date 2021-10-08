@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         source: '/settings',
-        destination: '/settings/profile',
+        destination: '/settings/edit-profile',
       },
     ]
   },

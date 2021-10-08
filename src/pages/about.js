@@ -22,7 +22,7 @@ export default function About() {
 
       {session && (
         <>
-          <h3>Signed in as {session.name} </h3>
+          <h3>Signed in as {session.user.full_name} </h3>
           <pre>{JSON.stringify(session, null, 2)}</pre>
           <br />
           <button onClick={signOut}>Sign out</button>

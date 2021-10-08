@@ -1,12 +1,21 @@
 import Image from 'next/image'
-import { AppBar, Box, Container, makeStyles, Toolbar } from '@material-ui/core'
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  makeStyles,
+  Toolbar,
+} from '@material-ui/core'
 import NavSearchBar from 'modules/search/NavSearchBar'
 import Link from 'next/link'
 import NavLink from './NavLink'
 import NavProfile from './NavProfile'
+import { signIn, useSession } from 'next-auth/client'
 
 export default function Navbar() {
   const classes = useStyles()
+  const [session, loading] = useSession()
 
   return (
     <AppBar position="fixed" color="default">
@@ -42,7 +51,13 @@ export default function Navbar() {
             <Box display="flex" alignItems="center" flex={1}>
               <NavSearchBar />
 
-              <NavProfile />
+              {session ? (
+                <NavProfile />
+              ) : (
+                <Button variant="contained" color="primary" onClick={signIn}>
+                  Sign In
+                </Button>
+              )}
             </Box>
             {/* right side */}
           </Box>

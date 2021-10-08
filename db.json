@@ -386,7 +386,7 @@
       "email": "18520093@gm.uit.edu.vn",
       "password": "1",
       "full_name": "Trần Hoàng Long",
-      "gender": "men"
+      "gender": "male"
     },
     
     {
@@ -394,7 +394,7 @@
       "email": "18520251@gm.uit.edu.vn",
       "password": "1",
       "full_name": "Nguyễn Đình Tuấn Anh",
-      "gender": "men"
+      "gender": "male"
     }
   ],
 
@@ -403,7 +403,7 @@
       "id": 1,
       "email": "18520093@gm.uit.edu.vn",
       "full_name": "Trần Hoàng Long",
-      "gender": "men",
+      "gender": "male",
       "age": 21,
       "academic_year": 4,
       "student_code": "18520093",
@@ -420,7 +420,7 @@
       "id": 2,
       "email": "18520251@gm.uit.edu.vn",
       "full_name": "Nguyễn Đình Tuấn Anh",
-      "gender": "men",
+      "gender": "male",
       "age": 21,
       "academic_year": 4,
       "student_code": "18520251",

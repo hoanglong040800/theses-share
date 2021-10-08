@@ -1,35 +1,32 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { Box, Button, Container, Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
+import Loading from 'common/components/loading/Loading'
 import {
   fetchNewestTheses,
   fetchThesisBySlug,
-} from "modules/theses/fetch-theses";
-import PdfViewer from "modules/theses/pdf/PdfViewer";
-import Head from "next/head";
-import { useRouter } from "next/router";
+} from 'modules/theses/fetch-theses'
+import PdfViewer from 'modules/theses/pdf/PdfViewer'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/client'
 
 export async function getStaticPaths() {
-  const data = await fetchNewestTheses(process.env.API_URL);
+  const data = await fetchNewestTheses(process.env.API_URL)
 
-  const paths = data.map((item) => {
+  const paths = data.map(item => {
     return {
       params: {
         email: item.user.email,
         slug: item.slug,
       },
-    };
-  });
+    }
+  })
 
   return {
     paths,
     fallback: true,
-  };
+  }
 }
 
 export async function getStaticProps({ params }) {
@@ -37,12 +34,14 @@ export async function getStaticProps({ params }) {
     props: {
       details: await fetchThesisBySlug(process.env.API_URL, params.slug),
     },
-  };
+  }
 }
 
 export default function ThesisDetail({ details }) {
-  const classes = useStyle();
-  const router = useRouter();
+  const classes = useStyle()
+  const router = useRouter()
+  const [session, loading] = useSession()
+  const [checkEmail, setCheckEmail] = useState(false)
 
   const gridItemProperty = {
     property: {
@@ -54,33 +53,41 @@ export default function ThesisDetail({ details }) {
       item: true,
       xs: 9,
     },
-  };
+  }
 
-  const email = "18520093@gm.uit.edu.vn";
-  const checkEmail = details.user.email === email;
+  useEffect(() => {
+    // debug
+    // session && !loading && details
+    //   ? console.log('-- check email --', { session, loading, details })
+    //   : console.log('session is undefined or loading or details is not ready')
+
+    // production
+    session && !loading && details
+      ? setCheckEmail(session.user.email === details.user.email)
+      : setCheckEmail(false)
+  }, [session, loading, details])
 
   // cho trang fetch du lieu -> hien thi component loading
   if (router.isFallback) {
     return (
       <>
         <Head>
-          <title>Chi tiết luận văn | Theses Share</title>
+          <title>Chi tiết luận văn - Theses Share</title>
         </Head>
 
-        <Box display="flex" justifyContent="center" my={15}>
-          <CircularProgress size={50} />
-        </Box>
+        <Loading />
       </>
-    );
+    )
   }
 
   return (
     <>
       <Head>
-        <title>{details.name} | Theses Share</title>
+        <title>{details.name} - Theses Share</title>
       </Head>
 
       <h1>Chi tiết luận văn</h1>
+
       <Container maxWidth="md" className={classes.container}>
         <Grid container>
           {/* name */}
@@ -112,7 +119,7 @@ export default function ThesisDetail({ details }) {
             Tags:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.tags.join(", ")}
+            {details.tags.join(', ')}
           </Grid>
 
           {/* type */}
@@ -162,25 +169,33 @@ export default function ThesisDetail({ details }) {
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.views}
           </Grid>
+
+          {/* user.mail */}
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+            Người đăng
+          </Grid>
+          <Grid {...gridItemProperty.value} className={classes.gridItem}>
+            {details.user.email}
+          </Grid>
         </Grid>
-        <Box display="flex" justifyContent="flex-end" mt={2}>
-          <div>
-            {checkEmail && (
-              <Button variant="contained" color="primary">
-                Chỉnh sửa
-              </Button>
-            )}
-          </div>
-        </Box>
       </Container>
+
+      <Box display="flex" justifyContent="flex-end" mt={2}>
+        {checkEmail && (
+          <Button variant="contained" color="primary">
+            Chỉnh sửa
+          </Button>
+        )}
+      </Box>
+
       <PdfViewer file={details.link_storage} isList={false} />
     </>
-  );
+  )
 }
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(theme => ({
   gridItem: {
-    padding: "1rem",
-    borderBottom: "1px solid #ddd",
+    padding: '1rem',
+    borderBottom: '1px solid #ddd',
   },
-}));
+}))

@@ -40,7 +40,11 @@ export default function OverviewUser() {
       {tab == 'theses' && (
         <Box mt={5}>
           <Box display="flex" justifyContent="flex-end">
-            <Button variant="contained" color="primary" onClick={()=>router.push('/new')}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => router.push('/new')}
+            >
               Thêm luận văn
             </Button>
           </Box>
