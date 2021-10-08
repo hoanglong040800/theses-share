@@ -1,3 +1,7 @@
+// ==== SESSION ======
+export const tokenData = ['id', 'email', 'full_name', 'gender']
+
+// ======== nav links ======
 function getUrlQuery(name, value) {
   return {
     [name]: value,

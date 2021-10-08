@@ -379,11 +379,29 @@
       }
     }
   ],
-  "users": [
+
+  "signin": [
     {
       "id": 1,
       "email": "18520093@gm.uit.edu.vn",
       "password": "1",
+      "full_name": "Trần Hoàng Long",
+      "gender": "men"
+    },
+    
+    {
+      "id": 2,
+      "email": "18520251@gm.uit.edu.vn",
+      "password": "1",
+      "full_name": "Nguyễn Đình Tuấn Anh",
+      "gender": "men"
+    }
+  ],
+
+  "users": [
+    {
+      "id": 1,
+      "email": "18520093@gm.uit.edu.vn",
       "full_name": "Trần Hoàng Long",
       "gender": "men",
       "age": 21,
@@ -397,15 +415,25 @@
         "name_short_vi": "MMT&TT"
       }
     },
-    
+
     {
-      "id": 12345,
-      "name": "J Smith",
-      "email": "jsmith@example.com",
-      "password": "1",
-      "gender": "men"
+      "id": 2,
+      "email": "18520251@gm.uit.edu.vn",
+      "full_name": "Nguyễn Đình Tuấn Anh",
+      "gender": "men",
+      "age": 21,
+      "academic_year": 4,
+      "student_code": "18520251",
+      "university": "uit",
+      "major": {
+        "id": 5,
+        "name_vi": "Mạng máy tính và truyền thông",
+        "name_en": "Computer network and Comunication",
+        "name_short_vi": "MMT&TT"
+      }
     }
   ],
+
   "tags": [
     {
       "name_en": "Machine Learning",

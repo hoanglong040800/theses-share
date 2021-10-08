@@ -1,3 +1,4 @@
+import { tokenData } from 'common/utils/constants'
 import fetchSignin from 'modules/auth/fetch-auth'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
@@ -17,6 +18,9 @@ const options = {
     secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
   },
 
+  // only true in development
+  debug: true,
+
   providers: [
     Providers.Credentials({
       name: 'Credentials',
@@ -32,7 +36,7 @@ const options = {
 
       async authorize(credentials) {
         const user = await fetchSignin(process.env.API_URL, credentials)
-        console.log('-- authorize/user --', user)
+        // console.log('-- authorize --', { credentials, user })
 
         if (user) {
           return user
@@ -44,16 +48,27 @@ const options = {
   ],
 
   callbacks: {
-    jwt: async data => {
-      console.log('--- jwt/data ---', data)
+    jwt: async (token, user) => {
+      // console.log('-- jwt --', { token, user })
 
-      return Promise.resolve(data)
+      // assign user (return from authorize) -> token
+      // user obj will available only 1st time jwt callback is called
+      // from the 2nd time, user will be undefined
+      if (user) {
+        tokenData.map(item => (token[item] = user[item]))
+      }
+
+      return Promise.resolve(token)
     },
 
     session: async (session, token) => {
-      console.log('--- session/token ---', token)
+      // console.log('-- session --', { session, token })
 
-      return Promise.resolve(token)
+      // assign token data to session
+      // beacause session reset everytime useSession() is called
+      tokenData.map(item => (session.user[item] = token[item]))
+
+      return Promise.resolve(session)
     },
   },
 }
