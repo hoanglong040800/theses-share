@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  makeStyles,
-  Tab,
-  Tabs,
-} from "@material-ui/core";
+import { Box, Button, Grid, makeStyles, Tab, Tabs } from "@material-ui/core";
 import { userPages } from "common/utils/constants";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -33,15 +25,15 @@ export default function OverviewUser() {
     },
   };
 
+  const genderVie = session.user.gender === "male" ? "Nam" : "Nữ";
+
   return (
     <>
       <Head>
-        <title>{email} - Hồ sơ</title>
+        <title>Hồ sơ</title>
       </Head>
 
-      <h1>
-        Trang profile và theses (để cho dễ nhớ, khi nào làm xong đổi tên sau)
-      </h1>
+      <h1>Trang profile và theses</h1>
 
       {!session && (
         <>
@@ -56,6 +48,10 @@ export default function OverviewUser() {
           <Grid container>
             <Grid {...gridItemProperty.property}>Tên:</Grid>
             <Grid {...gridItemProperty.value}>{session.user.full_name}</Grid>
+            <Grid {...gridItemProperty.property}>Email:</Grid>
+            <Grid {...gridItemProperty.value}>{session.user.email}</Grid>
+            <Grid {...gridItemProperty.property}>Giới tính:</Grid>
+            <Grid {...gridItemProperty.value}>{genderVie}</Grid>
           </Grid>
           <Box display="flex" justifyContent="center">
             <Tabs value={tab} className={mui.tabs}>
