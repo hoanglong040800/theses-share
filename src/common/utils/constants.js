@@ -119,6 +119,9 @@ export const colDef = [
     headerAlign: 'center',
     align: 'center',
     sortable: true,
+    valueFormatter: params => {
+      return params.value.name_short_vi
+    },
   },
 
   {
@@ -137,10 +140,10 @@ export const colDef = [
     type: 'string',
     flex: 0.2,
     minWidth: 150,
-    valueFormatter: params => {
-      return params.value.join(', ')
-    },
     sortable: true,
+    valueFormatter: params => {
+      return params.value.map(item => item.name_vi).join(', ')
+    },
   },
 
   {

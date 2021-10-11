@@ -1,37 +1,32 @@
-import { Box, Divider, makeStyles } from "@material-ui/core";
-import { colDef } from "common/utils/constants";
+import { Box, makeStyles } from '@material-ui/core'
+import { colDef } from 'common/utils/constants'
 import {
-  fetchMostViewsTheses,
   fetchNewestTheses,
-} from "modules/theses/fetch-theses";
-import ThesesTable from "modules/theses/table/ThesesTable";
-import Head from "next/head";
-import Link from "next/link";
+  fetchNewestThesesJson,
+} from 'modules/theses/fetch-theses'
+import ThesesTable from 'modules/theses/table/ThesesTable'
+import Head from 'next/head'
+import Link from 'next/link'
 
-// khi page được build
-export async function getStaticProps() {
-  const numOfTheses = 10;
+export async function getServerSideProps() {
+  const numOfTheses = 10
+  const newestTheses = await fetchNewestThesesJson('http://localhost:5000')
 
-  // chay ham fetch trong file fetch-theses.js
-  const newestTheses = await fetchNewestTheses(
-    process.env.API_URL,
-    numOfTheses
-  );
-  const mostViewsTheses = await fetchMostViewsTheses(
-    process.env.API_URL,
-    numOfTheses
-  );
+  if (newestTheses === false) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
       newestTheses,
-      mostViewsTheses, // truyen du lieu vao props cho trang
     },
-  };
+  }
 }
 
-export default function Home({ newestTheses, mostViewsTheses }) {
-  const mui = useStyles();
+export default function Home({ newestTheses }) {
+  const mui = useStyles()
 
   return (
     <>
@@ -39,10 +34,12 @@ export default function Home({ newestTheses, mostViewsTheses }) {
         <title>Trang chủ</title>
       </Head>
 
+      <h1>Trang chủ</h1>
+
       <Box my={6}>
         <Link href="/newest">
           <a>
-            <h1 className={mui.link}>Luận văn mới nhất</h1>
+            <h2 className={mui.link}>Luận văn mới nhất</h2>
           </a>
         </Link>
 
@@ -50,30 +47,16 @@ export default function Home({ newestTheses, mostViewsTheses }) {
           <ThesesTable columns={colDef} rows={newestTheses} />
         </Box>
       </Box>
-
-      <Divider />
-
-      <Box my={6}>
-        <Link href="/popular">
-          <a>
-            <h1 className={mui.link}>Luận văn xem nhiều</h1>
-          </a>
-        </Link>
-
-        <Box my={3}>
-          <ThesesTable columns={colDef} rows={mostViewsTheses} />
-        </Box>
-      </Box>
     </>
-  );
+  )
 }
 
 const useStyles = makeStyles({
   link: {
-    display: "inline",
+    display: 'inline',
 
-    "&:hover": {
-      textDecoration: "underline",
+    '&:hover': {
+      textDecoration: 'underline',
     },
   },
-});
+})

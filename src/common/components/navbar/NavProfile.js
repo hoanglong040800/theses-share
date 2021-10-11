@@ -30,8 +30,10 @@ export default function NavProfile() {
     handleClose()
   }
 
-  function handleLogout() {
-    signOut({ redirect: false })
+  function handleSignout() {
+    router.pathname.includes('/settings')
+      ? signOut({ callbackUrl: '/' })
+      : signOut({ redirect: false })
     handleClose()
   }
 
@@ -78,7 +80,7 @@ export default function NavProfile() {
 
         <Divider variant="middle" />
 
-        <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
+        <MenuItem onClick={handleSignout}>Đăng xuất</MenuItem>
       </Menu>
     </>
   )

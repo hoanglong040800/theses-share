@@ -23,19 +23,24 @@ const options = {
 
   providers: [
     Providers.Credentials({
-      name: 'Credentials',
+      name: 'Theses Share',
 
       credentials: {
         email: {
           label: 'Email',
           type: 'email',
-          placeholder: 'jsmith@example.com',
         },
         password: { label: 'Password', type: 'password' },
       },
 
       async authorize(credentials) {
-        const user = await fetchSignin(process.env.API_URL, credentials)
+        // const user = await fetchSignin(process.env.API_URL, credentials)
+        const user = {
+          id: 1,
+          full_name: 'Tran Hoang Long',
+          gender: 'male',
+          email: '18520093@gm.uit.edu.vn',
+        }
         // console.log('-- authorize --', { credentials, user })
 
         if (user) {

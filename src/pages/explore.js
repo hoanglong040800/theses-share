@@ -22,6 +22,8 @@ export default function Theses({ apiUrl }) {
 
   useEffect(() => {
     async function fetchRows() {
+      console.log(router.query)
+
       setLoading(true)
       const data = await fetchThesesWithQuery(
         apiUrl,

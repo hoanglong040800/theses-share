@@ -14,13 +14,29 @@ export async function fetchThesesWithQuery(apiUrl, query) {
   return data
 }
 
-export async function fetchNewestTheses(apiUrl, limit = null) {
-  const res = limit
-    ? await fetch(`${apiUrl}/theses?_sort=id&_order=desc&_limit=${limit}`)
-    : await fetch(`${apiUrl}/theses?_sort=id&_order=desc`)
+export async function fetchNewestTheses(apiUrl) {
+  try {
+    const res = await fetch(`${apiUrl}/theses`)
+    const resObj = await res.json()
+    const data = resObj.data
 
-  const data = await res.json()
-  return data
+    return data
+  } catch (error) {
+    return false
+  }
+}
+
+// ===== JSON SERVER ========
+
+export async function fetchNewestThesesJson(apiUrl) {
+  try {
+    const res = await fetch(`${apiUrl}/theses`)
+    const data = await res.json()
+
+    return data
+  } catch (error) {
+    return false
+  }
 }
 
 export async function fetchMostViewsTheses(apiUrl, limit = null) {

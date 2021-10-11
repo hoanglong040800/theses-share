@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles'
 import Loading from 'common/components/loading/Loading'
 import {
   fetchNewestTheses,
+  fetchNewestThesesJson,
   fetchThesisBySlug,
 } from 'modules/theses/fetch-theses'
 import PdfViewer from 'modules/theses/pdf/PdfViewer'
@@ -12,7 +13,7 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
 
 export async function getStaticPaths() {
-  const data = await fetchNewestTheses(process.env.API_URL)
+  const data = await fetchNewestThesesJson(process.env.API_URL)
 
   const paths = data.map(item => {
     return {
@@ -63,7 +64,7 @@ export default function ThesisDetail({ details }) {
 
     // production
     session && !loading && details
-      ? setCheckEmail(session.user.email === details.user.email)
+      ? setCheckEmail(session.user.id === details.user.id)
       : setCheckEmail(false)
   }, [session, loading, details])
 
@@ -83,7 +84,9 @@ export default function ThesisDetail({ details }) {
   return (
     <>
       <Head>
-        <title>{details.name} - Theses Share</title>
+        <title>
+          {details.name} - {details.user.full_name}
+        </title>
       </Head>
 
       <h1>Chi tiết luận văn</h1>
@@ -103,7 +106,7 @@ export default function ThesisDetail({ details }) {
             Khoa:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.faculty}
+            {details.faculty.name_vi}
           </Grid>
 
           {/* year */}
@@ -119,7 +122,7 @@ export default function ThesisDetail({ details }) {
             Tags:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.tags.join(', ')}
+            {details.tags.map(item => item.name_vi).join(', ')}
           </Grid>
 
           {/* type */}
@@ -170,12 +173,12 @@ export default function ThesisDetail({ details }) {
             {details.views}
           </Grid>
 
-          {/* user.mail */}
+          {/* user publish */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Người đăng
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.user.email}
+            {details.user.full_name}
           </Grid>
         </Grid>
       </Container>
