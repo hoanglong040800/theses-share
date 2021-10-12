@@ -34,13 +34,7 @@ const options = {
       },
 
       async authorize(credentials) {
-        // const user = await fetchSignin(process.env.API_URL, credentials)
-        const user = {
-          id: 1,
-          full_name: 'Tran Hoang Long',
-          gender: 'male',
-          email: '18520093@gm.uit.edu.vn',
-        }
+        const user = await fetchSignin(process.env.API_URL, credentials)
         // console.log('-- authorize --', { credentials, user })
 
         if (user) {
@@ -60,7 +54,9 @@ const options = {
       // user obj will available only 1st time jwt callback is called
       // from the 2nd time, user will be undefined
       if (user) {
-        tokenData.map(item => (token[item] = user[item]))
+        token['access_token'] = user['access_token']
+        token.user = {}
+        tokenData.map(item => (token.user[item] = user.data[item]))
       }
 
       return Promise.resolve(token)
@@ -71,7 +67,8 @@ const options = {
 
       // assign token data to session
       // beacause session reset everytime useSession() is called
-      tokenData.map(item => (session.user[item] = token[item]))
+      session['access_token'] = token['access_token']
+      tokenData.map(item => (session.user[item] = token.user[item]))
 
       return Promise.resolve(session)
     },
