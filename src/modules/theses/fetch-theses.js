@@ -9,9 +9,15 @@ export async function fetchPaginatedThesesRow(apiUrl, query, page, pageSize) {
 }
 
 export async function fetchThesesWithQuery(apiUrl, query) {
-  const res = await fetch(`${apiUrl}/theses?${query}`)
-  const data = await res.json()
-  return data
+  try {
+    const res = await fetch(`${apiUrl}/theses?${query}`)
+    const resObj = await res.json()
+    const data = await resObj.data
+
+    return data
+  } catch (error) {
+    return false
+  }
 }
 
 export async function fetchNewestTheses(apiUrl) {
@@ -26,41 +32,16 @@ export async function fetchNewestTheses(apiUrl) {
   }
 }
 
-// ===== JSON SERVER ========
-
-export async function fetchNewestThesesJson(apiUrl) {
+export async function fetchThesisBySlug(apiUrl, slug) {
   try {
-    const res = await fetch(`${apiUrl}/theses`)
-    const data = await res.json()
+    const res = await fetch(`${apiUrl}/theses?slug=${slug}`)
+    const resObj = await res.json()
+    const data = resObj.data
 
     return data
   } catch (error) {
     return false
   }
-}
-
-export async function fetchMostViewsTheses(apiUrl, limit = null) {
-  // fetch du lieu tu json server -> json
-  // process.env.API_URL http://localhost:5000
-
-  const res = limit
-    ? await fetch(`${apiUrl}/theses?_sort=views&_order=desc&_limit=${limit}`)
-    : await fetch(`${apiUrl}/theses?_sort=views&_order=desc`)
-
-  // chuyen json -> object
-  const data = await res.json()
-
-  // tra du lieu
-  return data
-}
-
-export async function fetchThesisBySlug(apiUrl, slug) {
-  const res = await fetch(`${apiUrl}/theses?slug=${slug}&_limit=1`)
-  const dataArr = await res.json()
-
-  const data = dataArr[0]
-
-  return data
 }
 
 // =========  ADD   =========

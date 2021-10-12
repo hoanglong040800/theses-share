@@ -120,12 +120,12 @@ export const colDef = [
     align: 'center',
     sortable: true,
     valueFormatter: params => {
-      return params.value.name_short_vi
+      return params.value.name_short_vn
     },
   },
 
   {
-    field: 'published_year',
+    field: 'publish_year',
     headerName: 'Năm',
     type: 'string',
     width: 90,
@@ -138,21 +138,26 @@ export const colDef = [
     field: 'tags',
     headerName: 'Tags',
     type: 'string',
-    flex: 0.2,
-    minWidth: 150,
+    flex: 0.3,
+    minWidth: 180,
     sortable: true,
     valueFormatter: params => {
-      return params.value.map(item => item.name_vi).join(', ')
+      return params.value
+        .map(item => {
+          if (item.name_short_en) return item.name_short_en
+          else return item.name_vn
+        })
+        .join(', ')
     },
   },
 
   {
-    field: 'views',
-    headerName: 'Lượt xem',
+    field: 'view',
+    headerName: 'Xem',
     type: 'string',
     headerAlign: 'center',
     align: 'center',
-    width: 120,
+    width: 90,
     sortable: true,
   },
 

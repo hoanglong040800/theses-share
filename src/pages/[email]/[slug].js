@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles'
 import Loading from 'common/components/loading/Loading'
 import {
   fetchNewestTheses,
-  fetchNewestThesesJson,
   fetchThesisBySlug,
 } from 'modules/theses/fetch-theses'
 import PdfViewer from 'modules/theses/pdf/PdfViewer'
@@ -13,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
 
 export async function getStaticPaths() {
-  const data = await fetchNewestThesesJson(process.env.API_URL)
+  const data = await fetchNewestTheses(process.env.API_URL)
 
   const paths = data.map(item => {
     return {
@@ -106,7 +105,7 @@ export default function ThesisDetail({ details }) {
             Khoa:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.faculty.name_vi}
+            {details.faculty.name_vn}
           </Grid>
 
           {/* year */}
@@ -114,7 +113,7 @@ export default function ThesisDetail({ details }) {
             Năm xuất bản:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.published_year}
+            {details.publish_year}
           </Grid>
 
           {/* tags */}
@@ -122,7 +121,7 @@ export default function ThesisDetail({ details }) {
             Tags:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.tags.map(item => item.name_vi).join(', ')}
+            {details.tags.map(item => item.name_vn).join(', ')}
           </Grid>
 
           {/* type */}
@@ -170,7 +169,7 @@ export default function ThesisDetail({ details }) {
             Lượt xem:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.views}
+            {details.view}
           </Grid>
 
           {/* user publish */}

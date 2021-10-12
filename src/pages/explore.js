@@ -2,6 +2,7 @@ import { colDef } from 'common/utils/constants'
 import { fetchThesesWithQuery } from 'modules/theses/fetch-theses'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -22,9 +23,8 @@ export default function Theses({ apiUrl }) {
 
   useEffect(() => {
     async function fetchRows() {
-      console.log(router.query)
-
       setLoading(true)
+
       const data = await fetchThesesWithQuery(
         apiUrl,
         new URLSearchParams(router.query).toString() // encode obj to URI query string
@@ -36,6 +36,11 @@ export default function Theses({ apiUrl }) {
 
     fetchRows()
   }, [router.query])
+
+  // handle error
+  if (rows === false) {
+    return <Error statusCode={404} />
+  }
 
   return (
     <>

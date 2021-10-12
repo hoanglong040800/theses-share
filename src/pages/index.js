@@ -1,16 +1,13 @@
 import { Box, makeStyles } from '@material-ui/core'
 import { colDef } from 'common/utils/constants'
-import {
-  fetchNewestTheses,
-  fetchNewestThesesJson,
-} from 'modules/theses/fetch-theses'
+import { fetchNewestTheses } from 'modules/theses/fetch-theses'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
 import Link from 'next/link'
 
 export async function getServerSideProps() {
   const numOfTheses = 10
-  const newestTheses = await fetchNewestThesesJson('http://localhost:5000')
+  const newestTheses = await fetchNewestTheses(process.env.API_URL)
 
   if (newestTheses === false) {
     return {
