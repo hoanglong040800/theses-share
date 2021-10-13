@@ -10,9 +10,10 @@ import UploadPDF from 'modules/theses/pdf/UploadPDF'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 import slugify from 'slugify'
-import { useSession } from 'next-auth/client'
+import { getSession } from 'next-auth/client'
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+  const session = getSession(ctx)
   const tagsOptions = await fetchAllTags(process.env.API_URL)
   const facultiesOptions = await fetchAllFaculties(process.env.API_URL)
 
@@ -25,14 +26,19 @@ export async function getServerSideProps() {
   return {
     props: {
       tagsOptions,
+      session,
       facultiesOptions,
       apiUrl: process.env.API_URL,
     },
   }
 }
 
-export default function NewThesis({ apiUrl, tagsOptions, facultiesOptions }) {
-  const [session, loading] = useSession()
+export default function NewThesis({
+  apiUrl,
+  session,
+  tagsOptions,
+  facultiesOptions,
+}) {
   const {
     register,
     control,

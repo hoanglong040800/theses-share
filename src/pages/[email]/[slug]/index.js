@@ -40,11 +40,23 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 
 export async function getStaticProps({ params }) {
+  const details = await fetchThesisBySlug(process.env.API_URL, params.slug)
+
+  if (!details)
+    return {
+      notFound: true,
+    }
+  // check if thesis belong to [email]
+  else if (params.email !== getNameFromEmail(details.user.email))
+    return {
+      notFound: true,
+    }
+
   return {
     props: {
       details: await fetchThesisBySlug(process.env.API_URL, params.slug),
@@ -106,7 +118,9 @@ export default function ThesisDetail({ details, apiUrl }) {
 
   // --- Edit & Delete ---
 
-  function handleEdit() {}
+  function handleEdit() {
+    router.push(`/${getNameFromEmail(details.user.email)}/${details.slug}/edit`)
+  }
 
   async function handleDelete() {
     handleCloseDialog()
