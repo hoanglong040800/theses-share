@@ -436,7 +436,7 @@ export const rsPswdSchema = yup.object().shape({
     .oneOf([yup.ref('pswdNew'), null], 'Không trùng với mật khẩu mới'),
 })
 
-export const thesisSchema = yup.object().shape({
+const infoYupShape = {
   name: yup
     .string()
     .required('Bắt buộc')
@@ -459,18 +459,19 @@ export const thesisSchema = yup.object().shape({
   authors: yup.string().max(255, obj => `Không được quá ${obj.max} kí tự`),
 
   teachers: yup.string().max(255, obj => `Không được quá ${obj.max} kí tự`),
+}
 
-  published_year: yup
-    .number()
-    .typeError('Không phải số')
-    .required('Bắt buộc')
-    .min(1, obj => `Không được nhỏ hơn năm ${obj.min}`)
-    .max(new Date().getFullYear(), obj => `Không được lớn hơn năm ${obj.max}`),
-
+export const thesisSchema = yup.object().shape({
   file: yup
     .mixed()
     .test('required', 'Chưa tải luận văn', value => value.length)
     .test('fileSize', 'File vượt quá 1MB', value =>
       value.length ? value[0].size <= 1000000 : false
     ),
+
+  ...infoYupShape,
+})
+
+export const editThesisSchema = yup.object().shape({
+  ...infoYupShape,
 })

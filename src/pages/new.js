@@ -133,7 +133,6 @@ export default function NewThesis({
             required
             control={control}
             errors={errors}
-            setValue={setValue}
           />
         </Box>
 

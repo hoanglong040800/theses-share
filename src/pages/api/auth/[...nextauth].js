@@ -30,7 +30,7 @@ const options = {
           label: 'Email',
           type: 'email',
         },
-        password: { label: 'Password', type: 'password' },
+        password: { label: 'Mật khẩu', type: 'password' },
       },
 
       async authorize(credentials) {

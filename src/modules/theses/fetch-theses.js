@@ -15,7 +15,7 @@ export async function fetchThesesWithQuery(apiUrl, query) {
     const data = await resObj.data
 
     return data
-  } catch (error) {
+  } catch (e) {
     return false
   }
 }
@@ -26,7 +26,7 @@ export async function fetchNewestTheses(apiUrl) {
     const resObj = await res.json()
 
     return resObj.data
-  } catch (error) {
+  } catch (e) {
     return false
   }
 }
@@ -37,7 +37,7 @@ export async function fetchThesisBySlug(apiUrl, slug) {
     const resObj = await res.json()
 
     return resObj.data
-  } catch (error) {
+  } catch (e) {
     return false
   }
 }
@@ -57,7 +57,7 @@ export async function addThesisInfor(apiUrl, data, user_id) {
     const resObj = await res.json()
 
     return resObj.data.user.id
-  } catch (error) {
+  } catch (e) {
     return false
   }
 }
@@ -87,6 +87,27 @@ export async function addFile(apiUrl, file, user_id, thesis_id) {
 
 // ========= UPDATE =========
 
+export async function updateThesisInfor(apiUrl, data, user_id, thesis_id) {
+  try {
+    const res = await fetch(
+      `${apiUrl}/users/${user_id}/theses/${thesis_id}/infor`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    )
+
+    const resObj = await res.json()
+
+    return resObj.status
+  } catch (e) {
+    return false
+  }
+}
+
 // ========= DELETE =========
 
 export async function deleteThesis(apiUrl, user_id, thesis_id) {
@@ -99,7 +120,7 @@ export async function deleteThesis(apiUrl, user_id, thesis_id) {
     console.log('-- del thesis --', res.ok, res.status, res.statusText, resObj)
 
     return resObj.status
-  } catch (error) {
+  } catch (e) {
     return false
   }
 }

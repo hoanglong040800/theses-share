@@ -250,7 +250,7 @@ export default function ThesisDetail({ details, apiUrl }) {
         {
           // edit & delete button
           checkEmail && (
-            <Box display="flex" justifyContent="flex-end" mt={2}>
+            <Box display="flex" justifyContent="flex-end" my={5}>
               <Button className={classes.delBtn} onClick={handleOpenDialog}>
                 Xoá
               </Button>
@@ -276,7 +276,7 @@ export default function ThesisDetail({ details, apiUrl }) {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleCloseDialog} autoFocus>
+          <Button color="default" onClick={handleCloseDialog} autoFocus>
             Hủy
           </Button>
 
