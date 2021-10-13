@@ -26,6 +26,7 @@
     "react-hook-form": "^7.15.0",
     "react-pdf": "^5.3.2",
     "react-redux": "^7.2.5",
+    "slugify": "^1.6.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {

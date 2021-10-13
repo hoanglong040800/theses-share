@@ -450,7 +450,7 @@ export const thesisSchema = yup.object().shape({
 
   type: yup.string().required('Bắt buộc'),
 
-  faculty: yup.string().required('Bắt buộc'),
+  faculty_id: yup.number().typeError('Bắt buộc').required('Bắt buộc'),
 
   language: yup.string(),
 

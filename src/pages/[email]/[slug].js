@@ -1,7 +1,21 @@
-import { Box, Button, Container, Grid } from '@material-ui/core'
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  Slide,
+  Snackbar,
+} from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 import { makeStyles } from '@material-ui/styles'
 import Loading from 'common/components/loading/Loading'
 import {
+  deleteThesis,
   fetchNewestTheses,
   fetchThesisBySlug,
 } from 'modules/theses/fetch-theses'
@@ -10,6 +24,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
+import { getNameFromEmail } from 'common/utils/util'
 
 export async function getStaticPaths() {
   const data = await fetchNewestTheses(process.env.API_URL)
@@ -33,15 +48,20 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       details: await fetchThesisBySlug(process.env.API_URL, params.slug),
+      apiUrl: process.env.API_URL,
     },
   }
 }
 
-export default function ThesisDetail({ details }) {
+export default function ThesisDetail({ details, apiUrl }) {
   const classes = useStyle()
   const router = useRouter()
   const [session, loading] = useSession()
   const [checkEmail, setCheckEmail] = useState(false)
+
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [severity, setSeverity] = useState('success')
+  const [openDialog, setOpenDialog] = useState(false)
 
   const gridItemProperty = {
     property: {
@@ -66,6 +86,38 @@ export default function ThesisDetail({ details }) {
       ? setCheckEmail(session.user.id === details.user.id)
       : setCheckEmail(false)
   }, [session, loading, details])
+
+  // --- snackbar & dialog ---
+  function handleOpenDialog() {
+    setOpenDialog(true)
+  }
+
+  function handleCloseDialog() {
+    setOpenDialog(false)
+  }
+
+  function handleCloseSnackbar() {
+    setOpenSnackbar(false)
+
+    severity === 'success'
+      ? router.push(`/${getNameFromEmail(session.user.email)}`)
+      : null
+  }
+
+  // --- Edit & Delete ---
+
+  function handleEdit() {}
+
+  async function handleDelete() {
+    handleCloseDialog()
+
+    const status = await deleteThesis(apiUrl, 4, 7)
+    // const status = true
+    // const status = await deleteThesis(apiUrl, session.user.id, details.id)
+
+    status ? setSeverity('success') : setSeverity('error')
+    setOpenSnackbar(true)
+  }
 
   // cho trang fetch du lieu -> hien thi component loading
   if (router.isFallback) {
@@ -180,17 +232,58 @@ export default function ThesisDetail({ details }) {
             {details.user.full_name}
           </Grid>
         </Grid>
+
+        {
+          // edit & delete button
+          checkEmail && (
+            <Box display="flex" justifyContent="flex-end" mt={2}>
+              <Button className={classes.delBtn} onClick={handleOpenDialog}>
+                Xoá
+              </Button>
+
+              <Button variant="contained" color="primary" onClick={handleEdit}>
+                Chỉnh sửa
+              </Button>
+            </Box>
+          )
+        }
       </Container>
 
-      <Box display="flex" justifyContent="flex-end" mt={2}>
-        {checkEmail && (
-          <Button variant="contained" color="primary">
-            Chỉnh sửa
-          </Button>
-        )}
-      </Box>
-
       <PdfViewer file={details.link_storage} isList={false} />
+
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Xác nhận xóa</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Xác nhận xóa luận văn <b>{details.name}</b>? Hành động này không thể
+            quay lại
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleCloseDialog} autoFocus>
+            Hủy
+          </Button>
+
+          <Button className={classes.delBtn} onClick={handleDelete}>
+            Xóa
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar
+        open={openSnackbar}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={2500}
+        TransitionComponent={Slide}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={severity}>
+          {severity === 'success'
+            ? 'Xóa luận văn thành công'
+            : 'Có lỗi xảy ra khi xóa. Thử lại lần sau.'}
+        </Alert>
+      </Snackbar>
     </>
   )
 }
@@ -199,5 +292,14 @@ const useStyle = makeStyles(theme => ({
   gridItem: {
     padding: '1rem',
     borderBottom: '1px solid #ddd',
+  },
+
+  delBtn: {
+    color: theme.palette.error.main,
+    marginRight: 20,
+
+    '&:hover': {
+      background: '#fff0f0',
+    },
   },
 }))

@@ -31,9 +31,10 @@ export default function NavProfile() {
   }
 
   function handleSignout() {
-    router.pathname.includes('/settings')
+    /settings|new/.test(router.pathname)
       ? signOut({ callbackUrl: '/' })
       : signOut({ redirect: false })
+
     handleClose()
   }
 

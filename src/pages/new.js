@@ -4,20 +4,35 @@ import AutocompleteController from 'common/components/input/AutocompleteControll
 import SelectController from 'common/components/input/SelectController'
 import TextFieldController from 'common/components/input/TextFieldController'
 import { thesisSchema } from 'common/utils/constants'
-import { fetchAllTags } from 'modules/theses/fetch-tags'
+import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
+import { addFile, addThesisInfor } from 'modules/theses/fetch-theses'
 import UploadPDF from 'modules/theses/pdf/UploadPDF'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
+import slugify from 'slugify'
+import { useSession } from 'next-auth/client'
 
 export async function getServerSideProps() {
+  const tagsOptions = await fetchAllTags(process.env.API_URL)
+  const facultiesOptions = await fetchAllFaculties(process.env.API_URL)
+
+  if (tagsOptions === false || facultiesOptions === false) {
+    return {
+      notFound: true,
+    }
+  }
+
   return {
     props: {
-      tagsOptions: await fetchAllTags(process.env.API_URL),
+      tagsOptions,
+      facultiesOptions,
+      apiUrl: process.env.API_URL,
     },
   }
 }
 
-export default function NewThesis({ tagsOptions }) {
+export default function NewThesis({ apiUrl, tagsOptions, facultiesOptions }) {
+  const [session, loading] = useSession()
   const {
     register,
     control,
@@ -26,18 +41,31 @@ export default function NewThesis({ tagsOptions }) {
     setValue,
   } = useForm({
     resolver: yupResolver(thesisSchema),
+    defaultValues: {
+      name: 'Phát triển ứng dụng di động',
+      faculty_id: 1,
+      published_year: 2021,
+      type: 'KLTN',
+      tags: [],
+      format: 'PDF',
+      authors: '',
+      teachers: '',
+    },
   })
 
   async function onSubmit(data) {
     console.log('SUBMIT', data)
-    // await addFile('', 1, data.file[0])
+    data['slug'] = slugify(data['name'])
+
+    // const thesis_id = await addThesisInfor(apiUrl, data, session.user.id)
+
+    const result = await addFile(apiUrl, data.file[0], 1, 6)
+    console.log('-- result --', result)
   }
 
   function onError(err) {
     console.log('ERROR\n', err)
   }
-
-  console.log(errors.tags)
 
   return (
     <>
@@ -51,30 +79,29 @@ export default function NewThesis({ tagsOptions }) {
         <TextFieldController
           name="name"
           label="Tên luận văn"
-          defaultValue="abc"
           required
           control={control}
           errors={errors}
         />
 
         <SelectController
-          name="faculty"
+          name="faculty_id"
           label="Khoa"
-          defaultValue="KHMT"
           required
           control={control}
           errors={errors}
         >
-          <MenuItem value="KHMT">Khoa học máy tính</MenuItem>
-          <MenuItem value="CNPM">Công nghệ phần mềm</MenuItem>
-          <MenuItem value="KTMT">Kĩ thuật máy tính</MenuItem>
+          {facultiesOptions.map(item => (
+            <MenuItem key={item.id} value={item.id}>
+              {item.name_vn}
+            </MenuItem>
+          ))}
         </SelectController>
 
         <TextFieldController
           name="published_year"
           label="Năm"
           type="number"
-          defaultValue={2021}
           required
           control={control}
           errors={errors}
@@ -83,7 +110,6 @@ export default function NewThesis({ tagsOptions }) {
         <SelectController
           name="type"
           label="Loại luận văn"
-          defaultValue="KLTN"
           required
           control={control}
           errors={errors}
@@ -106,23 +132,22 @@ export default function NewThesis({ tagsOptions }) {
         </Box>
 
         <SelectController
+          name="format"
+          label="Định dạng"
+          control={control}
+          errors={errors}
+        >
+          <MenuItem value="PDF">PDF</MenuItem>
+        </SelectController>
+
+        <SelectController
           name="language"
           label="Ngôn ngữ"
           control={control}
           errors={errors}
         >
-          <MenuItem value="vn">Tiếng Việt</MenuItem>
-          <MenuItem value="en">Tiếng Anh</MenuItem>
-        </SelectController>
-
-        <SelectController
-          name="format"
-          label="Định dạng"
-          defaultValue="pdf"
-          control={control}
-          errors={errors}
-        >
-          <MenuItem value="pdf">PDF</MenuItem>
+          <MenuItem value="VN">Tiếng Việt</MenuItem>
+          <MenuItem value="EN">Tiếng Anh</MenuItem>
         </SelectController>
 
         <TextFieldController
@@ -153,26 +178,4 @@ export default function NewThesis({ tagsOptions }) {
   )
 }
 
-/*
- user_id (session)
- name*: text x
- type*: dropdown x
- faculty*: dropdown x
- published_year*: number
- 
- tags: [
-  { id: 1, name_vn: 'Học sâu'},
-  { id: 2, name_vn: 'Máy học'},
- ]
-
-tags:[
-  id: 1,
-  id: 2,
-]
-
- author: array
- teachers: array
- language: dropdown x
- format: dropdown x
- file*
-*/
+NewThesis.auth = true

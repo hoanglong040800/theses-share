@@ -35,7 +35,7 @@ export default function Theses({ apiUrl }) {
     }
 
     fetchRows()
-  }, [router.query])
+  }, [router.query, apiUrl])
 
   // handle error
   if (rows === false) {
