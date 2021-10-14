@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Button, MenuItem } from '@material-ui/core'
+import { Box, Button, MenuItem, Slide, Snackbar } from '@material-ui/core'
 import AutocompleteController from 'common/components/input/AutocompleteController'
 import SelectController from 'common/components/input/SelectController'
 import TextFieldController from 'common/components/input/TextFieldController'
@@ -11,9 +11,13 @@ import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 import slugify from 'slugify'
 import { getSession } from 'next-auth/client'
+import { Alert } from '@material-ui/lab'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { getNameFromEmail } from 'common/utils/util'
 
 export async function getServerSideProps(ctx) {
-  const session = getSession(ctx)
+  const session = await getSession(ctx)
   const tagsOptions = await fetchAllTags(process.env.API_URL)
   const facultiesOptions = await fetchAllFaculties(process.env.API_URL)
 
@@ -40,11 +44,13 @@ export default function NewThesis({
   facultiesOptions,
 }) {
   const {
+    watch,
     register,
     control,
     formState: { errors },
     handleSubmit,
     setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(thesisSchema),
     defaultValues: {
@@ -59,14 +65,48 @@ export default function NewThesis({
     },
   })
 
+  const router = useRouter()
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [severity, setSeverity] = useState('success')
+
+  // Snackbar
+  function handleCloseSnackbar() {
+    setOpenSnackbar(false)
+
+    if (severity === 'success') {
+      reset('', {
+        keepValues: false,
+      })
+      router.push(
+        `/${getNameFromEmail(session.user.email)}/${slugify(watch('name'))}`
+      )
+    }
+  }
+
   async function onSubmit(data) {
-    console.log('SUBMIT', data)
+    // console.log('SUBMIT', data)
     data['slug'] = slugify(data['name'])
 
-    // const thesis_id = await addThesisInfor(apiUrl, data, session.user.id)
+    // add infor
+    const thesis_id = await addThesisInfor(apiUrl, data, session.user.id)
+    if (!thesis_id) {
+      setSeverity('error')
+      setOpenSnackbar(true)
+      return
+    }
 
-    const result = await addFile(apiUrl, data.file[0], 1, 6)
-    console.log('-- result --', result)
+    // add file
+    const status = await addFile(
+      apiUrl,
+      data.file[0],
+      session.user.id,
+      thesis_id
+    )
+
+    if (status) setSeverity('success')
+    else setSeverity('error')
+
+    setOpenSnackbar(true)
   }
 
   function onError(err) {
@@ -129,10 +169,11 @@ export default function NewThesis({
             name="tags"
             label="Tags"
             options={tagsOptions}
-            optionLabel="name_en"
+            optionLabel="name_vn"
             required
             control={control}
             errors={errors}
+            setValue={setValue}
           />
         </Box>
 
@@ -179,6 +220,19 @@ export default function NewThesis({
           </Button>
         </Box>
       </Box>
+
+      <Snackbar
+        open={openSnackbar}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={2500}
+        TransitionComponent={Slide}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={severity}>
+          {severity === 'success'
+            ? 'Thêm luận văn thành công. Đang điều hướng đến trang chi tiết'
+            : 'Có lỗi xảy ra khi thêm luận văn mới. Vui lòng thử lại lần sau.'}
+        </Alert>
+      </Snackbar>
     </>
   )
 }

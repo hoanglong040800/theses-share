@@ -125,10 +125,9 @@ export default function ThesisDetail({ details, apiUrl }) {
   async function handleDelete() {
     handleCloseDialog()
 
-    const status = await deleteThesis(apiUrl, 4, 7)
     // const status = true
-    // const status = await deleteThesis(apiUrl, session.user.id, details.id)
-
+    const status = await deleteThesis(apiUrl, session.user.id, details.id)
+    
     status ? setSeverity('success') : setSeverity('error')
     setOpenSnackbar(true)
   }
@@ -294,7 +293,7 @@ export default function ThesisDetail({ details, apiUrl }) {
       >
         <Alert onClose={handleCloseSnackbar} severity={severity}>
           {severity === 'success'
-            ? 'Xóa luận văn thành công'
+            ? 'Xóa luận văn thành công. Đang điều hướng đến trang hồ sơ của bạn'
             : 'Có lỗi xảy ra khi xóa. Thử lại lần sau.'}
         </Alert>
       </Snackbar>

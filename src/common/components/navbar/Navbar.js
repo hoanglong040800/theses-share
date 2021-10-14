@@ -54,9 +54,24 @@ export default function Navbar() {
               {session ? (
                 <NavProfile />
               ) : (
-                <Button variant="contained" color="primary" onClick={signIn}>
-                  Sign In
-                </Button>
+                <Box display="flex">
+                  <Button
+                    color="default"
+                    size="small"
+                    style={{ marginRight: 5 }}
+                  >
+                    Sign up
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={signIn}
+                  >
+                    Sign in
+                  </Button>
+                </Box>
               )}
             </Box>
             {/* right side */}

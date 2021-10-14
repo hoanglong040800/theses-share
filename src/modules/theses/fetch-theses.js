@@ -1,13 +1,5 @@
 // ====== FETCH ======
 
-export async function fetchPaginatedThesesRow(apiUrl, query, page, pageSize) {
-  const res = await fetch(
-    `${apiUrl}/theses?${query}&_page=${page}&_limit=${pageSize}`
-  )
-  const data = await res.json()
-  return data
-}
-
 export async function fetchThesesWithQuery(apiUrl, query) {
   try {
     const res = await fetch(`${apiUrl}/theses?${query}`)
@@ -49,14 +41,14 @@ export async function addThesisInfor(apiUrl, data, user_id) {
     const res = await fetch(`${apiUrl}/users/${user_id}/theses/infor`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+
       },
       body: JSON.stringify(data),
     })
 
     const resObj = await res.json()
 
-    return resObj.data.user.id
+    return resObj.data.id
   } catch (e) {
     return false
   }
@@ -72,14 +64,14 @@ export async function addFile(apiUrl, file, user_id, thesis_id) {
       {
         method: 'POST',
         headers: {
-          'Content-type': 'multipart/form-data',
+          
         },
         body: data,
       }
     )
-    const resObj = res.json()
+    const resObj = await res.json()
 
-    return true
+    return resObj.status
   } catch (e) {
     return false
   }

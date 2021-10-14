@@ -56,18 +56,16 @@ export default function NavProfile() {
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         {session.user.full_name && (
-          <MenuItem>
+          <MenuItem
+            onClick={() =>
+              handleSelect(`/${getNameFromEmail(session.user.email)}`)
+            }
+          >
             <p className={mui.full_name}>{session.user.full_name}</p>
           </MenuItem>
         )}
 
-        <MenuItem
-          onClick={() =>
-            handleSelect(`/${getNameFromEmail(session.user.email)}`)
-          }
-        >
-          Hồ sơ
-        </MenuItem>
+        <Divider variant="middle" />
 
         <MenuItem
           onClick={() =>
@@ -80,8 +78,6 @@ export default function NavProfile() {
         </MenuItem>
 
         <MenuItem onClick={() => handleSelect('/settings')}>Cài đặt</MenuItem>
-
-        <Divider variant="middle" />
 
         <MenuItem onClick={handleSignout}>Đăng xuất</MenuItem>
       </Menu>

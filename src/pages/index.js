@@ -9,7 +9,7 @@ export async function getServerSideProps() {
   const numOfTheses = 10
   const newestTheses = await fetchNewestTheses(process.env.API_URL)
 
-  if (newestTheses === false) {
+  if (!newestTheses) {
     return {
       notFound: true,
     }
@@ -41,7 +41,7 @@ export default function Home({ newestTheses }) {
         </Link>
 
         <Box mt={3}>
-          <ThesesTable columns={colDef} rows={newestTheses} />
+          <ThesesTable columns={colDef} rows={newestTheses} hideFooter={true} />
         </Box>
       </Box>
     </>

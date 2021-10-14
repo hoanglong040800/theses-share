@@ -78,13 +78,14 @@ export default function EditThesis({
     formState: { errors },
     handleSubmit,
     setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(editThesisSchema),
     defaultValues: {
       name: details.name,
       faculty_id: details.faculty.id,
       published_year: details.publish_year,
-      tags: details.tags,
+      tags: details.tags, // must update UI by set defaultValue for Autocomplete
       type: details.type,
       language: details.language,
       format: details.format,
@@ -97,10 +98,14 @@ export default function EditThesis({
   function handleCloseSnackbar() {
     setOpenSnackbar(false)
 
-    if (severity === 'success')
+    if (severity === 'success') {
+      reset('', {
+        keepValues: false,
+      })
       router.push(
         `/${getNameFromEmail(session.user.email)}/${slugify(watch('name'))}`
       )
+    }
   }
 
   async function onSubmit(data) {
@@ -240,7 +245,7 @@ export default function EditThesis({
       >
         <Alert onClose={handleCloseSnackbar} severity={severity}>
           {severity === 'success'
-            ? 'Chỉnh sửa luận văn thành công. Đang điều hướng đến trang hồ sơ'
+            ? 'Chỉnh sửa luận văn thành công. Đang điều hướng đến trang chi tiết'
             : 'Có lỗi xảy ra khi chỉnh sửa. Vui lòng thử lại lần sau.'}
         </Alert>
       </Snackbar>
