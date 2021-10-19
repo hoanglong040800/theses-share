@@ -178,7 +178,7 @@ export default function ThesisDetail({ details, apiUrl }) {
             Năm xuất bản:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.publish_year}
+            {details.published_year}
           </Grid>
 
           {/* tags */}
@@ -234,7 +234,7 @@ export default function ThesisDetail({ details, apiUrl }) {
             Lượt xem:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.view}
+            {details.views}
           </Grid>
 
           {/* user publish */}

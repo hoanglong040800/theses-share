@@ -16,3 +16,21 @@ export default async function fetchSignin(apiUrl, credentials) {
     return null
   }
 }
+
+export async function fetchSignup(apiUrl, data) {
+  try {
+    const res = await fetch(`${apiUrl}/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+
+    const resObj = await res.json()
+
+    return resObj.status
+  } catch (e) {
+    return false
+  }
+}

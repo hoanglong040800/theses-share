@@ -21,6 +21,10 @@ const options = {
   // only true in development
   debug: true,
 
+  pages: {
+    newUser: '/settings',
+  },
+
   providers: [
     Providers.Credentials({
       name: 'Theses Share',
@@ -34,12 +38,16 @@ const options = {
       },
 
       async authorize(credentials) {
-        const user = await fetchSignin(process.env.API_URL, credentials)
-        // console.log('-- authorize --', { credentials, user })
+        try {
+          const user = await fetchSignin(process.env.API_URL, credentials)
+          // console.log('-- authorize --', { credentials, user })
 
-        if (user) {
-          return user
-        } else {
+          if (user) {
+            return user
+          } else {
+            return null
+          }
+        } catch (e) {
           return null
         }
       },

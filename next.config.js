@@ -15,6 +15,10 @@ module.exports = {
         source: '/settings',
         destination: '/settings/edit-profile',
       },
+      {
+        source: '/signin',
+        destination: '/api/auth/signin',
+      },
     ]
   },
 }

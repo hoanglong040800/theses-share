@@ -1,5 +1,5 @@
 // ==== SESSION ======
-export const tokenData = ['id', 'email', 'full_name', 'gender']
+export const tokenData = ['id', 'email', 'full_name', 'gender', 'user_name']
 
 // ======== nav links ======
 function getUrlQuery(name, value) {
@@ -125,7 +125,7 @@ export const colDef = [
   },
 
   {
-    field: 'publish_year',
+    field: 'published_year',
     headerName: 'Năm',
     type: 'string',
     width: 90,
@@ -152,7 +152,7 @@ export const colDef = [
   },
 
   {
-    field: 'view',
+    field: 'views',
     headerName: 'Xem',
     type: 'string',
     headerAlign: 'center',
@@ -408,18 +408,20 @@ export const rowsDummy = [
 
 import * as yup from 'yup'
 
-export const authSchema = yup.object().shape({
+export const signupSchema = yup.object().shape({
   email: yup.string().required('Chưa nhập email').email('Không phải email'),
 
-  pswd: yup
+  user_name: yup.string().required('Chưa nhập username'),
+
+  password: yup
     .string()
     .required('Chưa nhập mật khẩu')
     .min(8, 'Mật khẩu tối thiểu 8 kí tự')
     .max(20, 'Mật khẩu không được quá 20 kí tự'),
 
-  pswdCf: yup
+  password_confirmation: yup
     .string()
-    .oneOf([yup.ref('pswd'), null], 'Không trùng với mật khẩu'),
+    .oneOf([yup.ref('password'), null], 'Không trùng với mật khẩu'),
 })
 
 export const rsPswdSchema = yup.object().shape({

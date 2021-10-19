@@ -12,8 +12,10 @@ import Link from 'next/link'
 import NavLink from './NavLink'
 import NavProfile from './NavProfile'
 import { signIn, useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 export default function Navbar() {
+  const router = useRouter()
   const classes = useStyles()
   const [session, loading] = useSession()
 
@@ -59,8 +61,9 @@ export default function Navbar() {
                     color="default"
                     size="small"
                     style={{ marginRight: 5 }}
+                    onClick={() => router.push('/signup')}
                   >
-                    Sign up
+                    Đăng ký
                   </Button>
 
                   <Button
@@ -69,7 +72,7 @@ export default function Navbar() {
                     size="small"
                     onClick={signIn}
                   >
-                    Sign in
+                    Đăng nhập
                   </Button>
                 </Box>
               )}
