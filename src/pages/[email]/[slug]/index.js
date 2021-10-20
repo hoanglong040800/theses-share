@@ -26,25 +26,25 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
 import { getNameFromEmail } from 'common/utils/util'
 
-export async function getStaticPaths() {
-  const data = await fetchNewestTheses(process.env.API_URL)
+// export async function getStaticPaths() {
+//   const data = await fetchNewestTheses(process.env.API_URL)
 
-  const paths = data.map(item => {
-    return {
-      params: {
-        email: item.user.email,
-        slug: item.slug,
-      },
-    }
-  })
+//   const paths = data.map(item => {
+//     return {
+//       params: {
+//         email: item.user.email,
+//         slug: item.slug,
+//       },
+//     }
+//   })
 
-  return {
-    paths,
-    fallback: 'blocking',
-  }
-}
+//   return {
+//     paths,
+//     fallback: 'blocking',
+//   }
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const details = await fetchThesisBySlug(process.env.API_URL, params.slug)
 
   if (!details)

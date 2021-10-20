@@ -84,11 +84,11 @@ export default function EditThesis({
     defaultValues: {
       name: details.name,
       faculty_id: details.faculty.id,
-      published_year: details.publish_year,
+      published_year: details.published_year,
       tags: details.tags, // must update UI by set defaultValue for Autocomplete
-      type: details.type,
-      language: details.language,
-      format: details.format,
+      type: details.type || '',
+      language: details.language || '',
+      format: details.format || '',
       authors: details.authors,
       teachers: details.teachers,
     },
@@ -99,12 +99,14 @@ export default function EditThesis({
     setOpenSnackbar(false)
 
     if (severity === 'success') {
+      const slug = slugify(watch('name'))
+      const nameEmail = getNameFromEmail(session.user.email)
+
       reset('', {
         keepValues: false,
       })
-      router.push(
-        `/${getNameFromEmail(session.user.email)}/${slugify(watch('name'))}`
-      )
+
+      router.push(`/${nameEmail}/${slug}`)
     }
   }
 

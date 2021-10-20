@@ -109,7 +109,6 @@ export async function deleteThesis(apiUrl, user_id, thesis_id) {
     })
 
     const resObj = await res.json()
-    console.log('-- del thesis --', res.ok, res.status, res.statusText, resObj)
 
     return resObj.status
   } catch (e) {

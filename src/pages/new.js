@@ -74,12 +74,14 @@ export default function NewThesis({
     setOpenSnackbar(false)
 
     if (severity === 'success') {
+      const slug = slugify(watch('name'))
+      const nameEmail = getNameFromEmail(session.user.email)
+
       reset('', {
         keepValues: false,
       })
-      router.push(
-        `/${getNameFromEmail(session.user.email)}/${slugify(watch('name'))}`
-      )
+
+      router.push(`/${nameEmail}/${slug}`)
     }
   }
 
