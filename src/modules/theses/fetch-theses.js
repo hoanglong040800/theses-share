@@ -40,9 +40,7 @@ export async function addThesisInfor(apiUrl, data, user_id) {
   try {
     const res = await fetch(`${apiUrl}/users/${user_id}/theses/infor`, {
       method: 'POST',
-      headers: {
-
-      },
+      headers: {},
       body: JSON.stringify(data),
     })
 
@@ -63,9 +61,7 @@ export async function addFile(apiUrl, file, user_id, thesis_id) {
       `${apiUrl}/users/${user_id}/theses/${thesis_id}/file`,
       {
         method: 'POST',
-        headers: {
-          
-        },
+        headers: {},
         body: data,
       }
     )

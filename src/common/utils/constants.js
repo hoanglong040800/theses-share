@@ -119,7 +119,7 @@ export const colDef = [
     headerAlign: 'center',
     align: 'center',
     sortable: true,
-    valueFormatter: params => {
+    valueGetter: params => {
       return params.value.name_short_vn
     },
   },
@@ -127,11 +127,14 @@ export const colDef = [
   {
     field: 'published_year',
     headerName: 'Năm',
-    type: 'string',
+    type: 'number',
     width: 90,
     headerAlign: 'center',
     align: 'center',
     sortable: true,
+    valueFormatter: params => {
+      return params.value.toString().replace(',', '')
+    },
   },
 
   {
@@ -141,7 +144,7 @@ export const colDef = [
     flex: 0.3,
     minWidth: 180,
     sortable: true,
-    valueFormatter: params => {
+    valueGetter: params => {
       return params.value
         .map(item => {
           if (item.name_short_en) return item.name_short_en
@@ -453,6 +456,13 @@ const infoYupShape = {
   type: yup.string().required('Bắt buộc'),
 
   faculty_id: yup.number().typeError('Bắt buộc').required('Bắt buộc'),
+
+  published_year: yup
+    .number()
+    .typeError('Bắt buộc')
+    .required('Bắt buộc')
+    .min(1900, obj => `Không được nhỏ hơn năm ${obj.min}`)
+    .max(new Date().getFullYear(), obj => `Không được lớn hơn năm ${obj.max}`),
 
   language: yup.string(),
 

@@ -86,9 +86,9 @@ export default function EditThesis({
       faculty_id: details.faculty.id,
       published_year: details.published_year,
       tags: details.tags, // must update UI by set defaultValue for Autocomplete
-      type: details.type || '',
-      language: details.language || '',
-      format: details.format || '',
+      type: details.type,
+      language: details.language,
+      format: details.format,
       authors: details.authors,
       teachers: details.teachers,
     },
@@ -112,6 +112,7 @@ export default function EditThesis({
 
   async function onSubmit(data) {
     data['slug'] = slugify(data['name'])
+    console.log('SUBMIT', data)
 
     // console.log('SUBMIT', data)
     // let status = true
