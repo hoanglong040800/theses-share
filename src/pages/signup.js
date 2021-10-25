@@ -43,8 +43,8 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
     defaultValues: {
       email: 'abc@gmail.com',
       user_name: 'abc',
-      password: '12345678',
-      password_confirmation: '12345678',
+      password: '1',
+      password_confirmation: '1',
     },
   })
 
@@ -55,34 +55,28 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
     setOpenSnackbar(false)
 
     if (severity === 'success') {
-      reset('', {
-        keepValues: false,
-      })
-
-      // signIn('credentials', {
-      //   email: watch('email'),
-      //   password: watch('password'),
-      // redirect: true,
-      // callbackUrl: `${nextauthUrl}/settings/edit-profile`,
-      // })
       signIn('credentials', {
-        email: 'user1@gmail.com',
-        password: '1',
+        email: watch('email'),
+        password: watch('password'),
         redirect: true,
         callbackUrl: `${nextauthUrl}/settings/edit-profile`,
       })
+
+      // signIn('credentials', {
+      //   email: 'user1@gmail.com',
+      //   password: '1',
+      //   redirect: true,
+      //   callbackUrl: `${nextauthUrl}/settings/edit-profile`,
+      // })
     }
   }
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     // console.log('SUBMIT', data)
 
-    // const status=fetchSignup(apiUrl,data)
-    const status = true
+    const status = await fetchSignup(apiUrl, data)
 
-    if (!status) {
-      setSeverity('error')
-    } else setSeverity('success')
+    status ? setSeverity('success') : setSeverity('error')
 
     setOpenSnackbar(true)
   }

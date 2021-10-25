@@ -2,11 +2,12 @@
 
 export async function fetchThesesWithQuery(apiUrl, query) {
   try {
-    const res = await fetch(`${apiUrl}/theses?${query}`)
+    const res = await fetch(`${apiUrl}/theses/filter?${query}`)
     const resObj = await res.json()
-    const data = await resObj.data
 
-    return data
+    if (resObj.data === null) return []
+
+    return resObj.data
   } catch (e) {
     return false
   }
@@ -14,8 +15,25 @@ export async function fetchThesesWithQuery(apiUrl, query) {
 
 export async function fetchNewestTheses(apiUrl) {
   try {
-    const res = await fetch(`${apiUrl}/theses`)
+    const res = await fetch(
+      `${apiUrl}/theses/filter?sort=upload_date&desc=desc`
+    )
     const resObj = await res.json()
+
+    if (resObj.data === null) return []
+
+    return resObj.data
+  } catch (e) {
+    return false
+  }
+}
+
+export async function fetchThesesByName(apiUrl, name) {
+  try {
+    const res = await fetch(`${apiUrl}/theses/filter?name=${name}`)
+    const resObj = await res.json()
+    
+    if (resObj.data === null) return []
 
     return resObj.data
   } catch (e) {
@@ -38,7 +56,7 @@ export async function fetchThesisBySlug(apiUrl, slug) {
 
 export async function addThesisInfor(apiUrl, data, user_id) {
   try {
-    const res = await fetch(`${apiUrl}/users/${user_id}/theses/infor`, {
+    const res = await fetch(`${apiUrl}/api/v1/users/${user_id}/theses/infor`, {
       method: 'POST',
       headers: {},
       body: JSON.stringify(data),
@@ -58,7 +76,7 @@ export async function addFile(apiUrl, file, user_id, thesis_id) {
 
   try {
     const res = await fetch(
-      `${apiUrl}/users/${user_id}/theses/${thesis_id}/file`,
+      `${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}/file`,
       {
         method: 'POST',
         headers: {},
@@ -78,7 +96,7 @@ export async function addFile(apiUrl, file, user_id, thesis_id) {
 export async function updateThesisInfor(apiUrl, data, user_id, thesis_id) {
   try {
     const res = await fetch(
-      `${apiUrl}/users/${user_id}/theses/${thesis_id}/infor`,
+      `${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}/infor`,
       {
         method: 'PUT',
         headers: {
@@ -100,7 +118,7 @@ export async function updateThesisInfor(apiUrl, data, user_id, thesis_id) {
 
 export async function deleteThesis(apiUrl, user_id, thesis_id) {
   try {
-    const res = await fetch(`${apiUrl}/users/${user_id}/theses/${thesis_id}`, {
+    const res = await fetch(`${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}`, {
       method: 'DELETE',
     })
 

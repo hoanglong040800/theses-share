@@ -11,8 +11,7 @@ export default async function fetchSignin(apiUrl, credentials) {
     const resObj = await res.json()
 
     return resObj
-  } catch (error) {
-    console.log(error)
+  } catch (e) {
     return null
   }
 }

@@ -419,7 +419,7 @@ export const signupSchema = yup.object().shape({
   password: yup
     .string()
     .required('Chưa nhập mật khẩu')
-    .min(8, 'Mật khẩu tối thiểu 8 kí tự')
+    .min(1, 'Mật khẩu tối thiểu 8 kí tự')
     .max(20, 'Mật khẩu không được quá 20 kí tự'),
 
   password_confirmation: yup

@@ -41,7 +41,7 @@ export default function Home({ newestTheses }) {
         </Link>
 
         <Box mt={3}>
-          <ThesesTable columns={colDef} rows={newestTheses} hideFooter={true} />
+          <ThesesTable columns={colDef} rows={newestTheses} />
         </Box>
       </Box>
     </>

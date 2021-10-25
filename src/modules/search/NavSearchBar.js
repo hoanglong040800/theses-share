@@ -15,7 +15,10 @@ export default function NavSearchBar() {
 
   function handleSearch() {
     if (stateValue) {
-      router.push(`/search?q=${stateValue}`)
+      router.push({
+        pathname: '/search',
+        query: { name: stateValue.trim() },
+      })
       setStateValue('')
     }
   }

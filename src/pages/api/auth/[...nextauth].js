@@ -42,7 +42,7 @@ const options = {
           const user = await fetchSignin(process.env.API_URL, credentials)
           // console.log('-- authorize --', { credentials, user })
 
-          if (user) {
+          if (user.status) {
             return user
           } else {
             return null
