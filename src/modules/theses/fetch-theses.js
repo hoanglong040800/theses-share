@@ -4,9 +4,6 @@ export async function fetchThesesWithQuery(apiUrl, query) {
   try {
     const res = await fetch(`${apiUrl}/theses/filter?${query}`)
     const resObj = await res.json()
-    console.log({ resObj })
-
-    if (resObj.data === null) return []
 
     return resObj.data
   } catch (e) {

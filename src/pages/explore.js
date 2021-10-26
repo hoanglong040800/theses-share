@@ -5,16 +5,23 @@ import Head from 'next/head'
 import Error from 'next/error'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
 
 export async function getServerSideProps() {
+  const apiUrl = process.env.API_URL
+  const allFaculties = await fetchAllFaculties(apiUrl)
+  const allTags = await fetchAllTags(apiUrl)
+
   return {
     props: {
-      apiUrl: process.env.API_URL,
+      apiUrl,
+      allFaculties,
+      allTags,
     },
   }
 }
 
-export default function Theses({ apiUrl }) {
+export default function Theses({ apiUrl, allFaculties, allTags }) {
   const router = useRouter()
   const { faculty, tags, published_year } = router.query
 

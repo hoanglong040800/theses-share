@@ -1,17 +1,36 @@
-import { makeStyles, MenuItem } from '@material-ui/core'
+import { makeStyles, MenuItem, Typography } from '@material-ui/core'
+import { useRouter } from 'next/router'
 
-export default function SearchSuggestedItem() {
+export default function SearchSuggestedItem({ details, handleChange }) {
   const mui = useStyles()
+  const router = useRouter()
+
+  const tagsFormat = details.tags
+    .map(item => {
+      if (item.name_short_en) return item.name_short_en
+      else return item.name_vn
+    })
+    .join(', ')
+
+  function handleClick() {
+    router.push(`/${details.user.user_name}/${details.slug}`)
+    handleChange('')
+  }
 
   return (
-    <MenuItem className={mui.item}>
-      <p>Search Suggested Item</p>
+    <MenuItem className={mui.item} onClick={handleClick}>
+      <div>
+        <Typography variant="body2">{details.name}</Typography>
+
+        <Typography variant="caption">{`${details.faculty.name_short_vn} | ${details.published_year} | ${tagsFormat}`}</Typography>
+      </div>
     </MenuItem>
   )
 }
 
 const useStyles = makeStyles(theme => ({
   item: {
-    padding: '0',
+    padding: '0.5rem 1rem',
+    borderBottom: '0.5px solid rgba(0,0,0,0.05)',
   },
 }))

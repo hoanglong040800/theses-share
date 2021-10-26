@@ -1,17 +1,18 @@
-import { Box, Button, CircularProgress, makeStyles } from '@material-ui/core'
+import { Box, Button, makeStyles } from '@material-ui/core'
 import SearchBar from 'material-ui-search-bar'
+import { fetchThesesWithQuery } from 'modules/theses/fetch-theses'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SearchSuggestedItem from './SearchSuggestedItem'
 
 export default function NavSearchBar() {
   const mui = useStyles()
   const router = useRouter()
-
   const [stateValue, setStateValue] = useState('')
+  const [rows, setRows] = useState([])
 
   function handleChange(value) {
-    setStateValue(value)
+    value ? setStateValue(value.trim()) : setStateValue('')
   }
 
   function handleSearch() {
@@ -23,6 +24,24 @@ export default function NavSearchBar() {
       setStateValue('')
     }
   }
+
+  useEffect(async () => {
+    if (stateValue) {
+      setRows([])
+
+      const query = {
+        name: stateValue,
+        limit: 3,
+      }
+
+      const data = await fetchThesesWithQuery(
+        process.env.NEXT_PUBLIC_API_URL,
+        new URLSearchParams(query).toString()
+      )
+
+      setRows(data)
+    }
+  }, [stateValue])
 
   return (
     <div className={mui.root}>
@@ -39,25 +58,36 @@ export default function NavSearchBar() {
         //
         stateValue && (
           <Box className={mui.suggestion}>
-            {/* <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              my={2}
-            >
-              <CircularProgress variant="indeterminate" size={30} />
-            </Box> */}
+            {
+              //
+              rows.length === 0 ? (
+                <p style={{ textAlign: 'center' }}>
+                  Không tìm thấy luận văn phù hợp
+                </p>
+              ) : (
+                <>
+                  {
+                    //
+                    rows.map(item => (
+                      <SearchSuggestedItem
+                        key={item.id}
+                        details={item}
+                        handleChange={handleChange}
+                      />
+                    ))
+                  }
 
-            <SearchSuggestedItem />
-
-            <Button
-              size="small"
-              fullWidth
-              className={mui.watchall}
-              onClick={handleSearch}
-            >
-              Xem tất cả
-            </Button>
+                  <Button
+                    size="small"
+                    fullWidth
+                    className={mui.watchall}
+                    onClick={handleSearch}
+                  >
+                    Xem tất cả
+                  </Button>
+                </>
+              )
+            }
           </Box>
         )
       }
@@ -76,7 +106,7 @@ const useStyles = makeStyles(theme => ({
 
   searchbar: {
     width: '100%',
-    maxWidth: 350,
+    maxWidth: 400,
     padding: 0,
     height: 35,
 
@@ -88,10 +118,10 @@ const useStyles = makeStyles(theme => ({
   suggestion: {
     position: 'absolute',
     top: 35,
-    maxWidth: 350,
+    maxWidth: 400,
     width: '100%',
     borderRadius: 5,
-    boxShadow: '1px 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    boxShadow: '3px 3px 2px 0 rgba(0, 0, 0, 0.05)',
     border: '1px solid rgba(0, 0, 0, 0.1)',
     backgroundColor: '#fff',
   },
