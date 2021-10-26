@@ -4,6 +4,7 @@ export async function fetchThesesWithQuery(apiUrl, query) {
   try {
     const res = await fetch(`${apiUrl}/theses/filter?${query}`)
     const resObj = await res.json()
+    console.log({ resObj })
 
     if (resObj.data === null) return []
 
@@ -32,7 +33,7 @@ export async function fetchThesesByName(apiUrl, name) {
   try {
     const res = await fetch(`${apiUrl}/theses/filter?name=${name}`)
     const resObj = await res.json()
-    
+
     if (resObj.data === null) return []
 
     return resObj.data
@@ -44,6 +45,17 @@ export async function fetchThesesByName(apiUrl, name) {
 export async function fetchThesisBySlug(apiUrl, slug) {
   try {
     const res = await fetch(`${apiUrl}/theses?slug=${slug}`)
+    const resObj = await res.json()
+
+    return resObj.data
+  } catch (e) {
+    return false
+  }
+}
+
+export async function getThesesByUsername(apiUrl, user_name) {
+  try {
+    const res = await fetch(`${apiUrl}/users/${user_name}/theses`)
     const resObj = await res.json()
 
     return resObj.data
@@ -118,9 +130,12 @@ export async function updateThesisInfor(apiUrl, data, user_id, thesis_id) {
 
 export async function deleteThesis(apiUrl, user_id, thesis_id) {
   try {
-    const res = await fetch(`${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}`, {
-      method: 'DELETE',
-    })
+    const res = await fetch(
+      `${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}`,
+      {
+        method: 'DELETE',
+      }
+    )
 
     const resObj = await res.json()
 

@@ -88,7 +88,7 @@ export const settingsPages = [
 
 export const userPages = [
   {
-    label: 'Luận văn',
+    label: 'Luận văn đã đăng',
     value: 'theses',
   },
   {

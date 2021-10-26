@@ -52,7 +52,7 @@ export async function getServerSideProps({ params }) {
       notFound: true,
     }
   // check if thesis belong to [email]
-  else if (params.email !== getNameFromEmail(details.user.email))
+  else if (params.user_name !== getNameFromEmail(details.user.email))
     return {
       notFound: true,
     }
@@ -88,12 +88,7 @@ export default function ThesisDetail({ details, apiUrl }) {
   }
 
   useEffect(() => {
-    // debug
-    // session && !loading && details
-    //   ? console.log('-- check email --', { session, loading, details })
-    //   : console.log('session is undefined or loading or details is not ready')
-
-    // production
+    // wait for session and details to load
     session && !loading && details
       ? setCheckEmail(session.user.id === details.user.id)
       : setCheckEmail(false)

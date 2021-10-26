@@ -24,7 +24,7 @@ export async function getServerSideProps(ctx) {
   // --- handle routing error ----
 
   // check is [email] match with user
-  if (ctx.params.email !== getNameFromEmail(session.user.email))
+  if (ctx.params.user_name !== getNameFromEmail(session.user.email))
     return {
       notFound: true,
     }
