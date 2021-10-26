@@ -2,6 +2,7 @@ import { Box, Button, CircularProgress, makeStyles } from '@material-ui/core'
 import SearchBar from 'material-ui-search-bar'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import SearchSuggestedItem from './SearchSuggestedItem'
 
 export default function NavSearchBar() {
   const mui = useStyles()
@@ -17,7 +18,7 @@ export default function NavSearchBar() {
     if (stateValue) {
       router.push({
         pathname: '/search',
-        query: { name: stateValue.trim() },
+        query: { q: stateValue.trim() },
       })
       setStateValue('')
     }
@@ -27,7 +28,7 @@ export default function NavSearchBar() {
     <div className={mui.root}>
       <SearchBar
         value={stateValue}
-        placeholder="Tìm tag hoặc tên đề tài"
+        placeholder="Tìm tên đề tài"
         onCancelSearch={handleChange}
         onChange={handleChange}
         onRequestSearch={handleSearch}
@@ -38,19 +39,21 @@ export default function NavSearchBar() {
         //
         stateValue && (
           <Box className={mui.suggestion}>
-            <Box
+            {/* <Box
               display="flex"
               justifyContent="center"
               alignItems="center"
               my={2}
             >
               <CircularProgress variant="indeterminate" size={30} />
-            </Box>
+            </Box> */}
+
+            <SearchSuggestedItem />
 
             <Button
               size="small"
               fullWidth
-              style={{ borderTop: '0.5px solid rgba(0,0,0,0.1)' }}
+              className={mui.watchall}
               onClick={handleSearch}
             >
               Xem tất cả
@@ -91,5 +94,9 @@ const useStyles = makeStyles(theme => ({
     boxShadow: '1px 1px 2px 0 rgba(0, 0, 0, 0.05)',
     border: '1px solid rgba(0, 0, 0, 0.1)',
     backgroundColor: '#fff',
+  },
+
+  watchall: {
+    borderTop: '0.5px solid rgba(0,0,0,0.1)',
   },
 }))

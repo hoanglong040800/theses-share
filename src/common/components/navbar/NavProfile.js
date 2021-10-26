@@ -55,15 +55,9 @@ export default function NavProfile() {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        {session.user.full_name && (
-          <MenuItem
-            onClick={() =>
-              handleSelect(`/${getNameFromEmail(session.user.email)}`)
-            }
-          >
-            <p className={mui.full_name}>{session.user.full_name}</p>
-          </MenuItem>
-        )}
+        <MenuItem onClick={() => handleSelect(`/${session.user.user_name}`)}>
+          <p className={mui.full_name}>{session.user.user_name}</p>
+        </MenuItem>
 
         <Divider variant="middle" />
 

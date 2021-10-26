@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/client'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ThesesTable from 'modules/theses/table/ThesesTable'
+import { useEffect, useState } from 'react'
 
 export async function getServerSideProps({ params: { user_name } }) {
   const apiUrl = process.env.API_URL
@@ -31,9 +32,18 @@ export default function UserProfile({ userDetails, userTheses }) {
   const router = useRouter()
   const mui = useStyles()
   const [session, loading] = useSession()
+  const [isUser, setIsUser] = useState(false)
 
   var { tab } = router.query
   tab = tab || 'theses'
+
+  useEffect(() => {
+    session
+      ? session.user.user_name === router.query.user_name
+        ? setIsUser(true)
+        : setIsUser(false)
+      : setIsUser(false)
+  }, [session, router.query.user_name])
 
   return (
     <>
@@ -41,45 +51,18 @@ export default function UserProfile({ userDetails, userTheses }) {
         <title>Hồ sơ</title>
       </Head>
 
-      <Box display="flex" alignItems="center">
-        <h1>Hồ sơ của {userDetails.user_name}</h1>
-
-        {session ? (
-          session.user.user_name === router.query.user_name ? (
-            <Box ml={3}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                onClick={() => router.push('/new')}
-              >
-                Thêm luận văn +
-              </Button>
-            </Box>
-          ) : null
-        ) : null}
-      </Box>
+      <h1>Hồ sơ của {userDetails.user_name}</h1>
 
       <Box
         display="flex"
         flexDirection="column"
         maxWidth="400px"
         mx="auto"
-        mb={3}
+        mb={4}
       >
         <div className={mui.gridContainer}>
           <p>Họ và tên</p>
           <p>{userDetails.full_name}</p>
-        </div>
-
-        <div className={mui.gridContainer}>
-          <p>Tuổi</p>
-          <p>{userDetails.age}</p>
-        </div>
-
-        <div className={mui.gridContainer}>
-          <p>Giới tính</p>
-          <p>{userDetails.gender}</p>
         </div>
 
         <div className={mui.gridContainer}>
@@ -96,6 +79,22 @@ export default function UserProfile({ userDetails, userTheses }) {
           <p>Năm học</p>
           <p>{userDetails.academic_year}</p>
         </div>
+
+        {
+          //
+          isUser && (
+            <Box display="flex" justifyContent="flex-end" mt={2}>
+              <Button
+                color="default"
+                variant="contained"
+                size="small"
+                onClick={() => router.push('/settings/edit-profile')}
+              >
+                Sửa hồ sơ
+              </Button>
+            </Box>
+          )
+        }
       </Box>
 
       <>
@@ -121,6 +120,23 @@ export default function UserProfile({ userDetails, userTheses }) {
         <Box mt={5}>
           {tab == 'theses' && (
             <>
+              <Box display="flex" justifyContent="center" mb={3}>
+                {
+                  //
+                  isUser && (
+                    <Box ml={3}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => router.push('/new')}
+                      >
+                        Thêm luận văn +
+                      </Button>
+                    </Box>
+                  )
+                }
+              </Box>
+
               <ThesesTable rows={userTheses} />
             </>
           )}

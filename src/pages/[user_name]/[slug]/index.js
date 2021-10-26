@@ -24,7 +24,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/client'
-import { getNameFromEmail } from 'common/utils/util'
+import Link from 'next/link'
 
 // export async function getStaticPaths() {
 //   const data = await fetchNewestTheses(process.env.API_URL)
@@ -32,7 +32,7 @@ import { getNameFromEmail } from 'common/utils/util'
 //   const paths = data.map(item => {
 //     return {
 //       params: {
-//         email: item.user.email,
+//         user_name: item.user.user_name,
 //         slug: item.slug,
 //       },
 //     }
@@ -52,7 +52,7 @@ export async function getServerSideProps({ params }) {
       notFound: true,
     }
   // check if thesis belong to [email]
-  else if (params.user_name !== getNameFromEmail(details.user.email))
+  else if (params.user_name !== details.user.user_name)
     return {
       notFound: true,
     }
@@ -106,15 +106,13 @@ export default function ThesisDetail({ details, apiUrl }) {
   function handleCloseSnackbar() {
     setOpenSnackbar(false)
 
-    severity === 'success'
-      ? router.push(`/${getNameFromEmail(session.user.email)}`)
-      : null
+    severity === 'success' ? router.push(`/${session.user.user_name}`) : null
   }
 
   // --- Edit & Delete ---
 
   function handleEdit() {
-    router.push(`/${getNameFromEmail(details.user.email)}/${details.slug}/edit`)
+    router.push(`/${details.user.user_name}/${details.slug}/edit`)
   }
 
   async function handleDelete() {
@@ -122,7 +120,7 @@ export default function ThesisDetail({ details, apiUrl }) {
 
     // const status = true
     const status = await deleteThesis(apiUrl, session.user.id, details.id)
-    
+
     status ? setSeverity('success') : setSeverity('error')
     setOpenSnackbar(true)
   }
@@ -237,7 +235,9 @@ export default function ThesisDetail({ details, apiUrl }) {
             Người đăng
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.user.full_name}
+            <Link href={`/${details.user.user_name}`}>
+              <a className={classes.link}>{details.user.user_name}</a>
+            </Link>
           </Grid>
         </Grid>
 
@@ -309,5 +309,9 @@ const useStyle = makeStyles(theme => ({
     '&:hover': {
       background: '#fff0f0',
     },
+  },
+
+  link: {
+    textDecoration: 'underline',
   },
 }))

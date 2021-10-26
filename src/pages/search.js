@@ -1,11 +1,26 @@
+import { Box } from '@material-ui/core'
+import { fetchThesesByName } from 'modules/theses/fetch-theses'
+import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function SearchPage() {
+export async function getServerSideProps() {
+  return {
+    props: {
+      apiUrl: process.env.API_URL,
+    },
+  }
+}
+
+export default function SearchPage({ apiUrl }) {
   const router = useRouter()
+  const [rows, setRows] = useState([])
 
-  useEffect(() => {}, [])
+  useEffect(async () => {
+    const data = await fetchThesesByName(apiUrl, router.query.q)
+    setRows(data)
+  }, [router.query.q])
 
   return (
     <>
@@ -14,10 +29,12 @@ export default function SearchPage() {
       </Head>
 
       <h1>
-        Kết quả tìm kiếm cho: <span></span>
+        Kết quả tìm kiếm cho: <span>{router.query.q}</span>
       </h1>
 
-      <pre>{JSON.stringify(router, null, 2)}</pre>
+      <Box mt={5}>
+        <ThesesTable rows={rows} />
+      </Box>
     </>
   )
 }
