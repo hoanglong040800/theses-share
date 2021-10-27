@@ -21,12 +21,12 @@ export const navlinks = [
         query: getUrlQuery('faculty', 'CNPM'),
       },
       {
-        name: 'Khoa học và kĩ thuật thông tin',
-        query: getUrlQuery('faculty', 'KH&KTTT'),
+        name: 'Kĩ thuật máy tính',
+        query: getUrlQuery('faculty', 'KTMT'),
       },
       {
         name: 'Mạng máy tính & truyền thông',
-        query: getUrlQuery('faculty', 'MMT&TT'),
+        query: getUrlQuery('faculty', 'MMTT&DL'),
       },
     ],
   },
@@ -57,12 +57,16 @@ export const navlinks = [
     cate: 'Tags',
     lists: [
       {
+        name: 'Trí tuệ nhân tạo',
+        query: getUrlQuery('tag', 'AI'),
+      },
+      {
         name: 'Máy học',
-        query: getUrlQuery('tags', 'machine learning'),
+        query: getUrlQuery('tag', 'ML'),
       },
       {
         name: 'Học sâu',
-        query: getUrlQuery('tags', 'deep learning'),
+        query: getUrlQuery('tag', 'DL'),
       },
     ],
   },

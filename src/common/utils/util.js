@@ -7,3 +7,10 @@ export function getIdFromArrObj(arrObj) {
     return { id: item.id }
   })
 }
+
+export function getIdByValueInArrObj(arrObj, key, value) {
+  const result = arrObj.find(el => el[key] === value)
+
+  if (result) return result.id
+  else return ''
+}

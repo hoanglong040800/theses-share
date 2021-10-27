@@ -6,6 +6,7 @@ import Error from 'next/error'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
+import { getIdByValueInArrObj } from 'common/utils/util'
 
 export async function getServerSideProps() {
   const apiUrl = process.env.API_URL
@@ -23,7 +24,6 @@ export async function getServerSideProps() {
 
 export default function Theses({ apiUrl, allFaculties, allTags }) {
   const router = useRouter()
-  const { faculty, tags, published_year } = router.query
 
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(false)
@@ -32,13 +32,29 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
     async function fetchRows() {
       setLoading(true)
 
+      const filterQuery = {
+        faculty: getIdByValueInArrObj(
+          allFaculties,
+          'name_short_vn',
+          router.query.faculty
+        ),
+
+        published_year: router.query.published_year || '',
+
+        tag: getIdByValueInArrObj(allTags, 'name_short_en', router.query.tag),
+
+        sort: 'upload_date',
+
+        order: 'desc',
+      }
+
       const data = await fetchThesesWithQuery(
         apiUrl,
-        new URLSearchParams(router.query).toString() // encode obj to URI query string
+        new URLSearchParams(filterQuery).toString()
       )
 
-      setLoading(false)
       setRows(data)
+      setLoading(false)
     }
 
     fetchRows()
@@ -58,9 +74,7 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
       <h1>Trang lọc luận văn</h1>
 
       <div>
-        {faculty && <h3>Khoa: {faculty}</h3>}
-        {tags && <h3>Tags: {tags}</h3>}
-        {published_year && <h3>Năm: {published_year}</h3>}
+        <pre>{JSON.stringify(router.query, null, 2)}</pre>
       </div>
 
       <button
@@ -87,8 +101,8 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
             {
               pathname: '/explore',
               query: {
-                faculty: 'MMT&TT',
-                published_year: 2018,
+                faculty: 'MMTT&DL',
+                published_year: 2019,
               },
             },
             undefined,
@@ -96,7 +110,7 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
           )
         }
       >
-        Change to MMTT 2018
+        Change to MMTT&DL 2019
       </button>
 
       <ThesesTable
