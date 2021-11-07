@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
 import { getIdByValueInArrObj } from 'common/utils/util'
+import FilterInputs from 'modules/theses/filter/FilterInputs'
 
 export async function getServerSideProps() {
   const apiUrl = process.env.API_URL
@@ -33,18 +34,17 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
       setLoading(true)
 
       const filterQuery = {
-        faculty: getIdByValueInArrObj(
-          allFaculties,
-          'name_short_vn',
-          router.query.faculty
-        ),
-
+        name: router.query.name || '',
+        faculty:
+          router.query.faculty === '' ||
+          getIdByValueInArrObj(
+            allFaculties,
+            'name_short_vn',
+            router.query.faculty
+          ),
         published_year: router.query.published_year || '',
-
         tag: getIdByValueInArrObj(allTags, 'name_short_en', router.query.tag),
-
         sort: 'upload_date',
-
         order: 'desc',
       }
 
@@ -58,7 +58,20 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
     }
 
     fetchRows()
-  }, [router.query, apiUrl])
+  }, [router.query])
+
+  function handleFilter(data) {
+    router.push(
+      {
+        pathname: '/explore',
+        query: {
+          ...data,
+        },
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
 
   // handle error
   if (rows === false) {
@@ -73,45 +86,12 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
 
       <h1>Trang lọc luận văn</h1>
 
-      <div>
-        <pre>{JSON.stringify(router.query, null, 2)}</pre>
-      </div>
-
-      <button
-        onClick={() =>
-          router.push(
-            {
-              pathname: '/explore',
-              query: {
-                faculty: 'CNPM',
-                published_year: 2019,
-              },
-            },
-            undefined,
-            { shallow: true }
-          )
-        }
-      >
-        Change to CNPM 2019
-      </button>
-
-      <button
-        onClick={() =>
-          router.push(
-            {
-              pathname: '/explore',
-              query: {
-                faculty: 'MMTT&DL',
-                published_year: 2019,
-              },
-            },
-            undefined,
-            { shallow: true }
-          )
-        }
-      >
-        Change to MMTT&DL 2019
-      </button>
+      <FilterInputs
+        allFaculties={allFaculties}
+        allTags={allTags}
+        defaultValues={router.query}
+        onFilter={handleFilter}
+      />
 
       <ThesesTable
         columns={colDef}
