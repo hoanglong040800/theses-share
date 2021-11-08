@@ -114,7 +114,7 @@ export default function FilterInputs({
 
       <Box display="flex" justifyContent="flex-end" alignItems="center" mt={2}>
         <Button size="small" onClick={handleReset} className={mui.resetBtn}>
-          Reset
+          Xóa
         </Button>
 
         <Button
@@ -123,7 +123,7 @@ export default function FilterInputs({
           size="small"
           onClick={handleSubmit(onSubmit)}
         >
-          Filter
+          Lọc
         </Button>
       </Box>
     </div>

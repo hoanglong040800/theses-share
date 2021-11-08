@@ -189,229 +189,51 @@ export const colDef = [
   },
 ]
 
-export const rowsDummy = [
-  {
-    id: 1,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    published_year: 2021,
-    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
+// --------- SNACKBAR INFO ------
+
+export const snackbarCaseMessages = {
+  deleteThesisSuccess: {
+    action: 'delete thesis',
+    severity: 'success',
+    message: 'Xóa luận văn thành công. Đang điều hướng...',
   },
 
-  {
-    id: 2,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    published_year: 2020,
-    tags: ['ML', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
+  deleteThesisError: {
+    action: 'delete thesis',
+    severity: 'error',
+    message: 'Xóa luận văn thất bại. Vui lòng thử lại sau',
   },
 
-  {
-    id: 3,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    published_year: 2021,
-    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
+  addBookmarkSuccess: {
+    action: 'add bookmark',
+    severity: 'success',
+    message: 'Thêm bookmark thành công',
   },
 
-  {
-    id: 4,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    published_year: 2020,
-    tags: ['ML', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
+  addBookmarkError: {
+    action: 'add bookmark',
+    severity: 'error',
+    message: 'Thêm bookmark thất bại. Vui lòng thử lại sau',
   },
 
-  {
-    id: 5,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    published_year: 2021,
-    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
+  deleteBookmarkSuccess: {
+    action: 'delete bookmark',
+    severity: 'success',
+    message: 'Xóa bookmark thành công',
   },
 
-  {
-    id: 6,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    published_year: 2020,
-    tags: ['ML', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
+  deleteBookmarkError: {
+    action: 'delete bookmark',
+    severity: 'error',
+    message: 'Xóa bookmark thất bại. Vui lòng thử lại sau',
   },
+}
 
-  {
-    id: 7,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    published_year: 2021,
-    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 8,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    published_year: 2020,
-    tags: ['ML', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
-
-  {
-    id: 9,
-    name: 'Tìm hiểu kiến trúc mạng neural với thuật toán tiến hóa cho bài toán phân tích cảm xúc',
-    faculty: 'KH&KTTT',
-    published_year: 2021,
-    tags: ['DL', 'mạng neural', 'DL', 'mạng neural'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 10,
-    name: 'Xây dựng ứng dụng mạng xã hội đa nền tảng',
-    faculty: 'KHMT',
-    published_year: 2020,
-    tags: ['ML', 'mạng neural'],
-    type: 'DACN',
-    language: 'vn',
-  },
-
-  {
-    id: 11,
-    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ứng dụng', 'di động'],
-    type: 'KLTN',
-    language: 'en',
-  },
-
-  {
-    id: 12,
-    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ML', 'web', 'ứng dụng'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 13,
-    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ứng dụng', 'di động'],
-    type: 'KLTN',
-    language: 'en',
-  },
-
-  {
-    id: 14,
-    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ML', 'web', 'ứng dụng'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 15,
-    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ứng dụng', 'di động'],
-    type: 'KLTN',
-    language: 'en',
-  },
-
-  {
-    id: 16,
-    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ML', 'web', 'ứng dụng'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 17,
-    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ứng dụng', 'di động'],
-    type: 'KLTN',
-    language: 'en',
-  },
-
-  {
-    id: 18,
-    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ML', 'web', 'ứng dụng'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 19,
-    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ứng dụng', 'di động'],
-    type: 'KLTN',
-    language: 'en',
-  },
-
-  {
-    id: 20,
-    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ML', 'web', 'ứng dụng'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-
-  {
-    id: 21,
-    name: 'Phát triển ứng dụng đọc sách và chia sẻ sách cũ trên di động',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ứng dụng', 'di động'],
-    type: 'KLTN',
-    language: 'en',
-  },
-
-  {
-    id: 22,
-    name: 'Xây dựng ứng dụng web hỗ trợ phát hiện tên riêng trong tiếng Việt ứng dụng ML',
-    faculty: 'MMT&TT',
-    published_year: 2021,
-    tags: ['ML', 'web', 'ứng dụng'],
-    type: 'KLTN',
-    language: 'vn',
-  },
-]
-
+// ===============================
+// ===============================
 // ========== SCHEMA yup =========
+// ===============================
+// ===============================
 
 import * as yup from 'yup'
 

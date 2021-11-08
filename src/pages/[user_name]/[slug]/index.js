@@ -8,23 +8,21 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
-  Slide,
-  Snackbar,
+  IconButton,
 } from '@material-ui/core'
-import { Alert } from '@material-ui/lab'
 import { makeStyles } from '@material-ui/styles'
 import Loading from 'common/components/loading/Loading'
-import {
-  deleteThesis,
-  fetchNewestTheses,
-  fetchThesisBySlug,
-} from 'modules/theses/fetch-theses'
+import { deleteThesis, fetchThesisBySlug } from 'modules/theses/fetch-theses'
 import PdfViewer from 'modules/theses/pdf/PdfViewer'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/client'
+import { signIn, useSession } from 'next-auth/client'
 import Link from 'next/link'
+import { Bookmark, BookmarkBorder } from '@material-ui/icons'
+import { snackbarCaseMessages } from 'common/utils/constants'
+import { addBookmark, deleteBookmark } from 'modules/bookmarks/fetch-bookmarks'
+import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
 
 // export async function getStaticPaths() {
 //   const data = await fetchNewestTheses(process.env.API_URL)
@@ -72,8 +70,13 @@ export default function ThesisDetail({ details, apiUrl }) {
   const [checkEmail, setCheckEmail] = useState(false)
 
   const [openSnackbar, setOpenSnackbar] = useState(false)
-  const [severity, setSeverity] = useState('success')
+  const [snackbarProps, setSnackbarProps] = useState({
+    action: '',
+    severity: '',
+    message: '',
+  })
   const [openDialog, setOpenDialog] = useState(false)
+  const [bookmark, setBookmark] = useState(false)
 
   const gridItemProperty = {
     property: {
@@ -87,7 +90,9 @@ export default function ThesisDetail({ details, apiUrl }) {
     },
   }
 
-  useEffect(() => {
+  useEffect(async () => {
+    session ? setBookmark(true) : setBookmark(false)
+
     // wait for session and details to load
     session && !loading && details
       ? setCheckEmail(session.user.id === details.user.id)
@@ -106,10 +111,12 @@ export default function ThesisDetail({ details, apiUrl }) {
   function handleCloseSnackbar() {
     setOpenSnackbar(false)
 
-    severity === 'success' ? router.push(`/${session.user.user_name}`) : null
+    snackbarProps.action === 'delete thesis' &&
+      snackbarProps.severity === 'success' &&
+      router.push(`/${session.user.user_name}`)
   }
 
-  // --- Edit & Delete ---
+  // --- Edit Delete Bookmark ---
 
   function handleEdit() {
     router.push(`/${details.user.user_name}/${details.slug}/edit`)
@@ -118,11 +125,43 @@ export default function ThesisDetail({ details, apiUrl }) {
   async function handleDelete() {
     handleCloseDialog()
 
-    // const status = true
     const status = await deleteThesis(apiUrl, session.user.id, details.id)
-
-    status ? setSeverity('success') : setSeverity('error')
+    status
+      ? setSnackbarProps(snackbarCaseMessages.deleteThesisSuccess)
+      : setSnackbarProps(snackbarCaseMessages.deleteThesisError)
     setOpenSnackbar(true)
+  }
+
+  async function handleBookmark() {
+    if (!session) {
+      signIn()
+      return
+    }
+
+    if (bookmark) {
+      const result = await deleteBookmark(
+        apiUrl,
+        session.user.user_name,
+        details.id
+      )
+
+      result
+        ? setSnackbarProps(snackbarCaseMessages.deleteBookmarkSuccess)
+        : setSnackbarProps(snackbarCaseMessages.deleteBookmarkError)
+    } else {
+      const result = await addBookmark(
+        apiUrl,
+        session.user.user_name,
+        details.id
+      )
+
+      result
+        ? setSnackbarProps(snackbarCaseMessages.addBookmarkSuccess)
+        : setSnackbarProps(snackbarCaseMessages.addBookmarkError)
+    }
+
+    setOpenSnackbar(true)
+    setBookmark(!bookmark)
   }
 
   // cho trang fetch du lieu -> hien thi component loading
@@ -142,13 +181,31 @@ export default function ThesisDetail({ details, apiUrl }) {
     <>
       <Head>
         <title>
-          {details.name} - {details.user.full_name}
+          {details.name} - {details.user.user_name}
         </title>
       </Head>
 
-      <h1>Chi tiết luận văn</h1>
-
       <Container maxWidth="md" className={classes.container}>
+        <Box display="flex" alignItems="center">
+          <h1>{details.name}</h1>
+
+          <div>
+            <IconButton
+              className={classes.bookmarkBtn}
+              onClick={handleBookmark}
+            >
+              {
+                //
+                !!bookmark ? (
+                  <Bookmark fontSize="large" />
+                ) : (
+                  <BookmarkBorder fontSize="large" />
+                )
+              }
+            </IconButton>
+          </div>
+        </Box>
+
         <Grid container>
           {/* name */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
@@ -244,7 +301,13 @@ export default function ThesisDetail({ details, apiUrl }) {
         {
           // edit & delete button
           checkEmail && (
-            <Box display="flex" justifyContent="flex-end" my={5}>
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+              height={35}
+              my={3}
+            >
               <Button className={classes.delBtn} onClick={handleOpenDialog}>
                 Xoá
               </Button>
@@ -280,34 +343,38 @@ export default function ThesisDetail({ details, apiUrl }) {
         </DialogActions>
       </Dialog>
 
-      <Snackbar
+      <AlertSnackbarCustom
         open={openSnackbar}
         onClose={handleCloseSnackbar}
-        autoHideDuration={2500}
-        TransitionComponent={Slide}
-      >
-        <Alert onClose={handleCloseSnackbar} severity={severity}>
-          {severity === 'success'
-            ? 'Xóa luận văn thành công. Đang điều hướng đến trang hồ sơ của bạn'
-            : 'Có lỗi xảy ra khi xóa. Thử lại lần sau.'}
-        </Alert>
-      </Snackbar>
+        severity={snackbarProps.severity}
+        message={snackbarProps.message}
+      />
     </>
   )
 }
 
 const useStyle = makeStyles(theme => ({
   gridItem: {
-    padding: '1rem',
+    padding: theme.spacing(2),
     borderBottom: '1px solid #ddd',
   },
 
   delBtn: {
     color: theme.palette.error.main,
-    marginRight: 20,
+    marginRight: theme.spacing(2),
 
     '&:hover': {
       background: '#fff0f0',
+    },
+  },
+
+  bookmarkBtn: {
+    color: theme.palette.warning.light,
+    marginLeft: theme.spacing(2),
+    padding: theme.spacing(0.5),
+
+    '&:hover': {
+      background: 'rgba(255, 152, 0, 0.1)',
     },
   },
 

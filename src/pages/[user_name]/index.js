@@ -7,14 +7,15 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import { useEffect, useState } from 'react'
+import {getBookmarksByUsername} from 'modules/bookmarks/fetch-bookmarks'
 
 export async function getServerSideProps({ params: { user_name } }) {
   const apiUrl = process.env.API_URL
   const userDetails = await getUserByUsername(apiUrl, user_name)
   const userTheses = await getThesesByUsername(apiUrl, user_name)
-  const userBookmarks = 1
+  const userBookmarks = await getBookmarksByUsername(apiUrl, user_name)
 
-  if (userDetails)
+  if (userDetails && userTheses && userBookmarks)
     return {
       props: {
         userDetails,
@@ -28,7 +29,11 @@ export async function getServerSideProps({ params: { user_name } }) {
     }
 }
 
-export default function UserProfile({ userDetails, userTheses }) {
+export default function UserProfile({
+  userDetails,
+  userTheses,
+  userBookmarks,
+}) {
   const router = useRouter()
   const mui = useStyles()
   const [session, loading] = useSession()
@@ -51,15 +56,15 @@ export default function UserProfile({ userDetails, userTheses }) {
         <title>Hồ sơ</title>
       </Head>
 
-      <h1>Hồ sơ của {userDetails.user_name}</h1>
-
       <Box
         display="flex"
         flexDirection="column"
-        maxWidth="400px"
+        maxWidth="500px"
         mx="auto"
         mb={4}
       >
+        <h1>Hồ sơ của {userDetails.user_name}</h1>
+
         <div className={mui.gridContainer}>
           <p>Họ và tên</p>
           <p>{userDetails.full_name}</p>
@@ -118,7 +123,7 @@ export default function UserProfile({ userDetails, userTheses }) {
         </Box>
 
         <Box mt={5}>
-          {tab == 'theses' && (
+          {tab === 'theses' && (
             <>
               <Box display="flex" justifyContent="center" mb={3}>
                 {
@@ -141,7 +146,9 @@ export default function UserProfile({ userDetails, userTheses }) {
             </>
           )}
 
-          {tab == 'bookmark' && <h3>Những luận văn đánh dấu yêu thích</h3>}
+          {tab === 'bookmark' && (
+            <pre>{JSON.stringify(userBookmarks, null, 2)}</pre>
+          )}
         </Box>
       </>
     </>
