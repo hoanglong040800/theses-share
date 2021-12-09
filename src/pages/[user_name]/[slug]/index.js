@@ -21,7 +21,7 @@ import { signIn, useSession } from 'next-auth/client'
 import Link from 'next/link'
 import { Bookmark, BookmarkBorder } from '@material-ui/icons'
 import { snackbarCaseMessages } from 'common/utils/constants'
-import { addBookmark, deleteBookmark } from 'modules/bookmarks/fetch-bookmarks'
+import { addBookmark, deleteBookmark, getBookmarkByUsernameAndThesisId } from 'modules/bookmarks/fetch-bookmarks'
 import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
 
 // export async function getStaticPaths() {
@@ -91,7 +91,15 @@ export default function ThesisDetail({ details, apiUrl }) {
   }
 
   useEffect(async () => {
-    session ? setBookmark(true) : setBookmark(false)
+    if (session) {
+      const status = await getBookmarkByUsernameAndThesisId(
+        apiUrl,
+        session.user.user_name,
+        details.id
+      )
+
+      setBookmark(status)
+    }
 
     // wait for session and details to load
     session && !loading && details
@@ -133,10 +141,7 @@ export default function ThesisDetail({ details, apiUrl }) {
   }
 
   async function handleBookmark() {
-    if (!session) {
-      signIn()
-      return
-    }
+    !session && signIn()
 
     if (bookmark) {
       const result = await deleteBookmark(

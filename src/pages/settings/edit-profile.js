@@ -61,8 +61,10 @@ export default function EditProfile({
   })
 
   async function onSubmit(data) {
-    const status = await updateUserProfile(apiUrl, session.user.user_name, data)
+    data.age = +data.age
+    data.academic_year = +data.academic_year
 
+    const status = await updateUserProfile(apiUrl, session.user.user_name, data)
     status
       ? setSnackbarProps(snackbarCaseMessages.editProfileSuccess)
       : setSnackbarProps(snackbarCaseMessages.editProfileError)

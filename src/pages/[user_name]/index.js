@@ -6,16 +6,17 @@ import { useSession } from 'next-auth/client'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ThesesTable from 'modules/theses/table/ThesesTable'
-import { useEffect, useState } from 'react'
-import {getBookmarksByUsername} from 'modules/bookmarks/fetch-bookmarks'
+import { getBookmarksByUsername } from 'modules/bookmarks/fetch-bookmarks'
 
 export async function getServerSideProps({ params: { user_name } }) {
   const apiUrl = process.env.API_URL
   const userDetails = await getUserByUsername(apiUrl, user_name)
   const userTheses = await getThesesByUsername(apiUrl, user_name)
-  const userBookmarks = await getBookmarksByUsername(apiUrl, user_name)
+  let userBookmarks = await getBookmarksByUsername(apiUrl, user_name)
 
-  if (userDetails && userTheses && userBookmarks)
+  if (userDetails && userTheses && userBookmarks) {
+    userBookmarks = userBookmarks.filter(item => item !== null)
+
     return {
       props: {
         userDetails,
@@ -23,10 +24,11 @@ export async function getServerSideProps({ params: { user_name } }) {
         userBookmarks,
       },
     }
-  else
-    return {
-      notFound: true,
-    }
+  }
+
+  return {
+    notFound: true,
+  }
 }
 
 export default function UserProfile({
@@ -36,19 +38,14 @@ export default function UserProfile({
 }) {
   const router = useRouter()
   const mui = useStyles()
-  const [session, loading] = useSession()
-  const [isUser, setIsUser] = useState(false)
+  const [session] = useSession()
 
-  var { tab } = router.query
-  tab = tab || 'theses'
-
-  useEffect(() => {
-    session
-      ? session.user.user_name === router.query.user_name
-        ? setIsUser(true)
-        : setIsUser(false)
-      : setIsUser(false)
-  }, [session, router.query.user_name])
+  const tab = router.query.tab || 'theses'
+  const isUser = session
+    ? session.user.user_name === router.query.user_name
+      ? true
+      : false
+    : false
 
   return (
     <>
@@ -147,7 +144,7 @@ export default function UserProfile({
           )}
 
           {tab === 'bookmark' && (
-            <pre>{JSON.stringify(userBookmarks, null, 2)}</pre>
+            <ThesesTable rows={userBookmarks} />
           )}
         </Box>
       </>

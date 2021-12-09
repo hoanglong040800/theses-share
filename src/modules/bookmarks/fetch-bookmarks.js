@@ -28,6 +28,23 @@ export async function getBookmarksByUsername(apiUrl, user_name) {
   }
 }
 
+export async function getBookmarkByUsernameAndThesisId(
+  apiUrl,
+  user_name,
+  thesis_id
+) {
+  try {
+    const res = await fetch(
+      `${apiUrl}/users/${user_name}/bookmarks/${thesis_id}`
+    )
+    const resObj = await res.json()
+
+    return resObj.status
+  } catch (e) {
+    return false
+  }
+}
+
 // ======== DELETE =========
 export async function deleteBookmark(apiUrl, user_name, thesis_id) {
   try {
