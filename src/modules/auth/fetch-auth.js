@@ -28,7 +28,7 @@ export async function fetchSignup(apiUrl, data) {
 
     const resObj = await res.json()
 
-    return resObj.status
+    return resObj
   } catch (e) {
     return false
   }

@@ -1,10 +1,10 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import { Box, Button, MenuItem, Slide, Snackbar } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import AutocompleteController from 'common/components/input/AutocompleteController'
 import SelectController from 'common/components/input/SelectController'
 import TextFieldController from 'common/components/input/TextFieldController'
-import { editThesisSchema } from 'common/utils/constants'
+import { editThesisSchema } from 'common/utils/validation-schema'
 import { getNameFromEmail } from 'common/utils/util'
 import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
 import {

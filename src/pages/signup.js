@@ -1,8 +1,10 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import { Box, Button, Slide, Snackbar } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
+import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
 import TextFieldController from 'common/components/input/TextFieldController'
-import { signupSchema } from 'common/utils/constants'
+import { snackbarCaseMessages } from 'common/utils/constants'
+import { signupSchema } from 'common/utils/validation-schema'
 import { fetchSignup } from 'modules/auth/fetch-auth'
 import { getSession, signIn } from 'next-auth/client'
 import Head from 'next/head'
@@ -49,34 +51,33 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
   })
 
   const [openSnackbar, setOpenSnackbar] = useState(false)
-  const [severity, setSeverity] = useState('success')
+  const [snackbarProps, setSnackbarProps] = useState({
+    action: '',
+    severity: '',
+    message: '',
+  })
 
   function handleCloseSnackbar() {
     setOpenSnackbar(false)
 
-    if (severity === 'success') {
+    if (snackbarProps.severity === 'success') {
       signIn('credentials', {
         email: watch('email'),
         password: watch('password'),
         redirect: true,
         callbackUrl: `${nextauthUrl}/settings/edit-profile`,
       })
-
-      // signIn('credentials', {
-      //   email: 'user1@gmail.com',
-      //   password: '1',
-      //   redirect: true,
-      //   callbackUrl: `${nextauthUrl}/settings/edit-profile`,
-      // })
     }
   }
 
   async function onSubmit(data) {
-    // console.log('SUBMIT', data)
+    const res = await fetchSignup(apiUrl, data)
 
-    const status = await fetchSignup(apiUrl, data)
-
-    status ? setSeverity('success') : setSeverity('error')
+    res.status
+      ? setSnackbarProps(snackbarCaseMessages.signupSuccess)
+      : res.message.includes('duplicate')
+      ? setSnackbarProps(snackbarCaseMessages.signupDuplicate)
+      : setSnackbarProps(snackbarCaseMessages.signupError)
 
     setOpenSnackbar(true)
   }
@@ -140,18 +141,12 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
         </Box>
       </Box>
 
-      <Snackbar
+      <AlertSnackbarCustom
         open={openSnackbar}
         onClose={handleCloseSnackbar}
-        autoHideDuration={2500}
-        TransitionComponent={Slide}
-      >
-        <Alert onClose={handleCloseSnackbar} severity={severity}>
-          {severity === 'success'
-            ? 'Đăng ký thành công. Đang đăng nhập...'
-            : 'Có lỗi xảy ra khi đăng ký. Vui lòng thử lại lần sau.'}
-        </Alert>
-      </Snackbar>
+        severity={snackbarProps.severity}
+        message={snackbarProps.message}
+      />
     </>
   )
 }

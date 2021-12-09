@@ -19,3 +19,14 @@ export async function fetchAllFaculties(apiUrl) {
     return false
   }
 }
+
+export async function fetchAllMajors(apiUrl) {
+  try {
+    const res = await fetch(`${apiUrl}/majors`)
+    const resObj = await res.json()
+
+    return resObj.data
+  } catch (error) {
+    return false
+  }
+}
