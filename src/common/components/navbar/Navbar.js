@@ -1,20 +1,21 @@
-import Image from 'next/image'
 import {
   AppBar,
   Box,
   Button,
   Container,
+  IconButton,
   makeStyles,
   Toolbar,
 } from '@material-ui/core'
 import NavSearchBar from 'modules/search/NavSearchBar'
-import Link from 'next/link'
 import NavLink from './NavLink'
 import NavProfile from './NavProfile'
 import { signIn, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import NavLogo from './NavLogo'
+import { Menu } from '@material-ui/icons'
 
-export default function Navbar() {
+export default function Navbar({ onOpenDrawer }) {
   const router = useRouter()
   const classes = useStyles()
   const [session, loading] = useSession()
@@ -26,28 +27,20 @@ export default function Navbar() {
           <Box className={classes.toolbar}>
             {/* left side */}
             <Box display="flex">
-              <Box className={classes.mobile} mr={2}>
-                <h3>Icon Menu</h3>
+              <Box className={classes.mobile}>
+                <IconButton onClick={onOpenDrawer}>
+                  <Menu color="primary" />
+                </IconButton>
               </Box>
 
-              <Box display="flex" alignItems="center">
-                <Link href="/">
-                  <a>
-                    <Image
-                      src="/logo.png"
-                      alt="logo-theses-share"
-                      width={35}
-                      height={30}
-                    />
-                  </a>
-                </Link>
-              </Box>
+              <Box className={classes.desktop} alignItems="center">
+                <Box mr={1}>
+                  <NavLogo />
+                </Box>
 
-              <Box className={classes.desktop} mx={2} alignItems="center">
                 <NavLink />
               </Box>
             </Box>
-            {/* left side */}
 
             {/* right side */}
             <Box display="flex" alignItems="center" flex={1}>
@@ -77,7 +70,6 @@ export default function Navbar() {
                 </Box>
               )}
             </Box>
-            {/* right side */}
           </Box>
         </Container>
       </Toolbar>
@@ -94,6 +86,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   desktop: {
+    marginRight: theme.spacing(1),
+
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
     },
@@ -103,6 +97,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   mobile: {
+    marginRight: theme.spacing(1),
+
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },

@@ -79,10 +79,6 @@ export const settingsPages = [
     pathname: '/settings/edit-profile',
   },
   {
-    label: 'Tài khoản',
-    pathname: '/settings/account',
-  },
-  {
     label: 'Đổi mật khẩu',
     pathname: '/settings/change-password',
   },
