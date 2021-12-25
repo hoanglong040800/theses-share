@@ -21,7 +21,11 @@ import { signIn, useSession } from 'next-auth/client'
 import Link from 'next/link'
 import { Bookmark, BookmarkBorder } from '@material-ui/icons'
 import { snackbarCaseMessages } from 'common/utils/constants'
-import { addBookmark, deleteBookmark, getBookmarkByUsernameAndThesisId } from 'modules/bookmarks/fetch-bookmarks'
+import {
+  addBookmark,
+  deleteBookmark,
+  getBookmarkByUsernameAndThesisId,
+} from 'modules/bookmarks/fetch-bookmarks'
 import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
 
 // export async function getStaticPaths() {
@@ -300,6 +304,14 @@ export default function ThesisDetail({ details, apiUrl }) {
             <Link href={`/${details.user.user_name}`}>
               <a className={classes.link}>{details.user.user_name}</a>
             </Link>
+          </Grid>
+
+          {/* views */}
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+            Tổng quan
+          </Grid>
+          <Grid {...gridItemProperty.value} className={classes.gridItem}>
+            {details.abstract}
           </Grid>
         </Grid>
 

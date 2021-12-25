@@ -1,6 +1,6 @@
 import { Box, Button, makeStyles } from '@material-ui/core'
 import SearchBar from 'material-ui-search-bar'
-import { fetchThesesWithQuery } from 'modules/theses/fetch-theses'
+import { getThesesBySearch } from 'modules/theses/fetch-theses'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import SearchSuggestedItem from './SearchSuggestedItem'
@@ -34,7 +34,7 @@ export default function NavSearchBar() {
         limit: 3,
       }
 
-      const data = await fetchThesesWithQuery(
+      const data = await getThesesBySearch(
         process.env.NEXT_PUBLIC_API_URL,
         new URLSearchParams(query).toString()
       )
@@ -68,7 +68,7 @@ export default function NavSearchBar() {
                 <>
                   {
                     //
-                    rows.map(item => (
+                    rows.slice(0,3).map(item => (
                       <SearchSuggestedItem
                         key={item.id}
                         details={item}
@@ -121,8 +121,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 400,
     width: '100%',
     borderRadius: 5,
-    boxShadow: '3px 3px 2px 0 rgba(0, 0, 0, 0.05)',
-    border: '1px solid rgba(0, 0, 0, 0.1)',
+    boxShadow: '3px 3px 2px 0 rgba(0, 0, 0, 0.1)',
+    border: '1px solid rgba(0, 0, 0, 0.2)',
     backgroundColor: '#fff',
   },
 

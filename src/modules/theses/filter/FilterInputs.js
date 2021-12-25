@@ -71,11 +71,17 @@ export default function FilterInputs({
             control={control}
             errors={errors}
           >
-            {allFaculties.map(item => (
-              <MenuItem key={item.id} value={item.name_short_vn}>
-                {item.name_vn}
-              </MenuItem>
-            ))}
+            {
+              //
+              allFaculties.map(
+                item =>
+                  item.id !== 1 && (
+                    <MenuItem key={item.id} value={item.name_short_vn}>
+                      {item.name_vn}
+                    </MenuItem>
+                  )
+              )
+            }
           </SelectController>
         </Grid>
 

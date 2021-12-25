@@ -26,9 +26,9 @@ export async function fetchNewestTheses(apiUrl) {
   }
 }
 
-export async function fetchThesesByName(apiUrl, name) {
+export async function getThesesBySearch(apiUrl, name) {
   try {
-    const res = await fetch(`${apiUrl}/theses/filter?name=${name}`)
+    const res = await fetch(`${apiUrl}/theses/search?keyword=${name}`)
     const resObj = await res.json()
 
     if (resObj.data === null) return []

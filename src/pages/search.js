@@ -1,5 +1,5 @@
 import { Box } from '@material-ui/core'
-import { fetchThesesByName } from 'modules/theses/fetch-theses'
+import { getThesesBySearch } from 'modules/theses/fetch-theses'
 import ThesesTable from 'modules/theses/table/ThesesTable'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -18,7 +18,7 @@ export default function SearchPage({ apiUrl }) {
   const [rows, setRows] = useState([])
 
   useEffect(async () => {
-    const data = await fetchThesesByName(apiUrl, router.query.q)
+    const data = await getThesesBySearch(apiUrl, router.query.q)
     setRows(data)
   }, [router.query.q])
 

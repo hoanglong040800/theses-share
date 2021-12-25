@@ -13,6 +13,14 @@ export const navlinks = [
     cate: 'Khoa',
     lists: [
       {
+        name: 'Mạng máy tính và truyền thông',
+        query: getUrlQuery('faculty', 'MMTT&TT'),
+      },
+      {
+        name: 'Hệ thống thông tin',
+        query: getUrlQuery('faculty', 'HTTT'),
+      },
+      {
         name: 'Khoa học máy tính',
         query: getUrlQuery('faculty', 'KHMT'),
       },
@@ -25,8 +33,8 @@ export const navlinks = [
         query: getUrlQuery('faculty', 'KTMT'),
       },
       {
-        name: 'Mạng máy tính & truyền thông',
-        query: getUrlQuery('faculty', 'MMTT&DL'),
+        name: 'Khoa học & kĩ thuật thông tin',
+        query: getUrlQuery('faculty', 'KH&KTTT'),
       },
     ],
   },
@@ -50,6 +58,18 @@ export const navlinks = [
         name: '2018',
         query: getUrlQuery('published_year', 2018),
       },
+      {
+        name: '2017',
+        query: getUrlQuery('published_year', 2017),
+      },
+      {
+        name: '2016',
+        query: getUrlQuery('published_year', 2016),
+      },
+      {
+        name: '2015',
+        query: getUrlQuery('published_year', 2015),
+      },
     ],
   },
 
@@ -67,6 +87,22 @@ export const navlinks = [
       {
         name: 'Học sâu',
         query: getUrlQuery('tag', 'DL'),
+      },
+      {
+        name: 'Internet vạn vật',
+        query: getUrlQuery('tag', 'IoT'),
+      },
+      {
+        name: 'Web',
+        query: getUrlQuery('tag', 'web'),
+      },
+      {
+        name: 'Ứng dụng',
+        query: getUrlQuery('tag', 'app'),
+      },
+      {
+        name: 'Di động',
+        query: getUrlQuery('tag', 'mobile'),
       },
     ],
   },
