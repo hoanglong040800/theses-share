@@ -60,6 +60,8 @@ const infoYupShape = {
   authors: yup.string().max(255, obj => `Không được quá ${obj.max} kí tự`),
 
   teachers: yup.string().max(255, obj => `Không được quá ${obj.max} kí tự`),
+
+  abstract: yup.string().max(2000, obj => `Không được quá ${obj.max} kí tự`),
 }
 
 export const thesisSchema = yup.object().shape({

@@ -1,6 +1,7 @@
 import { Box, Button, Grid, makeStyles, MenuItem } from '@material-ui/core'
 import SelectController from 'common/components/input/SelectController'
 import TextFieldController from 'common/components/input/TextFieldController'
+import { setTagName } from 'common/utils/util'
 import { useForm } from 'react-hook-form'
 
 export default function FilterInputs({
@@ -29,15 +30,11 @@ export default function FilterInputs({
 
   function onSubmit(data) {
     data.faculty === 'none' ? (data.faculty = '') : null
-
-    console.log(data.faculty)
-
+    
     for (let key in data) {
       data[key] === '' ? delete data[key] : null
     }
-
-    console.log({ data })
-
+    
     onFilter(data)
   }
 
@@ -73,13 +70,10 @@ export default function FilterInputs({
           >
             {
               //
-              allFaculties.map(
-                item =>
-                  item.id !== 1 && (
-                    <MenuItem key={item.id} value={item.name_short_vn}>
-                      {item.name_vn}
-                    </MenuItem>
-                  )
+              allFaculties.slice(2).map(
+                <MenuItem key={item.id} value={item.name_short_vn}>
+                  {item.name_vn} ({item.name_short_vn})
+                </MenuItem>
               )
             }
           </SelectController>
@@ -111,7 +105,7 @@ export default function FilterInputs({
           >
             {allTags.map(item => (
               <MenuItem key={item.id} value={item.name_short_en}>
-                {item.name_vn}
+                {setTagName(item)}
               </MenuItem>
             ))}
           </SelectController>
@@ -138,13 +132,13 @@ export default function FilterInputs({
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    padding: [theme.spacing(0, 3, 3, 3)],
-    margin: [theme.spacing(3, 0)],
-    boxShadow: [theme.shadows[2]],
-    borderRadius: [theme.shape.borderRadius],
+    padding: theme.spacing(0, 3, 3, 3),
+    margin: theme.spacing(3, 0),
+    boxShadow: theme.shadows[2],
+    borderRadius: theme.shape.borderRadius,
   },
 
   resetBtn: {
-    marginRight: [theme.spacing(1)],
+    marginRight: theme.spacing(1),
   },
 }))

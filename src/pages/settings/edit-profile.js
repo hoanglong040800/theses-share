@@ -73,7 +73,6 @@ export default function EditProfile({
   }
 
   function onError(errors) {
-    console.clear()
     console.log({ errors })
   }
 

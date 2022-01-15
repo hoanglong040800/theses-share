@@ -374,6 +374,7 @@ const useStyle = makeStyles(theme => ({
   gridItem: {
     padding: theme.spacing(2),
     borderBottom: '1px solid #ddd',
+    fontSize: theme.typography.body1.fontSize,
   },
 
   delBtn: {

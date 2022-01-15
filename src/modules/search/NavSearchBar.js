@@ -68,7 +68,7 @@ export default function NavSearchBar() {
                 <>
                   {
                     //
-                    rows.slice(0,3).map(item => (
+                    rows.slice(0, 3).map(item => (
                       <SearchSuggestedItem
                         key={item.id}
                         details={item}

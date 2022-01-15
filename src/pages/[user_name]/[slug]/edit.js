@@ -17,6 +17,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import slugify from 'slugify'
+import TextAreaController from 'common/components/input/TextAreaController'
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx)
@@ -91,6 +92,7 @@ export default function EditThesis({
       format: details.format,
       authors: details.authors,
       teachers: details.teachers,
+      teachers: details.abstract,
     },
   })
 
@@ -112,10 +114,7 @@ export default function EditThesis({
 
   async function onSubmit(data) {
     data['slug'] = slugify(data['name'])
-    console.log('SUBMIT', data)
 
-    // console.log('SUBMIT', data)
-    // let status = true
     const status = await updateThesisInfor(
       apiUrl,
       data,
@@ -225,6 +224,13 @@ export default function EditThesis({
         <TextFieldController
           name="teachers"
           label="Giảng viên hướng dẫn"
+          control={control}
+          errors={errors}
+        />
+
+        <TextAreaController
+          name='abstract'
+          label='Tổng quan'
           control={control}
           errors={errors}
         />

@@ -68,7 +68,7 @@ export default function NavProfile() {
             )
           }
         >
-          Yêu thích
+          Bookmarks
         </MenuItem>
 
         <MenuItem onClick={() => handleSelect('/settings')}>Cài đặt</MenuItem>
