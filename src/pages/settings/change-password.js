@@ -26,16 +26,11 @@ export default function ChangePassword() {
   })
 
   function onSubmit(data) {
-    console.log('onSubmit')
 
-    data.pswdOld === 'admin'
-      ? console.log(data)
-      : setError('pswdOld', { type: 'validate', message: 'Mật khẩu sai' })
   }
 
   function onError(err) {
-    console.log('onError')
-    console.log(err)
+    console.log('onError', err)
   }
 
   return (

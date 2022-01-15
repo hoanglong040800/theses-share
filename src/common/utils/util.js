@@ -14,3 +14,8 @@ export function getIdByValueInArrObj(arrObj, key, value) {
   if (result) return result.id
   else return ''
 }
+
+export function setTagName(item){
+  const name_en = item.name_en && `(${item.name_en})`
+  return `${item.name_vn} ${name_en}`
+}

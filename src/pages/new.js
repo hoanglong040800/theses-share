@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import { Box, Button, MenuItem, Slide, Snackbar } from '@material-ui/core'
 import AutocompleteController from 'common/components/input/AutocompleteController'
 import SelectController from 'common/components/input/SelectController'
+import TextAreaController from 'common/components/input/TextAreaController'
 import TextFieldController from 'common/components/input/TextFieldController'
 import { thesisSchema } from 'common/utils/validation-schema'
 import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
@@ -53,16 +54,9 @@ export default function NewThesis({
     reset,
   } = useForm({
     resolver: yupResolver(thesisSchema),
-    defaultValues: {
-      name: 'Phát triển ứng dụng di động',
-      faculty_id: 1,
-      published_year: 2021,
-      type: 'KLTN',
-      tags: [],
-      format: 'PDF',
-      authors: '',
-      teachers: '',
-    },
+    defaultValues:{
+      format: 'PDF'
+    }
   })
 
   const router = useRouter()
@@ -86,7 +80,6 @@ export default function NewThesis({
   }
 
   async function onSubmit(data) {
-    // console.log('SUBMIT', data)
     data['slug'] = slugify(data['name'])
 
     // add infor
@@ -139,7 +132,7 @@ export default function NewThesis({
           control={control}
           errors={errors}
         >
-          {facultiesOptions.map(item => (
+          {facultiesOptions.slice(1).map(item => (
             <MenuItem key={item.id} value={item.id}>
               {item.name_vn}
             </MenuItem>
@@ -208,6 +201,13 @@ export default function NewThesis({
         <TextFieldController
           name="teachers"
           label="Giảng viên hướng dẫn"
+          control={control}
+          errors={errors}
+        />
+
+<TextAreaController
+          name='abstract'
+          label='Tổng quan'
           control={control}
           errors={errors}
         />

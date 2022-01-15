@@ -108,7 +108,7 @@ export const navlinks = [
   },
 ]
 
-// ======== setting tabs ======
+// ======== path name in /settings page ======
 export const settingsPages = [
   {
     label: 'Chỉnh sửa hồ sơ',
@@ -134,7 +134,6 @@ export const userPages = [
 ]
 
 // ======= ThesesTable ===========
-
 export const colDef = [
   {
     field: 'name',
