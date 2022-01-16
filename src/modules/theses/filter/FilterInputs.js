@@ -70,7 +70,7 @@ export default function FilterInputs({
           >
             {
               //
-              allFaculties.slice(2).map((item) => (
+              allFaculties.slice(1).map((item) => (
                 <MenuItem key={item.id} value={item.name_short_vn}>
                   {item.name_vn} ({item.name_short_vn})
                 </MenuItem>
