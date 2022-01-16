@@ -1,8 +1,8 @@
-import { Box, Button, Grid, makeStyles, MenuItem } from '@material-ui/core'
-import SelectController from 'common/components/input/SelectController'
-import TextFieldController from 'common/components/input/TextFieldController'
-import { setTagName } from 'common/utils/util'
-import { useForm } from 'react-hook-form'
+import { Box, Button, Grid, makeStyles, MenuItem } from "@material-ui/core";
+import SelectController from "common/components/input/SelectController";
+import TextFieldController from "common/components/input/TextFieldController";
+import { setTagName } from "common/utils/util";
+import { useForm } from "react-hook-form";
 
 export default function FilterInputs({
   defaultValues,
@@ -20,33 +20,33 @@ export default function FilterInputs({
     reset,
   } = useForm({
     defaultValues: {
-      name: '',
-      faculty: defaultValues.faculty || '',
-      published_year: defaultValues.published_year || '',
-      tag: defaultValues.tag || '',
+      name: "",
+      faculty: defaultValues.faculty || "",
+      published_year: defaultValues.published_year || "",
+      tag: defaultValues.tag || "",
     },
-  })
-  const mui = useStyles()
+  });
+  const mui = useStyles();
 
   function onSubmit(data) {
-    data.faculty === 'none' ? (data.faculty = '') : null
-    
+    data.faculty === "none" ? (data.faculty = "") : null;
+
     for (let key in data) {
-      data[key] === '' ? delete data[key] : null
+      data[key] === "" ? delete data[key] : null;
     }
-    
-    onFilter(data)
+
+    onFilter(data);
   }
 
   function handleReset() {
     const resetValues = {
-      name: '',
-      faculty: '',
-      published_year: '',
-      tag: '',
-    }
+      name: "",
+      faculty: "",
+      published_year: "",
+      tag: "",
+    };
 
-    reset(resetValues)
+    reset(resetValues);
   }
 
   return (
@@ -70,11 +70,11 @@ export default function FilterInputs({
           >
             {
               //
-              allFaculties.slice(2).map(
+              allFaculties.slice(2).map((item) => (
                 <MenuItem key={item.id} value={item.name_short_vn}>
                   {item.name_vn} ({item.name_short_vn})
                 </MenuItem>
-              )
+              ))
             }
           </SelectController>
         </Grid>
@@ -103,7 +103,7 @@ export default function FilterInputs({
             control={control}
             errors={errors}
           >
-            {allTags.map(item => (
+            {allTags.map((item) => (
               <MenuItem key={item.id} value={item.name_short_en}>
                 {setTagName(item)}
               </MenuItem>
@@ -127,10 +127,10 @@ export default function FilterInputs({
         </Button>
       </Box>
     </div>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(0, 3, 3, 3),
     margin: theme.spacing(3, 0),
@@ -141,4 +141,4 @@ const useStyles = makeStyles(theme => ({
   resetBtn: {
     marginRight: theme.spacing(1),
   },
-}))
+}));
