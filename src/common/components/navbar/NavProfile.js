@@ -4,40 +4,40 @@ import {
   makeStyles,
   Menu,
   MenuItem,
-} from '@material-ui/core'
-import { AccountCircle } from '@material-ui/icons'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { signOut, useSession } from 'next-auth/client'
-import { getNameFromEmail } from 'common/utils/util'
+} from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { signOut, useSession } from "next-auth/client";
+import { getNameFromEmail } from "common/utils/util";
 
 export default function NavProfile() {
-  const router = useRouter()
-  const [session, loading] = useSession()
-  const mui = useStyles()
-  const [anchorEl, setAnchorEl] = useState(null)
+  const router = useRouter();
+  const [session, loading] = useSession();
+  const mui = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   function handleOpen(e) {
-    setAnchorEl(e.currentTarget)
+    setAnchorEl(e.currentTarget);
   }
 
   function handleClose() {
-    setAnchorEl(null)
+    setAnchorEl(null);
   }
 
   function handleSelect(route) {
-    router.push(route)
-    handleClose()
+    router.push(route);
+    handleClose();
   }
 
   function handleSignout() {
-    const regEx = /settings|new|edit/
+    const regEx = /settings|new|edit/;
 
     regEx.test(router.pathname)
-      ? signOut({ callbackUrl: '/' })
-      : signOut({ redirect: false })
+      ? signOut({ callbackUrl: "/" })
+      : signOut({ redirect: false });
 
-    handleClose()
+    handleClose();
   }
 
   return (
@@ -52,8 +52,8 @@ export default function NavProfile() {
         onClose={handleClose}
         keepMounted
         getContentAnchorEl={null}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <MenuItem onClick={() => handleSelect(`/${session.user.user_name}`)}>
           <p className={mui.full_name}>{session.user.user_name}</p>
@@ -63,30 +63,28 @@ export default function NavProfile() {
 
         <MenuItem
           onClick={() =>
-            handleSelect(
-              `/${getNameFromEmail(session.user.email)}?tab=bookmark`
-            )
+            handleSelect(`/${session.user.user_name}?tab=bookmark`)
           }
         >
           Bookmarks
         </MenuItem>
 
-        <MenuItem onClick={() => handleSelect('/settings')}>Cài đặt</MenuItem>
+        <MenuItem onClick={() => handleSelect("/settings")}>Cài đặt</MenuItem>
 
         <MenuItem onClick={handleSignout}>Đăng xuất</MenuItem>
       </Menu>
     </>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   icon: {
     color: [theme.palette.primary.main],
   },
 
   full_name: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 0,
     margin: 0,
   },
-}))
+}));
