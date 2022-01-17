@@ -71,7 +71,7 @@ export const thesisSchema = yup.object().shape({
   file: yup
     .mixed()
     .test("required", "Chưa tải luận văn", (value) => value.length)
-    .test("fileSize", "File vượt quá 55MB", (value) =>
+    .test("fileSize", "File vượt quá 25MB", (value) =>
       value.length ? value[0].size <= 25000000 : false
     ),
 
