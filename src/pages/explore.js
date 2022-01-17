@@ -58,7 +58,7 @@ export default function Theses({ apiUrl, allFaculties, allTags }) {
     }
 
     fetchRows()
-  }, [router.query])
+  }, [router.query, allFaculties, allTags, apiUrl])
 
   function handleFilter(data) {
     router.push(

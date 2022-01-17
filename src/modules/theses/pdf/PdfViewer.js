@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles, TextField } from '@material-ui/core'
+import { Box, Button, makeStyles } from '@material-ui/core'
 import { Alert, AlertTitle } from '@material-ui/lab'
 import Loading from 'common/components/loading/Loading'
 import { useState } from 'react'
@@ -120,7 +120,7 @@ export default function PdfViewer({
 const useStyles = makeStyles(theme => ({
   page: {
     '& .react-pdf__Page__canvas': {
-      maxWidth: '500px !important',
+      maxWidth: '600px !important',
       width: '100% !important',
       height: 'auto !important',
       margin: '20px 0',

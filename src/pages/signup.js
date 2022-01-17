@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
-import { Box, Button, Slide, Snackbar } from '@material-ui/core'
-import { Alert } from '@material-ui/lab'
+import { Box, Button } from '@material-ui/core'
 import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
 import TextFieldController from 'common/components/input/TextFieldController'
 import { snackbarCaseMessages } from 'common/utils/constants'
@@ -43,10 +42,7 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
   } = useForm({
     resolver: yupResolver(signupSchema),
     defaultValues: {
-      email: 'abc@gmail.com',
-      user_name: 'abc',
-      password: '1',
-      password_confirmation: '1',
+
     },
   })
 
