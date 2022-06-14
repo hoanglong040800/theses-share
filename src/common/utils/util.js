@@ -16,6 +16,6 @@ export function getIdByValueInArrObj(arrObj, key, value) {
 }
 
 export function setTagName(item) {
-  const name_en = item.name_en && `(${item.name_short_en})`;
-  return `${item.name_vn} ${name_en}`;
+  // const name_en = item.name_en && `(${item.name_short_en})`;
+  return `${item.name_vn}`;
 }

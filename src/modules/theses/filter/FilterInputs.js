@@ -103,11 +103,13 @@ export default function FilterInputs({
             control={control}
             errors={errors}
           >
-            {allTags.map((item) => (
-              <MenuItem key={item.id} value={item.name_short_en}>
-                {setTagName(item)}
-              </MenuItem>
-            ))}
+            {allTags
+              // .filter((item) => item.name_vn !== "rỗng")
+              .map((item) => (
+                <MenuItem key={item.id} value={item.name_short_en}>
+                  {setTagName(item)}
+                </MenuItem>
+              ))}
           </SelectController>
         </Grid>
       </Grid>

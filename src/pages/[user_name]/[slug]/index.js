@@ -9,24 +9,24 @@ import {
   DialogTitle,
   Grid,
   IconButton,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
-import Loading from 'common/components/loading/Loading'
-import { deleteThesis, fetchThesisBySlug } from 'modules/theses/fetch-theses'
-import PdfViewer from 'modules/theses/pdf/PdfViewer'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { signIn, useSession } from 'next-auth/client'
-import Link from 'next/link'
-import { Bookmark, BookmarkBorder } from '@material-ui/icons'
-import { snackbarCaseMessages } from 'common/utils/constants'
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import Loading from "common/components/loading/Loading";
+import { deleteThesis, fetchThesisBySlug } from "modules/theses/fetch-theses";
+import PdfViewer from "modules/theses/pdf/PdfViewer";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/client";
+import Link from "next/link";
+import { Bookmark, BookmarkBorder } from "@material-ui/icons";
+import { snackbarCaseMessages } from "common/utils/constants";
 import {
   addBookmark,
   deleteBookmark,
   getBookmarkByUsernameAndThesisId,
-} from 'modules/bookmarks/fetch-bookmarks'
-import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
+} from "modules/bookmarks/fetch-bookmarks";
+import AlertSnackbarCustom from "common/components/AlertSnackbarCustom";
 
 // export async function getStaticPaths() {
 //   const data = await fetchNewestTheses(process.env.API_URL)
@@ -47,40 +47,40 @@ import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
 // }
 
 export async function getServerSideProps({ params }) {
-  const details = await fetchThesisBySlug(process.env.API_URL, params.slug)
+  const details = await fetchThesisBySlug(process.env.API_URL, params.slug);
 
   if (!details)
     return {
       notFound: true,
-    }
+    };
   // check if thesis belong to [email]
   else if (params.user_name !== details.user.user_name)
     return {
       notFound: true,
-    }
+    };
 
   return {
     props: {
       details: await fetchThesisBySlug(process.env.API_URL, params.slug),
       apiUrl: process.env.API_URL,
     },
-  }
+  };
 }
 
 export default function ThesisDetail({ details, apiUrl }) {
-  const classes = useStyle()
-  const router = useRouter()
-  const [session, loading] = useSession()
-  const [checkEmail, setCheckEmail] = useState(false)
+  const classes = useStyle();
+  const router = useRouter();
+  const [session, loading] = useSession();
+  const [checkEmail, setCheckEmail] = useState(false);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarProps, setSnackbarProps] = useState({
-    action: '',
-    severity: '',
-    message: '',
-  })
-  const [openDialog, setOpenDialog] = useState(false)
-  const [bookmark, setBookmark] = useState(false)
+    action: "",
+    severity: "",
+    message: "",
+  });
+  const [openDialog, setOpenDialog] = useState(false);
+  const [bookmark, setBookmark] = useState(false);
 
   const gridItemProperty = {
     property: {
@@ -92,7 +92,7 @@ export default function ThesisDetail({ details, apiUrl }) {
       item: true,
       xs: 9,
     },
-  }
+  };
 
   useEffect(async () => {
     if (session) {
@@ -100,77 +100,77 @@ export default function ThesisDetail({ details, apiUrl }) {
         apiUrl,
         session.user.user_name,
         details.id
-      )
+      );
 
-      setBookmark(status)
+      setBookmark(status);
     }
 
     // wait for session and details to load
     session && !loading && details
       ? setCheckEmail(session.user.id === details.user.id)
-      : setCheckEmail(false)
-  }, [session, loading, details])
+      : setCheckEmail(false);
+  }, [session, loading, details]);
 
   // --- snackbar & dialog ---
   function handleOpenDialog() {
-    setOpenDialog(true)
+    setOpenDialog(true);
   }
 
   function handleCloseDialog() {
-    setOpenDialog(false)
+    setOpenDialog(false);
   }
 
   function handleCloseSnackbar() {
-    setOpenSnackbar(false)
+    setOpenSnackbar(false);
 
-    snackbarProps.action === 'delete thesis' &&
-      snackbarProps.severity === 'success' &&
-      router.push(`/${session.user.user_name}`)
+    snackbarProps.action === "delete thesis" &&
+      snackbarProps.severity === "success" &&
+      router.push(`/${session.user.user_name}`);
   }
 
   // --- Edit Delete Bookmark ---
 
   function handleEdit() {
-    router.push(`/${details.user.user_name}/${details.slug}/edit`)
+    router.push(`/${details.user.user_name}/${details.slug}/edit`);
   }
 
   async function handleDelete() {
-    handleCloseDialog()
+    handleCloseDialog();
 
-    const status = await deleteThesis(apiUrl, session.user.id, details.id)
+    const status = await deleteThesis(apiUrl, session.user.id, details.id);
     status
       ? setSnackbarProps(snackbarCaseMessages.deleteThesisSuccess)
-      : setSnackbarProps(snackbarCaseMessages.deleteThesisError)
-    setOpenSnackbar(true)
+      : setSnackbarProps(snackbarCaseMessages.deleteThesisError);
+    setOpenSnackbar(true);
   }
 
   async function handleBookmark() {
-    !session && signIn()
+    !session && signIn();
 
     if (bookmark) {
       const result = await deleteBookmark(
         apiUrl,
         session.user.user_name,
         details.id
-      )
+      );
 
       result
         ? setSnackbarProps(snackbarCaseMessages.deleteBookmarkSuccess)
-        : setSnackbarProps(snackbarCaseMessages.deleteBookmarkError)
+        : setSnackbarProps(snackbarCaseMessages.deleteBookmarkError);
     } else {
       const result = await addBookmark(
         apiUrl,
         session.user.user_name,
         details.id
-      )
+      );
 
       result
         ? setSnackbarProps(snackbarCaseMessages.addBookmarkSuccess)
-        : setSnackbarProps(snackbarCaseMessages.addBookmarkError)
+        : setSnackbarProps(snackbarCaseMessages.addBookmarkError);
     }
 
-    setOpenSnackbar(true)
-    setBookmark(!bookmark)
+    setOpenSnackbar(true);
+    setBookmark(!bookmark);
   }
 
   // cho trang fetch du lieu -> hien thi component loading
@@ -183,7 +183,7 @@ export default function ThesisDetail({ details, apiUrl }) {
 
         <Loading />
       </>
-    )
+    );
   }
 
   return (
@@ -245,7 +245,10 @@ export default function ThesisDetail({ details, apiUrl }) {
             Tags:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
-            {details.tags.map(item => item.name_vn).join(', ')}
+            {details.tags
+              .filter((item) => item.name_vn !== "rỗng")
+              .map((item) => item.name_vn)
+              .join(", ")}
           </Grid>
 
           {/* type */}
@@ -367,13 +370,13 @@ export default function ThesisDetail({ details, apiUrl }) {
         message={snackbarProps.message}
       />
     </>
-  )
+  );
 }
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles((theme) => ({
   gridItem: {
     padding: theme.spacing(2),
-    borderBottom: '1px solid #ddd',
+    borderBottom: "1px solid #ddd",
     fontSize: theme.typography.body1.fontSize,
   },
 
@@ -381,8 +384,8 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.error.main,
     marginRight: theme.spacing(2),
 
-    '&:hover': {
-      background: '#fff0f0',
+    "&:hover": {
+      background: "#fff0f0",
     },
   },
 
@@ -391,12 +394,12 @@ const useStyle = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     padding: theme.spacing(0.5),
 
-    '&:hover': {
-      background: 'rgba(255, 152, 0, 0.1)',
+    "&:hover": {
+      background: "rgba(255, 152, 0, 0.1)",
     },
   },
 
   link: {
-    textDecoration: 'underline',
+    textDecoration: "underline",
   },
-}))
+}));

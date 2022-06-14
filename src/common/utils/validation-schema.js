@@ -8,7 +8,7 @@ export const signupSchema = yup.object().shape({
   password: yup
     .string()
     .required("Chưa nhập mật khẩu")
-    .min(1, "Mật khẩu tối thiểu 8 kí tự")
+    .min(8, "Mật khẩu tối thiểu 8 kí tự")
     .max(20, "Mật khẩu không được quá 20 kí tự"),
 
   password_confirmation: yup
@@ -38,7 +38,7 @@ const infoYupShape = {
 
   tags: yup
     .array()
-    .required("Ít nhất 1 tag")
+    // .required("Ít nhất 1 tag")
     .min(1, (obj) => `Ít nhất ${obj.min} tags`)
     .max(5, (obj) => `Không được quá ${obj.max} tags`),
 

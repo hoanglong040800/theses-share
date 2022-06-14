@@ -181,9 +181,9 @@ export const colDef = [
     sortable: true,
     valueGetter: (params) => {
       return params.value
+        .filter((item) => item.name_vn !== "rỗng")
         .map((item) => {
-          if (item.name_short_en) return item.name_short_en;
-          else return item.name_vn;
+          return item.name_vn;
         })
         .join(", ");
     },
