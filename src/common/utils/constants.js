@@ -14,7 +14,7 @@ export const navlinks = [
     lists: [
       {
         name: "Mạng máy tính và truyền thông",
-        query: getUrlQuery("faculty", "MMTT&TT"),
+        query: getUrlQuery("faculty", "MMT&TT"),
       },
       {
         name: "Hệ thống thông tin",
@@ -78,31 +78,23 @@ export const navlinks = [
     lists: [
       {
         name: "Trí tuệ nhân tạo",
-        query: getUrlQuery("tag", "AI"),
+        query: getUrlQuery("tag", "ai"),
       },
       {
         name: "Máy học",
-        query: getUrlQuery("tag", "ML"),
-      },
-      {
-        name: "Học sâu",
-        query: getUrlQuery("tag", "DL"),
+        query: getUrlQuery("tag", "học máy"),
       },
       {
         name: "Internet vạn vật",
-        query: getUrlQuery("tag", "IoT"),
+        query: getUrlQuery("tag", "iot"),
       },
       {
         name: "Web",
         query: getUrlQuery("tag", "web"),
       },
       {
-        name: "Ứng dụng",
-        query: getUrlQuery("tag", "app"),
-      },
-      {
         name: "Di động",
-        query: getUrlQuery("tag", "mobile"),
+        query: getUrlQuery("tag", "di động"),
       },
     ],
   },

@@ -104,9 +104,9 @@ export default function FilterInputs({
             errors={errors}
           >
             {allTags
-              // .filter((item) => item.name_vn !== "rỗng")
+              .filter((item) => item.name_vn !== "rỗng")
               .map((item) => (
-                <MenuItem key={item.id} value={item.name_short_en}>
+                <MenuItem key={item.id} value={item.name_vn}>
                   {setTagName(item)}
                 </MenuItem>
               ))}

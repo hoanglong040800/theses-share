@@ -5,14 +5,14 @@ import {
   ListItem,
   ListItemText,
   makeStyles,
-} from '@material-ui/core'
-import { navlinks } from 'common/utils/constants'
-import Link from 'next/link'
-import NavLogo from '../NavLogo'
-import DrawerNestedList from './DrawerNestedList'
+} from "@material-ui/core";
+import { navlinks } from "common/utils/constants";
+import Link from "next/link";
+import NavLogo from "../NavLogo";
+import DrawerNestedList from "./DrawerNestedList";
 
 export default function NavLeftDrawer({ open, onClose }) {
-  const mui = useStyles()
+  const mui = useStyles();
 
   return (
     <Drawer open={open} onClose={onClose}>
@@ -21,9 +21,9 @@ export default function NavLeftDrawer({ open, onClose }) {
 
         {
           //
-          navlinks.map(item => (
+          navlinks.map((item, index) => (
             <DrawerNestedList
-              key={item.cate}
+              key={index}
               title={item.cate}
               list={item.lists}
               onCloseDrawer={onClose}
@@ -34,24 +34,24 @@ export default function NavLeftDrawer({ open, onClose }) {
         <Link href="/about">
           <a>
             <ListItem button onClick={onClose}>
-              <ListItemText primary="About" />
+              <ListItemText primary="Về Theses Share" />
             </ListItem>
           </a>
         </Link>
       </List>
     </Drawer>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
     padding: theme.spacing(3, 0),
   },
 
   logo: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
     margin: theme.spacing(2, 0),
   },
-}))
+}));
