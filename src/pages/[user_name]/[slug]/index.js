@@ -94,21 +94,24 @@ export default function ThesisDetail({ details, apiUrl }) {
     },
   };
 
-  useEffect(async () => {
-    if (session) {
-      const status = await getBookmarkByUsernameAndThesisId(
-        apiUrl,
-        session.user.user_name,
-        details.id
-      );
+  useEffect(() => {
+    async function getData() {
+      if (session) {
+        const status = await getBookmarkByUsernameAndThesisId(
+          apiUrl,
+          session.user.user_name,
+          details.id
+        );
 
-      setBookmark(status);
+        setBookmark(status);
+      }
+
+      // wait for session and details to load
+      session && !loading && details
+        ? setCheckEmail(session.user.id === details.user.id)
+        : setCheckEmail(false);
     }
-
-    // wait for session and details to load
-    session && !loading && details
-      ? setCheckEmail(session.user.id === details.user.id)
-      : setCheckEmail(false);
+    getData();
   }, [session, loading, details]);
 
   // --- snackbar & dialog ---
@@ -292,12 +295,12 @@ export default function ThesisDetail({ details, apiUrl }) {
           </Grid>
 
           {/* views */}
-          <Grid {...gridItemProperty.property} className={classes.gridItem}>
+          {/* <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Lượt xem:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.views}
-          </Grid>
+          </Grid> */}
 
           {/* user publish */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
@@ -376,7 +379,7 @@ export default function ThesisDetail({ details, apiUrl }) {
 const useStyle = makeStyles((theme) => ({
   gridItem: {
     padding: theme.spacing(2),
-    borderBottom: "1px solid #ddd",
+    // borderBottom: "1px solid #ddd",
     fontSize: theme.typography.body1.fontSize,
   },
 

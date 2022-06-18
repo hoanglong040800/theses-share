@@ -1,25 +1,25 @@
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
-import { Box, Button } from '@material-ui/core'
-import AlertSnackbarCustom from 'common/components/AlertSnackbarCustom'
-import TextFieldController from 'common/components/input/TextFieldController'
-import { snackbarCaseMessages } from 'common/utils/constants'
-import { signupSchema } from 'common/utils/validation-schema'
-import { fetchSignup } from 'modules/auth/fetch-auth'
-import { getSession, signIn } from 'next-auth/client'
-import Head from 'next/head'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { Box, Button } from "@material-ui/core";
+import AlertSnackbarCustom from "common/components/AlertSnackbarCustom";
+import TextFieldController from "common/components/input/TextFieldController";
+import { snackbarCaseMessages } from "common/utils/constants";
+import { signupSchema } from "common/utils/validation-schema";
+import { fetchSignup } from "modules/auth/fetch-auth";
+import { getSession, signIn } from "next-auth/client";
+import Head from "next/head";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  const session = await getSession(ctx);
 
   if (session) {
     return {
       redirect: {
         permanent: false,
-        destination: '/',
+        destination: "/",
       },
-    }
+    };
   }
 
   return {
@@ -27,7 +27,7 @@ export async function getServerSideProps(ctx) {
       apiUrl: process.env.API_URL,
       nextauthUrl: process.env.NEXTAUTH_URL,
     },
-  }
+  };
 }
 
 export default function SignUp({ apiUrl, nextauthUrl }) {
@@ -41,45 +41,43 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
     reset,
   } = useForm({
     resolver: yupResolver(signupSchema),
-    defaultValues: {
+    defaultValues: {},
+  });
 
-    },
-  })
-
-  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarProps, setSnackbarProps] = useState({
-    action: '',
-    severity: '',
-    message: '',
-  })
+    action: "",
+    severity: "",
+    message: "",
+  });
 
   function handleCloseSnackbar() {
-    setOpenSnackbar(false)
+    setOpenSnackbar(false);
 
-    if (snackbarProps.severity === 'success') {
-      signIn('credentials', {
-        email: watch('email'),
-        password: watch('password'),
+    if (snackbarProps.severity === "success") {
+      signIn("credentials", {
+        email: watch("email"),
+        password: watch("password"),
         redirect: true,
         callbackUrl: `${nextauthUrl}/settings/edit-profile`,
-      })
+      });
     }
   }
 
   async function onSubmit(data) {
-    const res = await fetchSignup(apiUrl, data)
+    const res = await fetchSignup(apiUrl, data);
 
     res.status
       ? setSnackbarProps(snackbarCaseMessages.signupSuccess)
-      : res.message.includes('duplicate')
+      : res.message.includes("duplicate")
       ? setSnackbarProps(snackbarCaseMessages.signupDuplicate)
-      : setSnackbarProps(snackbarCaseMessages.signupError)
+      : setSnackbarProps(snackbarCaseMessages.signupError);
 
-    setOpenSnackbar(true)
+    setOpenSnackbar(true);
   }
 
   function onError(error) {
-    console.log('ERROR', error)
+    console.log("ERROR", error);
   }
 
   return (
@@ -112,7 +110,7 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
           name="password"
           label="Mật khẩu"
           required
-          // type="password"
+          type="password"
           control={control}
           errors={errors}
         />
@@ -121,7 +119,7 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
           name="password_confirmation"
           label="Xác nhận mật khẩu"
           required
-          // type="password"
+          type="password"
           control={control}
           errors={errors}
         />
@@ -144,5 +142,5 @@ export default function SignUp({ apiUrl, nextauthUrl }) {
         message={snackbarProps.message}
       />
     </>
-  )
+  );
 }

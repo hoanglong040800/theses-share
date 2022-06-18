@@ -1,31 +1,31 @@
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
-import { Box, Button, MenuItem, Slide, Snackbar } from '@material-ui/core'
-import AutocompleteController from 'common/components/input/AutocompleteController'
-import SelectController from 'common/components/input/SelectController'
-import TextAreaController from 'common/components/input/TextAreaController'
-import TextFieldController from 'common/components/input/TextFieldController'
-import { thesisSchema } from 'common/utils/validation-schema'
-import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
-import { addFile, addThesisInfor } from 'modules/theses/fetch-theses'
-import UploadPDF from 'modules/theses/pdf/UploadPDF'
-import Head from 'next/head'
-import { useForm } from 'react-hook-form'
-import slugify from 'slugify'
-import { getSession } from 'next-auth/client'
-import { Alert } from '@material-ui/lab'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { getNameFromEmail } from 'common/utils/util'
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { Box, Button, MenuItem, Slide, Snackbar } from "@material-ui/core";
+import AutocompleteController from "common/components/input/AutocompleteController";
+import SelectController from "common/components/input/SelectController";
+import TextAreaController from "common/components/input/TextAreaController";
+import TextFieldController from "common/components/input/TextFieldController";
+import { thesisSchema } from "common/utils/validation-schema";
+import { fetchAllFaculties, fetchAllTags } from "modules/fetch-common";
+import { addFile, addThesisInfor } from "modules/theses/fetch-theses";
+import UploadPDF from "modules/theses/pdf/UploadPDF";
+import Head from "next/head";
+import { useForm } from "react-hook-form";
+import slugify from "slugify";
+import { getSession } from "next-auth/client";
+import { Alert } from "@material-ui/lab";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { getNameFromEmail } from "common/utils/util";
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
-  const tagsOptions = await fetchAllTags(process.env.API_URL)
-  const facultiesOptions = await fetchAllFaculties(process.env.API_URL)
+  const session = await getSession(ctx);
+  const tagsOptions = await fetchAllTags(process.env.API_URL);
+  const facultiesOptions = await fetchAllFaculties(process.env.API_URL);
 
   if (tagsOptions === false || facultiesOptions === false) {
     return {
       notFound: true,
-    }
+    };
   }
 
   return {
@@ -35,7 +35,7 @@ export async function getServerSideProps(ctx) {
       facultiesOptions,
       apiUrl: process.env.API_URL,
     },
-  }
+  };
 }
 
 export default function NewThesis({
@@ -54,40 +54,41 @@ export default function NewThesis({
     reset,
   } = useForm({
     resolver: yupResolver(thesisSchema),
-    defaultValues:{
-      format: 'PDF'
-    }
-  })
+    defaultValues: {
+      format: "PDF",
+    },
+  });
 
-  const router = useRouter()
-  const [openSnackbar, setOpenSnackbar] = useState(false)
-  const [severity, setSeverity] = useState('success')
+  const router = useRouter();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [severity, setSeverity] = useState("success");
 
   // Snackbar
   function handleCloseSnackbar() {
-    setOpenSnackbar(false)
+    setOpenSnackbar(false);
 
-    if (severity === 'success') {
-      const slug = slugify(watch('name'))
-      const nameEmail = getNameFromEmail(session.user.email)
+    if (severity === "success") {
+      const slug = slugify(watch("name"));
+      const nameEmail = getNameFromEmail(session.user.email);
 
-      reset('', {
+      reset("", {
         keepValues: false,
-      })
+      });
 
-      router.push(`/${nameEmail}/${slug}`)
+      router.push(`/${nameEmail}/${slug}`);
     }
   }
 
   async function onSubmit(data) {
-    data['slug'] = slugify(data['name'])
+    console.log(data);
+    data["slug"] = slugify(data["name"]);
 
     // add infor
-    const thesis_id = await addThesisInfor(apiUrl, data, session.user.id)
+    const thesis_id = await addThesisInfor(apiUrl, data, session.user.id);
     if (!thesis_id) {
-      setSeverity('error')
-      setOpenSnackbar(true)
-      return
+      setSeverity("error");
+      setOpenSnackbar(true);
+      return;
     }
 
     // add file
@@ -96,16 +97,16 @@ export default function NewThesis({
       data.file[0],
       session.user.id,
       thesis_id
-    )
+    );
 
-    if (status) setSeverity('success')
-    else setSeverity('error')
+    if (status) setSeverity("success");
+    else setSeverity("error");
 
-    setOpenSnackbar(true)
+    setOpenSnackbar(true);
   }
 
   function onError(err) {
-    console.log('ERROR\n', err)
+    console.log("ERROR\n", err);
   }
 
   return (
@@ -132,7 +133,7 @@ export default function NewThesis({
           control={control}
           errors={errors}
         >
-          {facultiesOptions.slice(1).map(item => (
+          {facultiesOptions.slice(1).map((item) => (
             <MenuItem key={item.id} value={item.id}>
               {item.name_vn}
             </MenuItem>
@@ -205,9 +206,9 @@ export default function NewThesis({
           errors={errors}
         />
 
-<TextAreaController
-          name='abstract'
-          label='Tổng quan'
+        <TextAreaController
+          name="abstract"
+          label="Tổng quan"
           control={control}
           errors={errors}
         />
@@ -230,13 +231,13 @@ export default function NewThesis({
         TransitionComponent={Slide}
       >
         <Alert onClose={handleCloseSnackbar} severity={severity}>
-          {severity === 'success'
-            ? 'Thêm luận văn thành công. Đang điều hướng đến trang chi tiết'
-            : 'Có lỗi xảy ra khi thêm luận văn mới. Vui lòng thử lại lần sau.'}
+          {severity === "success"
+            ? "Thêm luận văn thành công. Đang điều hướng đến trang chi tiết"
+            : "Có lỗi xảy ra khi thêm luận văn mới. Vui lòng thử lại lần sau."}
         </Alert>
       </Snackbar>
     </>
-  )
+  );
 }
 
-NewThesis.auth = true
+NewThesis.auth = true;

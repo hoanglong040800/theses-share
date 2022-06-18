@@ -106,10 +106,6 @@ export const settingsPages = [
     label: "Chỉnh sửa hồ sơ",
     pathname: "/settings/edit-profile",
   },
-  {
-    label: "Đổi mật khẩu",
-    pathname: "/settings/change-password",
-  },
 ];
 
 // ======= user [email] tabs ======
@@ -131,7 +127,7 @@ export const colDef = [
     field: "name",
     headerName: "Tên đề tài",
     type: "string",
-    flex: 0.7,
+    flex: 1,
     autoHeight: true,
     wrapText: true,
     minWidth: 400,
@@ -181,15 +177,15 @@ export const colDef = [
     },
   },
 
-  {
-    field: "views",
-    headerName: "Xem",
-    type: "string",
-    headerAlign: "center",
-    align: "center",
-    width: 90,
-    sortable: true,
-  },
+  // {
+  //   field: "views",
+  //   headerName: "Xem",
+  //   type: "string",
+  //   headerAlign: "center",
+  //   align: "center",
+  //   width: 90,
+  //   sortable: true,
+  // },
 
   {
     field: "type",

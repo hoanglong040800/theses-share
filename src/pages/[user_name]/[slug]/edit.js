@@ -1,26 +1,26 @@
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
-import { Box, Button, MenuItem, Slide, Snackbar } from '@material-ui/core'
-import { Alert } from '@material-ui/lab'
-import AutocompleteController from 'common/components/input/AutocompleteController'
-import SelectController from 'common/components/input/SelectController'
-import TextFieldController from 'common/components/input/TextFieldController'
-import { editThesisSchema } from 'common/utils/validation-schema'
-import { getNameFromEmail } from 'common/utils/util'
-import { fetchAllFaculties, fetchAllTags } from 'modules/fetch-common'
+import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
+import { Box, Button, MenuItem, Slide, Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import AutocompleteController from "common/components/input/AutocompleteController";
+import SelectController from "common/components/input/SelectController";
+import TextFieldController from "common/components/input/TextFieldController";
+import { editThesisSchema } from "common/utils/validation-schema";
+import { getNameFromEmail } from "common/utils/util";
+import { fetchAllFaculties, fetchAllTags } from "modules/fetch-common";
 import {
   fetchThesisBySlug,
   updateThesisInfor,
-} from 'modules/theses/fetch-theses'
-import { getSession } from 'next-auth/client'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import slugify from 'slugify'
-import TextAreaController from 'common/components/input/TextAreaController'
+} from "modules/theses/fetch-theses";
+import { getSession } from "next-auth/client";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import slugify from "slugify";
+import TextAreaController from "common/components/input/TextAreaController";
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  const session = await getSession(ctx);
 
   // --- handle routing error ----
 
@@ -28,27 +28,27 @@ export async function getServerSideProps(ctx) {
   if (ctx.params.user_name !== getNameFromEmail(session.user.email))
     return {
       notFound: true,
-    }
+    };
 
-  const details = await fetchThesisBySlug(process.env.API_URL, ctx.params.slug)
+  const details = await fetchThesisBySlug(process.env.API_URL, ctx.params.slug);
 
   if (!details)
     return {
       notFound: true,
-    }
+    };
   // check is thesis belong to user
   else if (session.user.id !== details.user.id)
     return {
       notFound: true,
-    }
+    };
 
-  const tagsOptions = await fetchAllTags(process.env.API_URL)
-  const facultiesOptions = await fetchAllFaculties(process.env.API_URL)
+  const tagsOptions = await fetchAllTags(process.env.API_URL);
+  const facultiesOptions = await fetchAllFaculties(process.env.API_URL);
 
   if (!facultiesOptions || !tagsOptions)
     return {
       notFound: true,
-    }
+    };
 
   return {
     props: {
@@ -58,7 +58,7 @@ export async function getServerSideProps(ctx) {
       facultiesOptions,
       tagsOptions,
     },
-  }
+  };
 }
 
 export default function EditThesis({
@@ -68,9 +68,9 @@ export default function EditThesis({
   facultiesOptions,
   tagsOptions,
 }) {
-  const [openSnackbar, setOpenSnackbar] = useState(false)
-  const [severity, setSeverity] = useState('success')
-  const router = useRouter()
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [severity, setSeverity] = useState("success");
+  const router = useRouter();
 
   const {
     watch,
@@ -92,42 +92,42 @@ export default function EditThesis({
       format: details.format,
       authors: details.authors,
       teachers: details.teachers,
-      teachers: details.abstract,
+      abstract: details.abstract,
     },
-  })
+  });
 
   // Snackbar
   function handleCloseSnackbar() {
-    setOpenSnackbar(false)
+    setOpenSnackbar(false);
 
-    if (severity === 'success') {
-      const slug = slugify(watch('name'))
-      const nameEmail = getNameFromEmail(session.user.email)
+    if (severity === "success") {
+      const slug = slugify(watch("name"));
+      const nameEmail = getNameFromEmail(session.user.email);
 
-      reset('', {
+      reset("", {
         keepValues: false,
-      })
+      });
 
-      router.push(`/${nameEmail}/${slug}`)
+      router.push(`/${nameEmail}/${slug}`);
     }
   }
 
   async function onSubmit(data) {
-    data['slug'] = slugify(data['name'])
+    data["slug"] = slugify(data["name"]);
 
     const status = await updateThesisInfor(
       apiUrl,
       data,
       session.user.id,
       details.id
-    )
+    );
 
-    status ? setSeverity('success') : setSeverity('error')
-    setOpenSnackbar(true)
+    status ? setSeverity("success") : setSeverity("error");
+    setOpenSnackbar(true);
   }
 
   function onError(err) {
-    console.log('ERROR\n', err)
+    console.log("ERROR\n", err);
   }
 
   return (
@@ -154,7 +154,7 @@ export default function EditThesis({
           control={control}
           errors={errors}
         >
-          {facultiesOptions.map(item => (
+          {facultiesOptions.map((item) => (
             <MenuItem key={item.id} value={item.id}>
               {item.name_vn}
             </MenuItem>
@@ -229,8 +229,8 @@ export default function EditThesis({
         />
 
         <TextAreaController
-          name='abstract'
-          label='Tổng quan'
+          name="abstract"
+          label="Tổng quan"
           control={control}
           errors={errors}
         />
@@ -253,13 +253,13 @@ export default function EditThesis({
         TransitionComponent={Slide}
       >
         <Alert onClose={handleCloseSnackbar} severity={severity}>
-          {severity === 'success'
-            ? 'Chỉnh sửa luận văn thành công. Đang điều hướng đến trang chi tiết'
-            : 'Có lỗi xảy ra khi chỉnh sửa. Vui lòng thử lại lần sau.'}
+          {severity === "success"
+            ? "Chỉnh sửa luận văn thành công. Đang điều hướng đến trang chi tiết"
+            : "Có lỗi xảy ra khi chỉnh sửa. Vui lòng thử lại lần sau."}
         </Alert>
       </Snackbar>
     </>
-  )
+  );
 }
 
-EditThesis.auth = true
+EditThesis.auth = true;
