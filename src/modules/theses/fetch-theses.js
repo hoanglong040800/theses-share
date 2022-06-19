@@ -14,7 +14,7 @@ export async function fetchThesesWithQuery(apiUrl, query) {
 export async function fetchNewestTheses(apiUrl) {
   try {
     const res = await fetch(
-      `${apiUrl}/theses/filter?sort=upload_date&desc=desc`
+      `${apiUrl}/theses/filter?sort=upload_date&order=desc`
     );
     const resObj = await res.json();
 
@@ -85,6 +85,27 @@ export async function addFile(apiUrl, file, user_id, thesis_id) {
 
   try {
     const res = await fetch(
+      `${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}/file`,
+      {
+        method: "POST",
+        headers: {},
+        body: data,
+      }
+    );
+    const resObj = await res.json();
+
+    return resObj.status;
+  } catch (e) {
+    return false;
+  }
+}
+
+export async function addFileAI(apiUrl, file, user_id, thesis_id) {
+  const data = new FormData();
+  data.append("file", file);
+
+  try {
+    const res = await fetch(
       `${apiUrl}/api/v1/users/${user_id}/theses/${thesis_id}/file/ai`,
       {
         method: "POST",
@@ -133,6 +154,22 @@ export async function deleteThesis(apiUrl, user_id, thesis_id) {
         method: "DELETE",
       }
     );
+
+    const resObj = await res.json();
+
+    return resObj.status;
+  } catch (e) {
+    return false;
+  }
+}
+
+// ========= PATCH =========
+
+export async function patchThesisViews(apiUrl, thesis_id) {
+  try {
+    const res = await fetch(`${apiUrl}/api/v1/theses/${thesis_id}/views/`, {
+      method: "PATCH",
+    });
 
     const resObj = await res.json();
 

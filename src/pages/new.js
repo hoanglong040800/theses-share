@@ -6,7 +6,12 @@ import TextAreaController from "common/components/input/TextAreaController";
 import TextFieldController from "common/components/input/TextFieldController";
 import { thesisSchema } from "common/utils/validation-schema";
 import { fetchAllFaculties, fetchAllTags } from "modules/fetch-common";
-import { addFile, addThesisInfor } from "modules/theses/fetch-theses";
+import {
+  addFile,
+  addFileAI,
+  addThesisInfor,
+  fetchNewestTheses,
+} from "modules/theses/fetch-theses";
 import UploadPDF from "modules/theses/pdf/UploadPDF";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
@@ -21,6 +26,7 @@ export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
   const tagsOptions = await fetchAllTags(process.env.API_URL);
   const facultiesOptions = await fetchAllFaculties(process.env.API_URL);
+  const allTheses = await fetchNewestTheses(process.env.API_URL);
 
   if (tagsOptions === false || facultiesOptions === false) {
     return {
@@ -30,6 +36,7 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
+      allTheses,
       tagsOptions,
       session,
       facultiesOptions,
@@ -39,11 +46,16 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function NewThesis({
+  allTheses,
   apiUrl,
   session,
   tagsOptions,
   facultiesOptions,
 }) {
+  // lấy id lớn nhất
+  const idArr = allTheses.map((thesis) => thesis.id);
+  const maxId = Math.max(...idArr);
+
   const {
     watch,
     register,
@@ -55,6 +67,7 @@ export default function NewThesis({
   } = useForm({
     resolver: yupResolver(thesisSchema),
     defaultValues: {
+      id: maxId + 1,
       format: "PDF",
     },
   });
@@ -80,7 +93,6 @@ export default function NewThesis({
   }
 
   async function onSubmit(data) {
-    console.log(data);
     data["slug"] = slugify(data["name"]);
 
     // add infor
@@ -92,12 +104,10 @@ export default function NewThesis({
     }
 
     // add file
-    const status = await addFile(
-      apiUrl,
-      data.file[0],
-      session.user.id,
-      thesis_id
-    );
+    const status =
+      data["tags"] === undefined || data["tags"].length === 0
+        ? await addFileAI(apiUrl, data.file[0], session.user.id, thesis_id)
+        : await addFile(apiUrl, data.file[0], session.user.id, thesis_id);
 
     if (status) setSeverity("success");
     else setSeverity("error");
@@ -166,7 +176,6 @@ export default function NewThesis({
             label="Tags"
             options={tagsOptions}
             optionLabel="name_vn"
-            required
             control={control}
             errors={errors}
             setValue={setValue}

@@ -177,15 +177,15 @@ export const colDef = [
     },
   },
 
-  // {
-  //   field: "views",
-  //   headerName: "Xem",
-  //   type: "string",
-  //   headerAlign: "center",
-  //   align: "center",
-  //   width: 90,
-  //   sortable: true,
-  // },
+  {
+    field: "views",
+    headerName: "Xem",
+    type: "string",
+    headerAlign: "center",
+    align: "center",
+    width: 90,
+    sortable: true,
+  },
 
   {
     field: "type",

@@ -12,7 +12,11 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Loading from "common/components/loading/Loading";
-import { deleteThesis, fetchThesisBySlug } from "modules/theses/fetch-theses";
+import {
+  deleteThesis,
+  fetchThesisBySlug,
+  patchThesisViews,
+} from "modules/theses/fetch-theses";
 import PdfViewer from "modules/theses/pdf/PdfViewer";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -61,7 +65,7 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      details: await fetchThesisBySlug(process.env.API_URL, params.slug),
+      details,
       apiUrl: process.env.API_URL,
     },
   };
@@ -114,6 +118,13 @@ export default function ThesisDetail({ details, apiUrl }) {
     getData();
   }, [session, loading, details]);
 
+  useEffect(() => {
+    async function updateViews() {
+      await patchThesisViews(apiUrl, details.id);
+    }
+    updateViews();
+  }, []);
+
   // --- snackbar & dialog ---
   function handleOpenDialog() {
     setOpenDialog(true);
@@ -148,32 +159,34 @@ export default function ThesisDetail({ details, apiUrl }) {
   }
 
   async function handleBookmark() {
-    !session && signIn();
-
-    if (bookmark) {
-      const result = await deleteBookmark(
-        apiUrl,
-        session.user.user_name,
-        details.id
-      );
-
-      result
-        ? setSnackbarProps(snackbarCaseMessages.deleteBookmarkSuccess)
-        : setSnackbarProps(snackbarCaseMessages.deleteBookmarkError);
+    if (!session) {
+      signIn();
     } else {
-      const result = await addBookmark(
-        apiUrl,
-        session.user.user_name,
-        details.id
-      );
+      if (bookmark) {
+        const result = await deleteBookmark(
+          apiUrl,
+          session.user.user_name,
+          details.id
+        );
 
-      result
-        ? setSnackbarProps(snackbarCaseMessages.addBookmarkSuccess)
-        : setSnackbarProps(snackbarCaseMessages.addBookmarkError);
+        result
+          ? setSnackbarProps(snackbarCaseMessages.deleteBookmarkSuccess)
+          : setSnackbarProps(snackbarCaseMessages.deleteBookmarkError);
+      } else {
+        const result = await addBookmark(
+          apiUrl,
+          session.user.user_name,
+          details.id
+        );
+
+        result
+          ? setSnackbarProps(snackbarCaseMessages.addBookmarkSuccess)
+          : setSnackbarProps(snackbarCaseMessages.addBookmarkError);
+      }
+
+      setOpenSnackbar(true);
+      setBookmark(!bookmark);
     }
-
-    setOpenSnackbar(true);
-    setBookmark(!bookmark);
   }
 
   // cho trang fetch du lieu -> hien thi component loading
@@ -295,12 +308,12 @@ export default function ThesisDetail({ details, apiUrl }) {
           </Grid>
 
           {/* views */}
-          {/* <Grid {...gridItemProperty.property} className={classes.gridItem}>
+          <Grid {...gridItemProperty.property} className={classes.gridItem}>
             Lượt xem:
           </Grid>
           <Grid {...gridItemProperty.value} className={classes.gridItem}>
             {details.views}
-          </Grid> */}
+          </Grid>
 
           {/* user publish */}
           <Grid {...gridItemProperty.property} className={classes.gridItem}>
@@ -351,7 +364,7 @@ export default function ThesisDetail({ details, apiUrl }) {
         <DialogContent>
           <DialogContentText>
             Xác nhận xóa luận văn <b>{details.name}</b>? Hành động này không thể
-            quay lại
+            hoàn tác
           </DialogContentText>
         </DialogContent>
 
@@ -379,7 +392,7 @@ export default function ThesisDetail({ details, apiUrl }) {
 const useStyle = makeStyles((theme) => ({
   gridItem: {
     padding: theme.spacing(2),
-    // borderBottom: "1px solid #ddd",
+    borderBottom: "1px solid #ddd",
     fontSize: theme.typography.body1.fontSize,
   },
 

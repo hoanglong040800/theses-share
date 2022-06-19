@@ -39,7 +39,7 @@ const infoYupShape = {
   tags: yup
     .array()
     // .required("Ít nhất 1 tag")
-    .min(1, (obj) => `Ít nhất ${obj.min} tags`)
+    // .min(1, (obj) => `Ít nhất ${obj.min} tags`)
     .max(5, (obj) => `Không được quá ${obj.max} tags`),
 
   type: yup.string().required("Bắt buộc"),
