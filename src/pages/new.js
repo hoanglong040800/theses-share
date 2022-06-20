@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup/dist/yup";
 import { Box, Button, MenuItem, Slide, Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import AutocompleteController from "common/components/input/AutocompleteController";
 import SelectController from "common/components/input/SelectController";
 import TextAreaController from "common/components/input/TextAreaController";
@@ -13,14 +14,12 @@ import {
   fetchNewestTheses,
 } from "modules/theses/fetch-theses";
 import UploadPDF from "modules/theses/pdf/UploadPDF";
+import { getSession } from "next-auth/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
-import { getSession } from "next-auth/client";
-import { Alert } from "@material-ui/lab";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { getNameFromEmail } from "common/utils/util";
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
@@ -82,13 +81,13 @@ export default function NewThesis({
 
     if (severity === "success") {
       const slug = slugify(watch("name"));
-      const nameEmail = getNameFromEmail(session.user.email);
+      // const nameEmail = getNameFromEmail(session.user.email);
 
       reset("", {
         keepValues: false,
       });
 
-      router.push(`/${nameEmail}/${slug}`);
+      router.push(`/${session.user.user_name}/${slug}`);
     }
   }
 

@@ -31,7 +31,7 @@ export default function NavProfile() {
   }
 
   function handleSignout() {
-    router.push("/");
+    // router.push("/");
     const regEx = /settings|new|edit/;
 
     regEx.test(router.pathname)

@@ -3,9 +3,9 @@ import { Box, Button, MenuItem, Slide, Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import AutocompleteController from "common/components/input/AutocompleteController";
 import SelectController from "common/components/input/SelectController";
+import TextAreaController from "common/components/input/TextAreaController";
 import TextFieldController from "common/components/input/TextFieldController";
 import { editThesisSchema } from "common/utils/validation-schema";
-import { getNameFromEmail } from "common/utils/util";
 import { fetchAllFaculties, fetchAllTags } from "modules/fetch-common";
 import {
   fetchThesisBySlug,
@@ -17,7 +17,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
-import TextAreaController from "common/components/input/TextAreaController";
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
@@ -25,7 +24,7 @@ export async function getServerSideProps(ctx) {
   // --- handle routing error ----
 
   // check is [email] match with user
-  if (ctx.params.user_name !== getNameFromEmail(session.user.email))
+  if (ctx.params.user_name !== session.user.user_name)
     return {
       notFound: true,
     };
@@ -102,13 +101,13 @@ export default function EditThesis({
 
     if (severity === "success") {
       const slug = slugify(watch("name"));
-      const nameEmail = getNameFromEmail(session.user.email);
+      // const nameEmail = getNameFromEmail(session.user.email);
 
       reset("", {
         keepValues: false,
       });
 
-      router.push(`/${nameEmail}/${slug}`);
+      router.push(`/${session.user.user_name}/${slug}`);
     }
   }
 

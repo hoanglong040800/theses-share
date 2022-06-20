@@ -219,14 +219,12 @@ export default function ThesisDetail({ details, apiUrl }) {
               className={classes.bookmarkBtn}
               onClick={handleBookmark}
             >
-              {
-                //
-                !!bookmark ? (
+              {session &&
+                (bookmark ? (
                   <Bookmark fontSize="large" />
                 ) : (
                   <BookmarkBorder fontSize="large" />
-                )
-              }
+                ))}
             </IconButton>
           </div>
         </Box>
