@@ -25,7 +25,6 @@ export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
   const tagsOptions = await fetchAllTags(process.env.API_URL);
   const facultiesOptions = await fetchAllFaculties(process.env.API_URL);
-  const allTheses = await fetchNewestTheses(process.env.API_URL);
 
   if (tagsOptions === false || facultiesOptions === false) {
     return {
@@ -35,7 +34,6 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      allTheses,
       tagsOptions,
       session,
       facultiesOptions,
@@ -45,16 +43,11 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function NewThesis({
-  allTheses,
   apiUrl,
   session,
   tagsOptions,
   facultiesOptions,
 }) {
-  // lấy id lớn nhất
-  const idArr = allTheses.map((thesis) => thesis.id);
-  const maxId = Math.max(...idArr);
-
   const {
     watch,
     register,
@@ -66,7 +59,6 @@ export default function NewThesis({
   } = useForm({
     resolver: yupResolver(thesisSchema),
     defaultValues: {
-      id: maxId + 1,
       format: "PDF",
     },
   });
@@ -86,14 +78,13 @@ export default function NewThesis({
       reset("", {
         keepValues: false,
       });
-
       router.push(`/${session.user.user_name}/${slug}`);
     }
   }
 
   async function onSubmit(data) {
     data["slug"] = slugify(data["name"]);
-
+    data["id"] = JSON.parse(localStorage.getItem("max_id")) + 1;
     // add infor
     const thesis_id = await addThesisInfor(apiUrl, data, session.user.id);
     if (!thesis_id) {
@@ -108,8 +99,12 @@ export default function NewThesis({
         ? await addFileAI(apiUrl, data.file[0], session.user.id, thesis_id)
         : await addFile(apiUrl, data.file[0], session.user.id, thesis_id);
 
-    if (status) setSeverity("success");
-    else setSeverity("error");
+    console.log(status);
+
+    if (status) {
+      setSeverity("success");
+      JSON.stringify(localStorage.setItem("max_id", data["id"]));
+    } else setSeverity("error");
 
     setOpenSnackbar(true);
   }

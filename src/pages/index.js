@@ -4,6 +4,7 @@ import { fetchNewestTheses } from "modules/theses/fetch-theses";
 import ThesesTable from "modules/theses/table/ThesesTable";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export async function getServerSideProps() {
   const numOfTheses = 10;
@@ -24,7 +25,12 @@ export async function getServerSideProps() {
 
 export default function Home({ newestTheses }) {
   const mui = useStyles();
+  const idArr = newestTheses.map((thesis) => thesis.id);
+  const maxId = Math.max(...idArr);
 
+  useEffect(() => {
+    JSON.stringify(localStorage.setItem("max_id", maxId));
+  }, [maxId]);
   return (
     <>
       <Head>
