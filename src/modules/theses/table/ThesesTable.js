@@ -22,6 +22,7 @@ export default function ThesesTable({
       <DataGrid
         columns={columns}
         rows={rows}
+        rowHeight={67}
         pageSize={pageSizeState}
         loading={loading}
         rowsPerPageOptions={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}

@@ -6,6 +6,7 @@ export default function SearchSuggestedItem({ details, handleChange }) {
   const router = useRouter();
 
   const tagsFormat = details.tags
+    .filter((item) => item.name_vn !== "rỗng")
     .map((item) => {
       return item.name_vn;
     })
@@ -23,7 +24,10 @@ export default function SearchSuggestedItem({ details, handleChange }) {
           {details.name}
         </Typography>
 
-        <Typography variant="caption">{`${details.faculty.name_short_vn} | ${details.published_year} | ${tagsFormat}`}</Typography>
+        <Typography variant="caption">
+          {details.faculty.name_short_vn} {details.published_year && "|"}{" "}
+          {details.published_year && details.published_year} | {tagsFormat}
+        </Typography>
       </div>
     </MenuItem>
   );
