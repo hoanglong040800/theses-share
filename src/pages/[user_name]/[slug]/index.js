@@ -33,7 +33,7 @@ import {
 import AlertSnackbarCustom from "common/components/AlertSnackbarCustom";
 
 // export async function getStaticPaths() {
-//   const data = await fetchNewestTheses(process.env.API_URL)
+//   const data = await fetchNewestTheses(process.env.NEXT_PUBLIC_API_URL)
 
 //   const paths = data.map(item => {
 //     return {
@@ -51,7 +51,10 @@ import AlertSnackbarCustom from "common/components/AlertSnackbarCustom";
 // }
 
 export async function getServerSideProps({ params }) {
-  const details = await fetchThesisBySlug(process.env.API_URL, params.slug);
+  const details = await fetchThesisBySlug(
+    process.env.NEXT_PUBLIC_API_URL,
+    params.slug
+  );
 
   if (!details)
     return {
@@ -66,7 +69,7 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       details,
-      apiUrl: process.env.API_URL,
+      apiUrl: process.env.NEXT_PUBLIC_API_URL,
     },
   };
 }

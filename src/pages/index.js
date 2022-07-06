@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export async function getServerSideProps() {
   const numOfTheses = 10;
-  const newestTheses = await fetchNewestTheses(process.env.API_URL);
+  const newestTheses = await fetchNewestTheses(process.env.NEXT_PUBLIC_API_URL);
 
   if (!newestTheses) {
     return {

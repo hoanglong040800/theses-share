@@ -29,7 +29,10 @@ export async function getServerSideProps(ctx) {
       notFound: true,
     };
 
-  const details = await fetchThesisBySlug(process.env.API_URL, ctx.params.slug);
+  const details = await fetchThesisBySlug(
+    process.env.NEXT_PUBLIC_API_URL,
+    ctx.params.slug
+  );
 
   if (!details)
     return {
@@ -41,8 +44,10 @@ export async function getServerSideProps(ctx) {
       notFound: true,
     };
 
-  const tagsOptions = await fetchAllTags(process.env.API_URL);
-  const facultiesOptions = await fetchAllFaculties(process.env.API_URL);
+  const tagsOptions = await fetchAllTags(process.env.NEXT_PUBLIC_API_URL);
+  const facultiesOptions = await fetchAllFaculties(
+    process.env.NEXT_PUBLIC_API_URL
+  );
 
   if (!facultiesOptions || !tagsOptions)
     return {
@@ -51,7 +56,7 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      apiUrl: process.env.API_URL,
+      apiUrl: process.env.NEXT_PUBLIC_API_URL,
       session,
       details,
       facultiesOptions,

@@ -13,7 +13,7 @@ import { useState } from "react";
 import { snackbarCaseMessages } from "common/utils/constants";
 
 export async function getServerSideProps(ctx) {
-  const apiUrl = process.env.API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const session = await getSession(ctx);
   const defaultValues = await getUserByUsername(apiUrl, session.user.user_name);
   const allMajors = await fetchAllMajors(apiUrl);

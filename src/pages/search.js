@@ -1,26 +1,29 @@
-import { Box } from '@material-ui/core'
-import { getThesesBySearch } from 'modules/theses/fetch-theses'
-import ThesesTable from 'modules/theses/table/ThesesTable'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { Box } from "@material-ui/core";
+import { getThesesBySearch } from "modules/theses/fetch-theses";
+import ThesesTable from "modules/theses/table/ThesesTable";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export async function getServerSideProps() {
   return {
     props: {
-      apiUrl: process.env.API_URL,
+      apiUrl: process.env.NEXT_PUBLIC_API_URL,
     },
-  }
+  };
 }
 
 export default function SearchPage({ apiUrl }) {
-  const router = useRouter()
-  const [rows, setRows] = useState([])
+  const router = useRouter();
+  const [rows, setRows] = useState([]);
 
-  useEffect(async () => {
-    const data = await getThesesBySearch(apiUrl, router.query.q)
-    setRows(data)
-  }, [router.query.q])
+  useEffect(() => {
+    async function getTheses() {
+      const data = await getThesesBySearch(apiUrl, router.query.q);
+      setRows(data);
+    }
+    getTheses();
+  }, [router.query.q]);
 
   return (
     <>
@@ -36,5 +39,5 @@ export default function SearchPage({ apiUrl }) {
         <ThesesTable rows={rows} />
       </Box>
     </>
-  )
+  );
 }

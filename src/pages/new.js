@@ -23,8 +23,10 @@ import slugify from "slugify";
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
-  const tagsOptions = await fetchAllTags(process.env.API_URL);
-  const facultiesOptions = await fetchAllFaculties(process.env.API_URL);
+  const tagsOptions = await fetchAllTags(process.env.NEXT_PUBLIC_API_URL);
+  const facultiesOptions = await fetchAllFaculties(
+    process.env.NEXT_PUBLIC_API_URL
+  );
 
   if (tagsOptions === false || facultiesOptions === false) {
     return {
@@ -37,7 +39,7 @@ export async function getServerSideProps(ctx) {
       tagsOptions,
       session,
       facultiesOptions,
-      apiUrl: process.env.API_URL,
+      apiUrl: process.env.NEXT_PUBLIC_API_URL,
     },
   };
 }

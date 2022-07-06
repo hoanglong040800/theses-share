@@ -1,13 +1,13 @@
-import { tokenData } from 'common/utils/constants'
-import fetchSignin from 'modules/auth/fetch-auth'
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import { tokenData } from "common/utils/constants";
+import fetchSignin from "modules/auth/fetch-auth";
+import NextAuth from "next-auth";
+import Providers from "next-auth/providers";
 
 const options = {
   theme: {
-    colorScheme: 'light',
-    brandColor: '#455a64',
-    logo: '/logo.png',
+    colorScheme: "light",
+    brandColor: "#455a64",
+    logo: "/logo.png",
   },
 
   session: {
@@ -15,40 +15,43 @@ const options = {
   },
 
   jwt: {
-    secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
+    secret: "INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw",
   },
 
   // only true in development
   debug: true,
 
   pages: {
-    newUser: '/settings',
+    newUser: "/settings",
   },
 
   providers: [
     Providers.Credentials({
-      name: 'Theses Share',
+      name: "Theses Share",
 
       credentials: {
         email: {
-          label: 'Email',
-          type: 'email',
+          label: "Email",
+          type: "email",
         },
-        password: { label: 'Mật khẩu', type: 'password' },
+        password: { label: "Mật khẩu", type: "password" },
       },
 
       async authorize(credentials) {
         try {
-          const user = await fetchSignin(process.env.API_URL, credentials)
+          const user = await fetchSignin(
+            process.env.NEXT_PUBLIC_API_URL,
+            credentials
+          );
           // console.log('-- authorize --', { credentials, user })
 
           if (user.status) {
-            return user
+            return user;
           } else {
-            return null
+            return null;
           }
         } catch (e) {
-          return null
+          return null;
         }
       },
     }),
@@ -62,12 +65,12 @@ const options = {
       // user obj will available only 1st time jwt callback is called
       // from the 2nd time, user will be undefined
       if (user) {
-        token['access_token'] = user['access_token']
-        token.user = {}
-        tokenData.map(item => (token.user[item] = user.data[item]))
+        token["access_token"] = user["access_token"];
+        token.user = {};
+        tokenData.map((item) => (token.user[item] = user.data[item]));
       }
 
-      return Promise.resolve(token)
+      return Promise.resolve(token);
     },
 
     session: async (session, token) => {
@@ -75,12 +78,12 @@ const options = {
 
       // assign token data to session
       // beacause session reset everytime useSession() is called
-      session['access_token'] = token['access_token']
-      tokenData.map(item => (session.user[item] = token.user[item]))
+      session["access_token"] = token["access_token"];
+      tokenData.map((item) => (session.user[item] = token.user[item]));
 
-      return Promise.resolve(session)
+      return Promise.resolve(session);
     },
   },
-}
+};
 
-export default (req, res) => NextAuth(req, res, options)
+export default (req, res) => NextAuth(req, res, options);

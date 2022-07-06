@@ -10,7 +10,7 @@ import { getIdByValueInArrObj } from "common/utils/util";
 import FilterInputs from "modules/theses/filter/FilterInputs";
 
 export async function getServerSideProps() {
-  const apiUrl = process.env.API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const allFaculties = await fetchAllFaculties(apiUrl);
   const allTags = await fetchAllTags(apiUrl);
 

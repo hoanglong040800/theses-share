@@ -24,7 +24,7 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      apiUrl: process.env.API_URL,
+      apiUrl: process.env.NEXT_PUBLIC_API_URL,
       nextauthUrl: process.env.NEXTAUTH_URL,
     },
   };

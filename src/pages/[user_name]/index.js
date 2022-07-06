@@ -1,21 +1,21 @@
-import { Box, Button, makeStyles, Tab, Tabs } from '@material-ui/core'
-import { userPages } from 'common/utils/constants'
-import { getUserByUsername } from 'modules/user/fetch-users'
-import { getThesesByUsername } from 'modules/theses/fetch-theses'
-import { useSession } from 'next-auth/client'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import ThesesTable from 'modules/theses/table/ThesesTable'
-import { getBookmarksByUsername } from 'modules/bookmarks/fetch-bookmarks'
+import { Box, Button, makeStyles, Tab, Tabs } from "@material-ui/core";
+import { userPages } from "common/utils/constants";
+import { getUserByUsername } from "modules/user/fetch-users";
+import { getThesesByUsername } from "modules/theses/fetch-theses";
+import { useSession } from "next-auth/client";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import ThesesTable from "modules/theses/table/ThesesTable";
+import { getBookmarksByUsername } from "modules/bookmarks/fetch-bookmarks";
 
 export async function getServerSideProps({ params: { user_name } }) {
-  const apiUrl = process.env.API_URL
-  const userDetails = await getUserByUsername(apiUrl, user_name)
-  const userTheses = await getThesesByUsername(apiUrl, user_name)
-  let userBookmarks = await getBookmarksByUsername(apiUrl, user_name)
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const userDetails = await getUserByUsername(apiUrl, user_name);
+  const userTheses = await getThesesByUsername(apiUrl, user_name);
+  let userBookmarks = await getBookmarksByUsername(apiUrl, user_name);
 
   if (userDetails && userTheses && userBookmarks) {
-    userBookmarks = userBookmarks.filter(item => item !== null)
+    userBookmarks = userBookmarks.filter((item) => item !== null);
 
     return {
       props: {
@@ -23,12 +23,12 @@ export async function getServerSideProps({ params: { user_name } }) {
         userTheses,
         userBookmarks,
       },
-    }
+    };
   }
 
   return {
     notFound: true,
-  }
+  };
 }
 
 export default function UserProfile({
@@ -36,16 +36,16 @@ export default function UserProfile({
   userTheses,
   userBookmarks,
 }) {
-  const router = useRouter()
-  const mui = useStyles()
-  const [session] = useSession()
+  const router = useRouter();
+  const mui = useStyles();
+  const [session] = useSession();
 
-  const tab = router.query.tab || 'theses'
+  const tab = router.query.tab || "theses";
   const isUser = session
     ? session.user.user_name === router.query.user_name
       ? true
       : false
-    : false
+    : false;
 
   return (
     <>
@@ -90,7 +90,7 @@ export default function UserProfile({
                 color="default"
                 variant="contained"
                 size="small"
-                onClick={() => router.push('/settings/edit-profile')}
+                onClick={() => router.push("/settings/edit-profile")}
               >
                 Sửa hồ sơ
               </Button>
@@ -104,7 +104,7 @@ export default function UserProfile({
           <Tabs value={tab} className={mui.tabs}>
             {
               //
-              userPages.map(item => (
+              userPages.map((item) => (
                 <Tab
                   key={item.value}
                   label={item.label}
@@ -120,7 +120,7 @@ export default function UserProfile({
         </Box>
 
         <Box mt={5}>
-          {tab === 'theses' && (
+          {tab === "theses" && (
             <>
               <Box display="flex" justifyContent="center" mb={3}>
                 {
@@ -130,7 +130,7 @@ export default function UserProfile({
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => router.push('/new')}
+                        onClick={() => router.push("/new")}
                       >
                         Thêm luận văn +
                       </Button>
@@ -143,33 +143,31 @@ export default function UserProfile({
             </>
           )}
 
-          {tab === 'bookmark' && (
-            <ThesesTable rows={userBookmarks} />
-          )}
+          {tab === "bookmark" && <ThesesTable rows={userBookmarks} />}
         </Box>
       </>
     </>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   tabs: {
-    '& .MuiTabs-indicator': {
+    "& .MuiTabs-indicator": {
       backgroundColor: [theme.palette.primary.light],
     },
   },
 
   tab: {
-    fontSize: '0.9rem',
+    fontSize: "0.9rem",
     fontWeight: 700,
-    borderBottom: '1px solid lightgray',
+    borderBottom: "1px solid lightgray",
     color: [theme.palette.primary.dark],
   },
 
   gridContainer: {
-    display: 'grid',
-    gridTemplateColumns: '100px auto',
-    gridGap: '1rem 0',
-    borderBottom: '1px solid #ddd',
+    display: "grid",
+    gridTemplateColumns: "100px auto",
+    gridGap: "1rem 0",
+    borderBottom: "1px solid #ddd",
   },
-}))
+}));
