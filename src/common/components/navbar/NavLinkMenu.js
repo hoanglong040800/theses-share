@@ -1,18 +1,18 @@
-import { Box, Button, makeStyles, MenuItem } from '@material-ui/core'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { Box, Button, makeStyles, MenuItem } from "@material-ui/core";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function NavLinkMenu({ name, lists }) {
-  const classes = useStyles()
-  const router = useRouter()
-  const [menu, setMenu] = useState({ display: 'none' })
+  const classes = useStyles();
+  const router = useRouter();
+  const [menu, setMenu] = useState({ display: "none" });
 
   function handleClick() {
-    setMenu({ display: 'block' })
+    setMenu({ display: "block" });
   }
 
   function handleClose() {
-    setMenu({ display: 'none' })
+    setMenu({ display: "none" });
   }
 
   return (
@@ -34,13 +34,13 @@ export default function NavLinkMenu({ name, lists }) {
       >
         {
           //
-          lists.map(item => (
+          lists.map((item) => (
             <MenuItem
               key={item.name}
               onClick={() =>
                 router.push(
                   {
-                    pathname: '/explore',
+                    pathname: "/explore",
                     query: item.query,
                   },
                   undefined,
@@ -54,27 +54,27 @@ export default function NavLinkMenu({ name, lists }) {
         }
       </Box>
     </Box>
-  )
+  );
 }
 
 const useStyles = makeStyles(() => ({
   button: {
-    color: 'inherit',
-    fontSize: '1rem',
-    fontWeight: 'bold',
-    padding: '5px 7px',
+    color: "inherit",
+    fontSize: "1rem",
+    fontWeight: "bold",
+    padding: "5px 7px",
 
-    '&:hover': {
-      cursor: 'pointer',
+    "&:hover": {
+      cursor: "pointer",
     },
   },
 
   menu: {
-    position: 'fixed',
-    backgroundColor: '#fff',
-    color: '#000',
-    border: '1px solid rgba(0,0,0,0.1)',
-    borderRadius: '5px',
-    boxShadow: '1px 1px 5px 0 rgba(0, 0, 0, 0.05)',
+    position: "fixed",
+    backgroundColor: "#fff",
+    color: "#000",
+    border: "1px solid rgba(0,0,0,0.1)",
+    borderRadius: "5px",
+    boxShadow: "1px 1px 5px 0 rgba(0, 0, 0, 0.05)",
   },
-}))
+}));

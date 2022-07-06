@@ -68,6 +68,16 @@ export default function NewThesis({
   const router = useRouter();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [severity, setSeverity] = useState("success");
+  const [loading, setLoading] = useState(false);
+  const [openProcessSnackbar, setOpenProcessSnackbar] = useState(false);
+
+  function handleCloseProcessSnackbar(event, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenProcessSnackbar(false);
+  }
 
   // Snackbar
   function handleCloseSnackbar() {
@@ -85,6 +95,8 @@ export default function NewThesis({
   }
 
   async function onSubmit(data) {
+    setLoading(true);
+    setOpenProcessSnackbar(true);
     data["slug"] = slugify(data["name"]);
     data["id"] = JSON.parse(localStorage.getItem("max_id")) + 1;
     // add infor
@@ -109,6 +121,7 @@ export default function NewThesis({
     } else setSeverity("error");
 
     setOpenSnackbar(true);
+    setLoading(false);
   }
 
   function onError(err) {
@@ -220,6 +233,7 @@ export default function NewThesis({
 
         <Box display="flex" justifyContent="flex-end" mt={3}>
           <Button
+            disabled={loading}
             variant="contained"
             color="primary"
             onClick={handleSubmit(onSubmit, onError)}
@@ -239,6 +253,21 @@ export default function NewThesis({
           {severity === "success"
             ? "Thêm luận văn thành công. Đang điều hướng đến trang chi tiết"
             : "Có lỗi xảy ra khi thêm luận văn mới. Vui lòng thử lại lần sau."}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        color="warning"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={openProcessSnackbar}
+        autoHideDuration={5000}
+        TransitionComponent={Slide}
+        onClose={handleCloseProcessSnackbar}
+      >
+        <Alert onClose={handleCloseProcessSnackbar} severity="info">
+          Luận văn của bạn đang được xử lý. Vui lòng chờ trong giây lát nhé ^^
         </Alert>
       </Snackbar>
     </>

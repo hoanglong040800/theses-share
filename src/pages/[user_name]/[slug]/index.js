@@ -345,7 +345,11 @@ export default function ThesisDetail({ details, apiUrl }) {
               height={35}
               my={3}
             >
-              <Button className={classes.delBtn} onClick={handleOpenDialog}>
+              <Button
+                variant="outlined"
+                className={classes.delBtn}
+                onClick={handleOpenDialog}
+              >
                 Xoá
               </Button>
 

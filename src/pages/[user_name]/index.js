@@ -56,6 +56,7 @@ export default function UserProfile({
       <Box
         display="flex"
         flexDirection="column"
+        gridGap={"1rem"}
         maxWidth="500px"
         mx="auto"
         mb={4}
@@ -168,6 +169,7 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: "100px auto",
     gridGap: "1rem 0",
+    paddingBottom: "1rem",
     borderBottom: "1px solid #ddd",
   },
 }));

@@ -6,22 +6,22 @@ import {
   IconButton,
   makeStyles,
   Toolbar,
-} from '@material-ui/core'
-import NavSearchBar from 'modules/search/NavSearchBar'
-import NavLink from './NavLink'
-import NavProfile from './NavProfile'
-import { signIn, useSession } from 'next-auth/client'
-import { useRouter } from 'next/router'
-import NavLogo from './NavLogo'
-import { Menu } from '@material-ui/icons'
+} from "@material-ui/core";
+import NavSearchBar from "modules/search/NavSearchBar";
+import NavLink from "./NavLink";
+import NavProfile from "./NavProfile";
+import { signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import NavLogo from "./NavLogo";
+import { Menu } from "@material-ui/icons";
 
 export default function Navbar({ onOpenDrawer }) {
-  const router = useRouter()
-  const classes = useStyles()
-  const [session, loading] = useSession()
+  const router = useRouter();
+  const classes = useStyles();
+  const [session, loading] = useSession();
 
   return (
-    <AppBar position="fixed" color="default">
+    <AppBar elevation={1} position="fixed" color="default">
       <Toolbar>
         <Container maxWidth="xl">
           <Box className={classes.toolbar}>
@@ -51,10 +51,11 @@ export default function Navbar({ onOpenDrawer }) {
               ) : (
                 <Box display="flex">
                   <Button
-                    color="default"
+                    // variant="outlined"
+                    color="primary"
                     size="small"
-                    style={{ marginRight: 5 }}
-                    onClick={() => router.push('/signup')}
+                    style={{ marginRight: 10 }}
+                    onClick={() => router.push("/signup")}
                   >
                     Đăng ký
                   </Button>
@@ -74,36 +75,36 @@ export default function Navbar({ onOpenDrawer }) {
         </Container>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
     flex: 1,
   },
 
   desktop: {
     marginRight: theme.spacing(1),
 
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
     },
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
     },
   },
 
   mobile: {
     marginRight: theme.spacing(1),
 
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
-    [theme.breakpoints.down('sm')]: {
-      display: 'flex',
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
     },
   },
-}))
+}));

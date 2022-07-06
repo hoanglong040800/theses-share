@@ -1,7 +1,22 @@
-import { createTheme } from '@material-ui/core'
-import { red, blueGrey, lightGreen, grey } from '@material-ui/core/colors'
+import { createTheme } from "@material-ui/core";
+import { red, blueGrey, lightGreen, grey } from "@material-ui/core/colors";
 
 const theme = createTheme({
+  props: {
+    MuiButton: {
+      disableElevation: true,
+    },
+  },
+
+  overrides: {
+    MuiButton: {
+      root: {
+        borderRadius: "3rem",
+        fontSize: "1rem",
+      },
+    },
+  },
+
   palette: {
     primary: {
       light: blueGrey[600],
@@ -18,7 +33,7 @@ const theme = createTheme({
     },
 
     background: {
-      default: '#fff',
+      default: "#fff",
     },
   },
 
@@ -33,10 +48,19 @@ const theme = createTheme({
   },
 
   typography: {
-    button: {
-      textTransform: 'inherit',
-    },
+    fontFamily: [
+      "Quicksand",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Segoe UI",
+      "Helvetica",
+      "Arial",
+      "sans-serif",
+      "serif",
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+    ].join(", "),
   },
-})
+});
 
-export default theme
+export default theme;
