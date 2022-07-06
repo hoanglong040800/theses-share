@@ -71,40 +71,6 @@ export default function About() {
           <Grid container className={mui.team_container}>
             <Grid item xs={12} sm={6} lg={3} className={mui.member}>
               <a
-                href="https://github.com/hoanglong040800"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Image
-                  width={100}
-                  height={100}
-                  layout="responsive"
-                  src="/long.png"
-                  alt="long"
-                  className={mui.team_image}
-                />
-                <p>Trần Hoàng Long</p>
-              </a>
-            </Grid>
-            <Grid item xs={12} sm={6} lg={3} className={mui.member}>
-              <a
-                href="https://github.com/ueihvn"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Image
-                  width={100}
-                  height={100}
-                  layout="responsive"
-                  src="/hieu.png"
-                  alt="hieu"
-                  className={mui.team_image}
-                />
-                <p>Lê Trọng Hiếu</p>
-              </a>
-            </Grid>
-            <Grid item xs={12} sm={6} lg={3} className={mui.member}>
-              <a
                 href="https://github.com/nhoxlove2k15"
                 target="_blank"
                 rel="noreferrer"
@@ -122,7 +88,7 @@ export default function About() {
             </Grid>
             <Grid item xs={12} sm={6} lg={3} className={mui.member}>
               <a
-                href="https://github.com/nhoxbinndta"
+                href="https://github.com/anhnguyen515"
                 target="_blank"
                 rel="noreferrer"
               >

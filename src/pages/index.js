@@ -37,7 +37,7 @@ export default function Home({ newestTheses }) {
         <title>Trang chủ</title>
       </Head>
 
-      <h1>Trang chủ</h1>
+      <h1>Các luận văn mới được đăng tải</h1>
 
       <Box my={6}>
         <Box mt={3}>
