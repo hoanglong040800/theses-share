@@ -36,7 +36,7 @@ export default function NavSearchBar() {
         };
 
         const data = await getThesesBySearch(
-          process.env.NEXT_PUBLIC_NEXT_PUBLIC_API_URL,
+          process.env.NEXT_PUBLIC_API_URL,
           new URLSearchParams(query).toString()
         );
         setRows(data);
