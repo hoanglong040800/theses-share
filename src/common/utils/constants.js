@@ -160,7 +160,6 @@ export const colDef = [
     align: "center",
     sortable: true,
     valueFormatter: (params) => {
-      console.log(params);
       return params.value;
     },
   },
